@@ -1,5 +1,7 @@
+package Model;
 
 public class Voiture {
+    String modele;
     double masse;
     double efficaciteTransmission;
     double rayonRoue;
@@ -31,7 +33,8 @@ public class Voiture {
     double puissance7500rpm;
     double puissance8000rpm;
 
-    Voiture(double masse,
+    public Voiture(String modele,
+            double masse,
             double efficaciteTransmission,
             double rayonRoue,
             double ratioDiff,
@@ -62,6 +65,7 @@ public class Voiture {
             double puissance7500rpm,
             double puissance8000rpm
     ){
+        this.modele = modele;
         this.efficaciteTransmission = efficaciteTransmission;
         this.masse = masse;
         this.nombreVit = nombreVit;
@@ -92,6 +96,14 @@ public class Voiture {
         this.rayonRoue = rayonRoue;
         this.rpmMax = rpmMax;
         this.vitesseMax = vitesseMax;
+    }
+
+    public String getModele() {
+        return modele;
+    }
+
+    public void setModele(String modele) {
+        this.modele = modele;
     }
 
     public double getMasse() {
