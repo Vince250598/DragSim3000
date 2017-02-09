@@ -1,3 +1,5 @@
+package Model;
+
 import Model.Voiture;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -5,10 +7,11 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.util.Vector;
 
 public class ListeVoitures {
-    public Vector<Voiture> voitures = new Vector<>();
+    public Vector<Voiture> voitures = new Vector<Voiture>();
 
     public ListeVoitures() {
         loadVoitures();
@@ -16,9 +19,11 @@ public class ListeVoitures {
 
     public void loadVoitures() {
         try {
+            File xml = new File("C:/Users/Utilisateur/Desktop/Choses école/Session 4/Projet Intégration/DragSim3000/DragSim3000/src/Voitures.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            org.w3c.dom.Document doc = builder.parse("XML.xml");
+            org.w3c.dom.Document doc = builder.parse(xml);
+            doc.getDocumentElement().normalize();
 
             NodeList list = doc.getElementsByTagName("Voiture");
             for (int x = 0; x < list.getLength(); x++) {

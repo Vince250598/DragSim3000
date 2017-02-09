@@ -1,8 +1,14 @@
+import Model.ListeVoitures;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Principal {
+public class Principal extends Application {
+  @Override
+    public void start(Stage primaryStage){
+
+  }
+
     public static void main(String[] args) {
-        ListeVoitures a = new ListeVoitures();
-
-        System.out.println(a.voitures.get(0).getModele());
+        launch(args);
     }
 }

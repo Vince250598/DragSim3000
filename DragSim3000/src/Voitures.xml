@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Model>
+<model>
 	<Voiture>
 		<Modele>VW Beetle</Modele>
 		<Masse>1231</Masse>
@@ -204,8 +204,8 @@
 		<EF>0</EF>
 		<Rayon>0.65</Rayon>
 		<RD>3.73</RD>
-		<VM>forza</VM>
-		<RPM>forza</RPM>
+		<VM>000</VM>
+		<RPM>000</RPM>
 		<RV1>3.07</RV1>
 		<RV2>1.765</RV2>
 		<RV3>1</RV3>
@@ -429,4 +429,4 @@
 		<P7500>0</P7500>
 		<P8000>0</P8000>
 	</Voiture>
-</Model>
+</model>
