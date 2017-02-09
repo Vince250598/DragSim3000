@@ -19,7 +19,7 @@ public class ListeVoitures {
 
     public void loadVoitures() {
         try {
-            File xml = new File("C:/Users/Utilisateur/Desktop/Choses école/Session 4/Projet Intégration/DragSim3000/DragSim3000/src/Voitures.xml");
+            File xml = new File("C:/Users/Utilisateur/Desktop/Choses école/Session 4/Projet Intégration/DragSim3000/DragSim3000/src/Ressources/Voitures.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             org.w3c.dom.Document doc = builder.parse(xml);
@@ -60,7 +60,8 @@ public class ListeVoitures {
                             Double.parseDouble(eElement.getElementsByTagName("P6500").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("P7000").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("P7500").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("P8000").item(0).getTextContent())));
+                            Double.parseDouble(eElement.getElementsByTagName("P8000").item(0).getTextContent()),
+                            eElement.getElementsByTagName("URL").item(0).getTextContent()));
                 }
             }
         } catch (Exception e) {

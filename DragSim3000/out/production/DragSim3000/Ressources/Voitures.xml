@@ -32,6 +32,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/Beetle.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Corvette</Modele>
@@ -65,6 +66,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/Corvette63.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Ford Mustang gt350</Modele>
@@ -98,6 +100,7 @@
 		<P7000>515</P7000>
 		<P7500>520</P7500>
 		<P8000>515</P8000>
+		<URL>/Ressources/GT350.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Ford Focus RS 2016</Modele>
@@ -131,6 +134,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/RS2016.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Honda Accord 2000</Modele>
@@ -164,6 +168,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/HA2000.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>AMC Pacer 1976</Modele>
@@ -197,6 +202,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/AmcPacer.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>1940 De Luxe Coupe</Modele>
@@ -230,6 +236,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/Coupe1940.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>BMW 323i 2000</Modele>
@@ -263,6 +270,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/323i2000.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Subaru Forester</Modele>
@@ -296,6 +304,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/HA2000.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Dragster</Modele>
@@ -329,6 +338,7 @@
 		<P7000>9900</P7000>
 		<P7500>9800</P7500>
 		<P8000>9700</P8000>
+		<URL>/Ressources/dragster.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>F1</Modele>
@@ -362,6 +372,7 @@
 		<P7000>700</P7000>
 		<P7500>700</P7500>
 		<P8000>700</P8000>
+		<URL>/Ressources/f1.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Ford Transit 2015</Modele>
@@ -395,6 +406,7 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/Transit.png</URL>
 	</Voiture>
 	<Voiture>
 		<Modele>Porsche Panamera 2016</Modele>
@@ -428,5 +440,6 @@
 		<P7000>0</P7000>
 		<P7500>0</P7500>
 		<P8000>0</P8000>
+		<URL>/Ressources/Panamera.png</URL>
 	</Voiture>
 </model>

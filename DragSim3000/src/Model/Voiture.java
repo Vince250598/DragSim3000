@@ -1,5 +1,9 @@
 package Model;
 
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Voiture {
     String modele;
     double masse;
@@ -32,39 +36,43 @@ public class Voiture {
     double puissance7000rpm;
     double puissance7500rpm;
     double puissance8000rpm;
+    String URL;
+    ImageView image = new ImageView();
 
     public Voiture(String modele,
-            double masse,
-            double efficaciteTransmission,
-            double rayonRoue,
-            double ratioDiff,
-            double vitesseMax,
-            double rpmMax,
-            double ratioVit1,
-            double ratioVit2,
-            double ratioVit3,
-            double ratioVit4,
-            double ratioVit5,
-            double ratioVit6,
-            double ratioVit7,
-            double ratioVit8,
-            int nombreVit,
-            double puissance1000rpm,
-            double puissance1500rpm,
-            double puissance2000rpm,
-            double puissance2500rpm,
-            double puissance3000rpm,
-            double puissance3500rpm,
-            double puissance4000rpm,
-            double puissance4500rpm,
-            double puissance5000rpm,
-            double puissance5500rpm,
-            double puissance6000rpm,
-            double puissance6500rpm,
-            double puissance7000rpm,
-            double puissance7500rpm,
-            double puissance8000rpm
-    ){
+                   double masse,
+                   double efficaciteTransmission,
+                   double rayonRoue,
+                   double ratioDiff,
+                   double vitesseMax,
+                   double rpmMax,
+                   double ratioVit1,
+                   double ratioVit2,
+                   double ratioVit3,
+                   double ratioVit4,
+                   double ratioVit5,
+                   double ratioVit6,
+                   double ratioVit7,
+                   double ratioVit8,
+                   int nombreVit,
+                   double puissance1000rpm,
+                   double puissance1500rpm,
+                   double puissance2000rpm,
+                   double puissance2500rpm,
+                   double puissance3000rpm,
+                   double puissance3500rpm,
+                   double puissance4000rpm,
+                   double puissance4500rpm,
+                   double puissance5000rpm,
+                   double puissance5500rpm,
+                   double puissance6000rpm,
+                   double puissance6500rpm,
+                   double puissance7000rpm,
+                   double puissance7500rpm,
+                   double puissance8000rpm,
+                   String URL
+
+    ) {
         this.modele = modele;
         this.efficaciteTransmission = efficaciteTransmission;
         this.masse = masse;
@@ -96,6 +104,12 @@ public class Voiture {
         this.rayonRoue = rayonRoue;
         this.rpmMax = rpmMax;
         this.vitesseMax = vitesseMax;
+        this.URL = URL;
+        image.setImage(new Image(URL));
+    }
+
+    public ImageView getImage() {
+        return image;
     }
 
     public String getModele() {
@@ -344,5 +358,9 @@ public class Voiture {
 
     public void setPuissance8000rpm(double puissance8000rpm) {
         this.puissance8000rpm = puissance8000rpm;
+    }
+
+    public String getURL() {
+        return URL;
     }
 }
