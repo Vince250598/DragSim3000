@@ -22,16 +22,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ListeVoitures.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ListeVoitures.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Model/ListeVoitures.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
+            <state relative-caret-position="314">
+              <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#336#345#0" expanded="true" />
-                <element signature="e#377#378#0" expanded="true" />
-                <element signature="e#407#408#0" expanded="true" />
+                <element signature="e#397#398#0" expanded="true" />
+                <element signature="e#427#428#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -40,22 +39,20 @@
       <file leaf-file-name="Voitures.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ressources/Voitures.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3971">
-              <caret line="430" column="26" lean-forward="true" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
+            <state relative-caret-position="7310">
+              <caret line="430" column="26" lean-forward="false" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Principal.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Principal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Principal.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="11" column="46" lean-forward="false" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#486#487#0" expanded="true" />
-                <element signature="e#514#515#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,10 +95,10 @@
         <option value="$PROJECT_DIR$/src/ListeVoitures.java" />
         <option value="$PROJECT_DIR$/src/XML.xml" />
         <option value="$PROJECT_DIR$/src/Voitures.xml" />
-        <option value="$PROJECT_DIR$/src/Model/ListeVoitures.java" />
         <option value="$PROJECT_DIR$/src/Model/Voiture.java" />
         <option value="$PROJECT_DIR$/src/Ressources/Voitures.xml" />
         <option value="$PROJECT_DIR$/src/Principal.java" />
+        <option value="$PROJECT_DIR$/src/Model/ListeVoitures.java" />
       </list>
     </option>
   </component>
@@ -126,8 +123,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,21 +189,22 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Choses inutiles/Session 3/Prog 3/Projet Final/Ragnarr" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Utilisateur\Desktop\Choses école\Session 4\Projet Intégration\DragSim3000\DragSim3000\src\Ressources" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Utilisateur\Desktop\Choses école\Session 4\Projet Intégration\DragSim3000\DragSim3000\src\Ressources" />
+      <recent name="C:\Users\Utilisateur\Desktop\Choses école\Session 4\Projet Intégration\DragSim3000\DragSim3000\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Utilisateur\Desktop\Choses école\Session 4\Projet Intégration\DragSim3000\DragSim3000\src\Ressources" />
     </key>
   </component>
@@ -494,12 +492,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Model/ListeVoitures.java</url>
-          <line>59</line>
+          <line>22</line>
           <properties />
-          <option name="timeStamp" value="18" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -510,13 +508,56 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Model/ListeVoitures.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ressources/Voitures.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7310">
+          <caret line="430" column="26" lean-forward="true" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Principal.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#336#345#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Voiture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="107" column="8" lean-forward="false" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3684#3685#0" expanded="true" />
+            <element signature="e#3712#3713#0" expanded="true" />
+            <element signature="e#9350#9351#0" expanded="true" />
+            <element signature="e#9376#9377#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/ListeVoitures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -527,29 +568,21 @@
           <caret line="5" column="56" lean-forward="false" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#486#487#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/XML.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="8" lean-forward="false" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/XML.xml" />
     <entry file="file://$PROJECT_DIR$/src/Model/Voiture.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3745#3746#0" expanded="false" />
-            <element signature="e#3774#3775#0" expanded="false" />
-            <element signature="e#3818#3819#0" expanded="false" />
-            <element signature="e#3854#3855#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3684#3685#0" expanded="true" />
+            <element signature="e#3712#3713#0" expanded="true" />
+            <element signature="e#9350#9351#0" expanded="true" />
+            <element signature="e#9376#9377#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -560,9 +593,8 @@
           <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#336#345#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -573,20 +605,11 @@
           <caret line="6" column="56" lean-forward="false" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#486#487#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/XML.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/XML.xml" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/org/xml/sax/InputSource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
@@ -602,19 +625,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/XML.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Honda Accord 2000.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/XML.xml" />
+    <entry file="file://$PROJECT_DIR$/src/Honda Accord 2000.png" />
     <entry file="file://$PROJECT_DIR$/src/Ressources/HA2000.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -622,22 +634,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ressources/Voitures.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3971">
-          <caret line="430" column="26" lean-forward="true" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
+        <state relative-caret-position="7310">
+          <caret line="430" column="26" lean-forward="false" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/ListeVoitures.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#336#345#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -658,11 +657,21 @@
     <entry file="file://$PROJECT_DIR$/src/Principal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="46" lean-forward="false" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#486#487#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/ListeVoitures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
           </folding>
         </state>
       </provider>

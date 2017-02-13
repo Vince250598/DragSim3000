@@ -9,7 +9,7 @@ public class Principal extends Application {
     public void start(Stage primaryStage){
       ListeVoitures a = new ListeVoitures();
 
-      Group root = new Group(a.voitures.get(10).getImage());
+      Group root = new Group(a.voitures.get(7).getImage());
       primaryStage.setScene(new Scene(root, 400,400));
       primaryStage.show();
   }
