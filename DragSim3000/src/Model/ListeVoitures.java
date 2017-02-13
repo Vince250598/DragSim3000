@@ -19,8 +19,7 @@ public class ListeVoitures {
 
     public void loadVoitures() {
         try {
-            File xml = new File(/*"C:/Users/Utilisateur/Desktop/Choses école/Session 4/Projet Intégration/DragSim3000/DragSim3000/src/Ressources/Voitures.xml"*/
-            "E:\\prog\\Projet intégrateur\\DragSim3000\\DragSim3000\\src\\Ressources\\Voitures.xml");
+            File xml = new File("C:/Users/Public/Documents/Voitures.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             org.w3c.dom.Document doc = builder.parse(xml);
