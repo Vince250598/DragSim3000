@@ -68,4 +68,8 @@ public class ListeVoitures {
             System.out.println("erreur loadage voitures");
         }
     }
+
+    public Vector<Voiture> getVoitures() {
+        return voitures;
+    }
 }

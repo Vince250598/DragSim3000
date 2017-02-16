@@ -31,6 +31,7 @@ public class Programme extends Application {
         EventHandler events = new EventHandler();
         Selection selection = new Selection(primaryStage, events);
         Demarrage demarrage = new Demarrage(primaryStage, events);
+        events.choixVoiture(liste);
     }
 
     public static void main(String[] args) {
