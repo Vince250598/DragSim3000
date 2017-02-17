@@ -4,9 +4,8 @@ import Controller.EventHandler;
 import Main.Programme;
 import Model.ListeVoitures;
 import javafx.scene.Scene;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Selection {
@@ -16,17 +15,18 @@ public class Selection {
     private ListeVoitures lv = new ListeVoitures();
     private GridPane grid = new GridPane();
     private Scene choix = new Scene(grid, prog.getLargeurEcran(), prog.getHauteurEcran());
+    private Image background = new Image("\\Ressources\\noRoad.png");
 
     public Selection(Stage s, EventHandler eh) {
         this.stage = s;
-        addChoices(grid, lv);
+        addElements(grid, lv);
     }
 
     public Scene getChoix() {
         return choix;
     }
 
-    public void addChoices(GridPane gp, ListeVoitures liste) {
+    public void addElements(GridPane gp, ListeVoitures liste) {
 
         int nbCol = 5;
         int nbRan = 3;
@@ -51,5 +51,10 @@ public class Selection {
                 noRan++;
             }
         }
+        BackgroundImage bgImg = new BackgroundImage(background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        Background bg = new Background(bgImg);
+        gp.setBackground(bg);
+
     }
 }

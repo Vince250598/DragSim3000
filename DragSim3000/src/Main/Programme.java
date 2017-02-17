@@ -5,8 +5,6 @@ import Model.ListeVoitures;
 import View.Demarrage;
 import View.Selection;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
