@@ -2,10 +2,9 @@ package View;
 
 import Controller.EventHandler;
 import Main.Programme;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.image.Image;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,10 +17,17 @@ public class Options {
     private Pane group = new Pane();
     private Scene option = new Scene(group, prog.getLargeurEcran(), prog.getHauteurEcran());
     private Image background = new Image("Ressources\\noRoad.png");
+    private CheckBox sec = new CheckBox("Sèche");
+    private CheckBox trempe = new CheckBox("Mouillée");
+    private CheckBox autom = new CheckBox("Automatique");
+    private CheckBox manuel = new CheckBox("Manuelle");
+    private ImageView start = new ImageView(new Image("\\Ressources\\start.png"));
+
 
     public Options(Stage s, EventHandler eh) {
 //TODO: appeler les méthodes addElements et celle qui check si on clic sur START
         addElements(group);
+        eh.option(this, s, new EnCourse());
     }
 
     public void addElements(Pane p){
@@ -30,24 +36,58 @@ public class Options {
         Background bg = new Background(bgImg);
         p.setBackground(bg);
 
-        VBox vb = new VBox(50);
-        HBox hb = new HBox(50);
-        Text txt = new Text("État de la chaussée:");
-        txt.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
-        CheckBox sec = new CheckBox("Sèche");
+        VBox vb1 = new VBox(50);
+        HBox hb1 = new HBox(50);
+        Text txt1 = new Text("État de la chaussée:");
+        txt1.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
         sec.setSelected(true);
         sec.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
-        CheckBox trempe = new CheckBox("Mouillée");
         trempe.setFont(Font.font(null, FontWeight.SEMI_BOLD, 30));
-        hb.getChildren().addAll(sec, trempe);
-        vb.getChildren().addAll(txt, hb);
+        hb1.getChildren().addAll(sec, trempe);
+        vb1.getChildren().addAll(txt1, hb1);
 
+        VBox vb2 = new VBox(50);
+        HBox hb2 = new HBox(50);
+        Text txt2 = new Text("Type de transmission:");
+        txt2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
+        autom.setSelected(true);
+        autom.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
+        manuel.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
+        hb2.getChildren().addAll(autom, manuel);
+        vb2.getChildren().addAll(txt2, hb2);
 
+        VBox vb = new VBox(100);
+        vb.getChildren().addAll(vb1, vb2, start);
+
+        vb.setTranslateX(780);
+        vb.setTranslateY(200);
+
+        //TODO: centrer le shit
 
         p.getChildren().addAll(vb);
     }
 
     public Scene getOption() {
         return option;
+    }
+
+    public CheckBox getSec() {
+        return sec;
+    }
+
+    public CheckBox getTrempe() {
+        return trempe;
+    }
+
+    public CheckBox getAutom() {
+        return autom;
+    }
+
+    public CheckBox getManuel() {
+        return manuel;
+    }
+
+    public ImageView getStart() {
+        return start;
     }
 }

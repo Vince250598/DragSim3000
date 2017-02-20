@@ -2,9 +2,11 @@ package Controller;
 
 import Model.ListeVoitures;
 import Model.Voiture;
+import View.EnCourse;
 import View.Options;
 import View.Selection;
 import javafx.scene.Scene;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -40,5 +42,41 @@ public class EventHandler {
                 v.getVoitures().get(i).getImage().setScaleY(1);
             });
         }
+    }
+
+    public void option(Options opt, Stage stage, EnCourse ec) {
+        opt.getSec().setOnAction(event -> {
+            if (opt.getSec().isSelected())
+                opt.getTrempe().setSelected(false);
+            else
+                opt.getTrempe().setSelected(true);
+        });
+
+        opt.getTrempe().setOnAction(event -> {
+            if (opt.getTrempe().isSelected())
+                opt.getSec().setSelected(false);
+            else
+                opt.getSec().setSelected(true);
+        });
+
+        opt.getAutom().setOnAction(event -> {
+            if (opt.getAutom().isSelected())
+                opt.getManuel().setSelected(false);
+            else
+                opt.getManuel().setSelected(true);
+        });
+
+        opt.getManuel().setOnAction(event -> {
+            if (opt.getManuel().isSelected())
+                opt.getAutom().setSelected(false);
+            else
+                opt.getAutom().setSelected(true);
+        });
+
+        Glow glow = new Glow(1);
+        opt.getStart().setOnMouseEntered(event -> opt.getStart().setEffect(glow));
+        opt.getStart().setOnMouseExited(event -> opt.getStart().setEffect(null));
+
+        opt.getStart().setOnMouseClicked(event -> stage.setScene(ec.getEnCourse()));
     }
 }
