@@ -28,6 +28,8 @@ public class Demarrage {
     public Demarrage(Stage s, EventHandler eh) {
         demarrer(s, eh);
         addElements(group);
+        s.setMaximized(true);
+        s.setTitle("DragSim3000");
     }
 
     public void demarrer(Stage stage, EventHandler eh) {
