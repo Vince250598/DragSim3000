@@ -31,7 +31,7 @@ public class EnCourse {
 
     private void addElements(Pane p) {
         BackgroundImage backgroundImage = new BackgroundImage(background, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(300, 800, false, false, false, false));
+                new BackgroundSize(300, 1080, false, false, false, false));
 
         VBox vb = new VBox(20);
         Label temps = new Label("Temps: ");
@@ -43,10 +43,10 @@ public class EnCourse {
         Label distance = new Label("Distance: ");
         distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
         vb.getChildren().addAll(temps, vitesse, RPM, distance);
-        voiture.setY(520);
-        voiture.setX(-60);
-        voiture.setScaleX(0.2);
-        voiture.setScaleY(0.2);
+        voiture.setY(735);
+        voiture.setX(-70);
+        voiture.setScaleX(0.3);
+        voiture.setScaleY(0.3);
 
         Background bg = new Background(backgroundImage);
         p.setBackground(bg);
