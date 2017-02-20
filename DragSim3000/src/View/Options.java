@@ -2,6 +2,7 @@ package View;
 
 import Controller.EventHandler;
 import Main.Programme;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
@@ -16,10 +17,11 @@ public class Options {
     private Programme prog = new Programme();
     private Pane group = new Pane();
     private Scene option = new Scene(group, prog.getLargeurEcran(), prog.getHauteurEcran());
-    private Image background = new Image("Ressources\\noRoad.jpg");
+    private Image background = new Image("Ressources\\noRoad.png");
 
     public Options(Stage s, EventHandler eh) {
 //TODO: appeler les méthodes addElements et celle qui check si on clic sur START
+        addElements(group);
     }
 
     public void addElements(Pane p){
@@ -33,7 +35,19 @@ public class Options {
         Text txt = new Text("État de la chaussée:");
         txt.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
         CheckBox sec = new CheckBox("Sèche");
+        sec.setSelected(true);
         sec.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
-        //TODO: continuer les checkbox
+        CheckBox trempe = new CheckBox("Mouillée");
+        trempe.setFont(Font.font(null, FontWeight.SEMI_BOLD, 30));
+        hb.getChildren().addAll(sec, trempe);
+        vb.getChildren().addAll(txt, hb);
+
+
+
+        p.getChildren().addAll(vb);
+    }
+
+    public Scene getOption() {
+        return option;
     }
 }

@@ -21,6 +21,7 @@ public class Selection {
     public Selection(Stage s, EventHandler eh) {
         this.stage = s;
         addElements(grid, lv);
+        eh.choixVoiture(lv, s, new Options(s, eh));
     }
 
     public Scene getChoix() {
@@ -29,7 +30,7 @@ public class Selection {
 
     public void addElements(GridPane gp, ListeVoitures liste) {
 
-        eh.choixVoiture(liste);
+
 
         int nbCol = 5;
         int nbRan = 3;

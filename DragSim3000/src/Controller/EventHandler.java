@@ -2,6 +2,7 @@ package Controller;
 
 import Model.ListeVoitures;
 import Model.Voiture;
+import View.Options;
 import View.Selection;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -19,13 +20,14 @@ public class EventHandler {
         });
     }
 
-    public void choixVoiture(ListeVoitures v) {
+    public void choixVoiture(ListeVoitures v, Stage stage, Options opt) {
         for (int x = 0; x < v.getVoitures().size(); x++) {
             ImageView iv = v.getVoitures().get(x).getImage();
             final int i = x;
 
             iv.setOnMouseClicked(event -> {
                 Moteur.setChoixVoiture(v.getVoitures().get(i));
+                stage.setScene(opt.getOption());
             });
 
             iv.setOnMouseEntered(event -> {
