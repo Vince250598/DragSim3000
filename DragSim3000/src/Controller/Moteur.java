@@ -9,7 +9,7 @@ public class Moteur {
         return choixVoiture;
     }
 
-    public static void setChoixVoiture(Voiture choixVoiture) {
-        choixVoiture = choixVoiture;
+    public static void setChoixVoiture(Voiture v) {
+        choixVoiture = v;
     }
 }

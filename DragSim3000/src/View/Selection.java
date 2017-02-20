@@ -16,6 +16,7 @@ public class Selection {
     private GridPane grid = new GridPane();
     private Scene choix = new Scene(grid, prog.getLargeurEcran(), prog.getHauteurEcran());
     private Image background = new Image("\\Ressources\\noRoad.png");
+    EventHandler eh = new EventHandler();
 
     public Selection(Stage s, EventHandler eh) {
         this.stage = s;
@@ -27,6 +28,8 @@ public class Selection {
     }
 
     public void addElements(GridPane gp, ListeVoitures liste) {
+
+        eh.choixVoiture(liste);
 
         int nbCol = 5;
         int nbRan = 3;

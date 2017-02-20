@@ -20,13 +20,22 @@ public class EventHandler {
     }
 
     public void choixVoiture(ListeVoitures v) {
-
         for (int x = 0; x < v.getVoitures().size(); x++) {
             ImageView iv = v.getVoitures().get(x).getImage();
             final int i = x;
+
             iv.setOnMouseClicked(event -> {
                 Moteur.setChoixVoiture(v.getVoitures().get(i));
-                System.out.print(Moteur.getChoixVoiture().getModele());
+            });
+
+            iv.setOnMouseEntered(event -> {
+                v.getVoitures().get(i).getImage().setScaleX(1.2);
+                v.getVoitures().get(i).getImage().setScaleY(1.2);
+            });
+
+            iv.setOnMouseExited(event -> {
+                v.getVoitures().get(i).getImage().setScaleX(1);
+                v.getVoitures().get(i).getImage().setScaleY(1);
             });
         }
     }
