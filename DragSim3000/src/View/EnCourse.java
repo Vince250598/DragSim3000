@@ -19,8 +19,7 @@ public class EnCourse {
     ListeVoitures lv = new ListeVoitures();
     private Pane group = new Pane();
     private Scene enCourse = new Scene(group, programme.getLargeurEcran(), programme.getHauteurEcran());
-    private Image background = new Image("Ressources\\background.png");
-    //TODO:changer background
+    private Image background = new Image("Ressources\\road.png");
     private Voiture v = lv.getVoitures().get(0);
     //TODO: changer voiture pour Moteur.choixVoiture
     private ImageView voiture = v.getImage();
