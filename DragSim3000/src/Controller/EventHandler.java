@@ -17,7 +17,6 @@ public class EventHandler {
 
     public void anyKey(Scene scene, Stage stage, Selection selec) {
         scene.setOnKeyPressed(event -> {
-            //TODO: mettre la scene de sélection de la voiture
             stage.setScene(selec.getChoix());
         });
     }
@@ -44,6 +43,7 @@ public class EventHandler {
         }
     }
 
+    //TODO: arranger le vbox qui monte quand je check une case
     public void option(Options opt, Stage stage, EnCourse ec) {
         opt.getSec().setOnAction(event -> {
             if (opt.getSec().isSelected())
@@ -77,6 +77,9 @@ public class EventHandler {
         opt.getStart().setOnMouseEntered(event -> opt.getStart().setEffect(glow));
         opt.getStart().setOnMouseExited(event -> opt.getStart().setEffect(null));
 
-        opt.getStart().setOnMouseClicked(event -> stage.setScene(ec.getEnCourse()));
+        opt.getStart().setOnMouseClicked(event -> {
+            stage.setScene(ec.getEnCourse());
+            ec.loaderVoiture();
+        });
     }
 }

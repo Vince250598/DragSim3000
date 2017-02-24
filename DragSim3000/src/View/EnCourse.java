@@ -20,15 +20,14 @@ public class EnCourse {
     private Pane group = new Pane();
     private Scene enCourse = new Scene(group, programme.getLargeurEcran(), programme.getHauteurEcran());
     private Image background = new Image("Ressources\\road.png");
-    private Voiture v = lv.getVoitures().get(0);
-    //TODO: changer voiture pour Moteur.choixVoiture
-    private ImageView voiture = v.getImage();
+    private Voiture voiture;
+    private ImageView imageVoiture = new ImageView();
 
     public EnCourse() {
-        addElements(group);
+        addElements();
     }
 
-    private void addElements(Pane p) {
+    private void addElements() {
         BackgroundImage backgroundImage = new BackgroundImage(background, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(300, 1080, false, false, false, false));
 
@@ -42,20 +41,33 @@ public class EnCourse {
         Label distance = new Label("Distance: ");
         distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
         vb.getChildren().addAll(temps, vitesse, RPM, distance);
-        voiture.setY(735);
-        voiture.setX(-70);
-        voiture.setScaleX(0.3);
-        voiture.setScaleY(0.3);
+
 
         Background bg = new Background(backgroundImage);
-        p.setBackground(bg);
+        group.setBackground(bg);
 
-        p.getChildren().addAll(vb, voiture);
+        group.getChildren().add(vb);
+    }
 
-
+    public void loaderVoiture(){
+        voiture = Moteur.getChoixVoiture();
+        imageVoiture.setImage(new Image(voiture.getURL()));
+        imageVoiture.setY(735);
+        imageVoiture.setX(-70);
+        imageVoiture.setScaleX(0.3);
+        imageVoiture.setScaleY(0.3);
+        group.getChildren().add(imageVoiture);
     }
 
     public Scene getEnCourse() {
         return enCourse;
+    }
+
+    public Voiture getVoiture() {
+        return voiture;
+    }
+
+    public ImageView getImageVoiture() {
+        return imageVoiture;
     }
 }

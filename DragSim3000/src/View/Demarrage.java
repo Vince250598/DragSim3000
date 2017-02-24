@@ -27,7 +27,7 @@ public class Demarrage {
 
     public Demarrage(Stage s, EventHandler eh) {
         demarrer(s, eh);
-        addElements(group);
+        addElements();
         s.setMaximized(true);
         s.setTitle("DragSim3000");
     }
@@ -38,11 +38,11 @@ public class Demarrage {
         stage.show();
     }
 
-    public void addElements(Pane p) {
+    public void addElements() {
         BackgroundImage bgImg = new BackgroundImage(background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true));
         Background bg = new Background(bgImg);
-        p.setBackground(bg);
+        group.setBackground(bg);
         //TODO: ajouter le texte et autres trucs si nécessaire
 
         Text txt = new Text("Press any key\n to continue");
@@ -57,7 +57,7 @@ public class Demarrage {
         ds.setOffsetY(18);
         gb.setInput(ds);
         txt.setEffect(gb);
-        p.getChildren().add(txt);
+        group.getChildren().add(txt);
 
         ScaleTransition st = new ScaleTransition(Duration.millis(1000), txt);
         st.setAutoReverse(true);

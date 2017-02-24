@@ -2,6 +2,7 @@ package View;
 
 import Controller.EventHandler;
 import Main.Programme;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.*;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 public class Options {
 
     private Programme prog = new Programme();
-    private Pane group = new Pane();
+    private StackPane group = new StackPane();
     private Scene option = new Scene(group, prog.getLargeurEcran(), prog.getHauteurEcran());
     private Image background = new Image("Ressources\\noRoad.png");
     private CheckBox sec = new CheckBox("Sèche");
@@ -26,18 +27,20 @@ public class Options {
 
     public Options(Stage s, EventHandler eh) {
 //TODO: appeler les méthodes addElements et celle qui check si on clic sur START
-        addElements(group);
+        addElements();
         eh.option(this, s, new EnCourse());
     }
 
-    public void addElements(Pane p){
+    public void addElements(){
         BackgroundImage bgImg = new BackgroundImage(background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background bg = new Background(bgImg);
-        p.setBackground(bg);
+        group.setBackground(bg);
 
         VBox vb1 = new VBox(50);
+        vb1.setAlignment(Pos.CENTER);
         HBox hb1 = new HBox(50);
+        hb1.setAlignment(Pos.CENTER);
         Text txt1 = new Text("État de la chaussée:");
         txt1.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
         sec.setSelected(true);
@@ -47,7 +50,9 @@ public class Options {
         vb1.getChildren().addAll(txt1, hb1);
 
         VBox vb2 = new VBox(50);
+        vb2.setAlignment(Pos.CENTER);
         HBox hb2 = new HBox(50);
+        hb2.setAlignment(Pos.CENTER);
         Text txt2 = new Text("Type de transmission:");
         txt2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
         autom.setSelected(true);
@@ -57,14 +62,13 @@ public class Options {
         vb2.getChildren().addAll(txt2, hb2);
 
         VBox vb = new VBox(100);
+        vb.setAlignment(Pos.CENTER);
+        start.setScaleX(2);
+        start.setScaleY(2);
         vb.getChildren().addAll(vb1, vb2, start);
 
-        vb.setTranslateX(780);
-        vb.setTranslateY(200);
-
-        //TODO: centrer le shit
-
-        p.getChildren().addAll(vb);
+        group.getChildren().add(vb);
+        StackPane.setAlignment(vb, Pos.BASELINE_CENTER);
     }
 
     public Scene getOption() {

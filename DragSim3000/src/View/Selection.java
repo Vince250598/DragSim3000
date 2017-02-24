@@ -20,7 +20,7 @@ public class Selection {
 
     public Selection(Stage s, EventHandler eh) {
         this.stage = s;
-        addElements(grid, lv);
+        addElements(lv);
         eh.choixVoiture(lv, s, new Options(s, eh));
     }
 
@@ -28,7 +28,7 @@ public class Selection {
         return choix;
     }
 
-    public void addElements(GridPane gp, ListeVoitures liste) {
+    public void addElements(ListeVoitures liste) {
 
 
 
@@ -37,18 +37,18 @@ public class Selection {
         for (int i = 0; i < nbCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / nbCol);
-            gp.getColumnConstraints().add(colConst);
+            grid.getColumnConstraints().add(colConst);
         }
         for (int i = 0; i < nbRan; i++) {
             RowConstraints rowConst = new RowConstraints();
             rowConst.setPercentHeight(100.0 / nbRan);
-            gp.getRowConstraints().add(rowConst);
+            grid.getRowConstraints().add(rowConst);
         }
 
         int noCol = 0;
         int noRan = 0;
         for (int x = 0; x < liste.voitures.size(); x++) {
-            gp.add(liste.voitures.get(x).getImage(), noCol, noRan);
+            grid.add(liste.voitures.get(x).getImage(), noCol, noRan);
             noCol++;
             if (noCol > 4) {
                 noCol = 0;
@@ -58,7 +58,7 @@ public class Selection {
         BackgroundImage bgImg = new BackgroundImage(background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background bg = new Background(bgImg);
-        gp.setBackground(bg);
+        grid.setBackground(bg);
 
     }
 }
