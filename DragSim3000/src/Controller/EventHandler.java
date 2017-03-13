@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 public class EventHandler {
 
+    Moteur engine = new Moteur();
+
     public EventHandler() {
     }
 
@@ -80,6 +82,9 @@ public class EventHandler {
         opt.getStart().setOnMouseClicked(event -> {
             stage.setScene(ec.getEnCourse());
             ec.loaderVoiture();
+            engine.tableauData();
+            engine.RPM(Moteur.getChoixVoiture());
+            engine.test();
         });
     }
 }
