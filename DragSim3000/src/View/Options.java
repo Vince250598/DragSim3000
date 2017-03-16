@@ -68,7 +68,7 @@ public class Options {
         vb.getChildren().addAll(vb1, vb2, start);
 
         group.getChildren().add(vb);
-        StackPane.setAlignment(vb, Pos.BASELINE_CENTER);
+        vb.setTranslateY(-100);
     }
 
     public Scene getOption() {
