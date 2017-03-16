@@ -10,7 +10,7 @@ import java.util.Vector;
 
 public class Moteur {
     private static Voiture choixVoiture;
-    private double accelX;
+    private double accel;
     private int rpm = 1000;
     private int actualGear = 1;
     private double wheelSpeed;
@@ -19,20 +19,60 @@ public class Moteur {
     private double actualPower;
     private boolean max = false;
     private int increase;
+    private double currentSpeed;
+    private double currentPosition;
+    private double wheelForce;
+    private double torque;
+    private double maxWheelForce;
 
     public Moteur() {
     }
 
     public void test() {
         Timeline tl = new Timeline(new KeyFrame(Duration.millis(15), a -> {
-            System.out.println(rpm + "              " + actualGear);
-            RPM(choixVoiture);
+            CalculateAcceleration(choixVoiture);
+            System.out.println(accel);
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
     }
 
-    public void RPM(Voiture v) {
+    private double CalculateTorque (Voiture v){
+        //calcul en lb.in jusqu'à n.m
+        torque = (63025 * (CalculatePower(v)/RPM(v))) * 0.112984829333;
+        return torque;
+    }
+
+    private double CalculateMaxWheelForce(Voiture v){
+        maxWheelForce = (v.getMasse()/2) * 9.8;
+        return maxWheelForce;
+    }
+
+    private double CalculateWheelForce(Voiture v){
+        wheelForce = (CalculateTorque(v) * (double) gearRatio.get(actualGear-1) * v.getRatioDiff() * (v.getEfficaciteTransmission()/v.getRayonRoue()));
+        if (wheelForce > CalculateMaxWheelForce(v))
+            wheelForce = maxWheelForce;
+        return wheelForce;
+    }
+
+    private double CalculateFriction(Voiture v){
+        return (0.85 * v.getMasse() * 9.8);
+    }
+
+    private double CalculateAcceleration(Voiture v){
+        accel = ((CalculateWheelForce(v) - CalculateFriction(v))/v.getMasse());
+        return accel;
+    }
+
+    public void CalculateCurrentSpeed(Voiture v){
+        currentSpeed = currentSpeed + (15/1000) * CalculateAcceleration(v);
+    }
+
+    public void CalculateCurrentPosition(Voiture v){
+        currentPosition = currentPosition + (15/1000) * currentSpeed;
+    }
+
+    public int RPM(Voiture v) {
         if (max)
             rpm = (int) v.getRpmMax();
         if (!max) {
@@ -46,9 +86,10 @@ public class Moteur {
                 rpm = (int) (wheelSpeed * v.getRatioDiff() * (double) gearRatio.get(actualGear - 1) * 60 / (2 * Math.PI));
             } else max = true;
         }
+        return rpm;
     }
 
-    private void RPMincrease(Voiture v) {
+    private double CalculatePower(Voiture v) {
         int div = rpm / 500;
         switch (div) {
             case 2:
@@ -97,7 +138,12 @@ public class Moteur {
                 actualPower = (double) puissance.get(div - 2);
                 break;
         }
-        increase = (int) (((double) gearRatio.get(actualGear - 1) * actualPower) / (6 * v.getRatioDiff()));
+       return actualPower;
+    }
+
+    private int RPMincrease(Voiture voiture){
+        increase = (int) (((double) gearRatio.get(actualGear - 1) * CalculatePower(voiture)) / (6 * voiture.getRatioDiff()));
+        return increase;
     }
 
     private void findWheelSpeed(int rpm, Voiture v) {
@@ -118,6 +164,8 @@ public class Moteur {
                 gearRatio.remove(gearRatio.size() - 1);
             }
         }
+
+        actualPower = choixVoiture.getPuissance1000rpm();
 
         puissance.add(choixVoiture.getPuissance1000rpm());
         puissance.add(choixVoiture.getPuissance1500rpm());
