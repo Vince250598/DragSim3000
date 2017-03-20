@@ -32,8 +32,9 @@ public class Moteur {
 
     public void test() {
         Timeline tl = new Timeline(new KeyFrame(Duration.millis(15), a -> {
-            CalculateCurrentSpeed(choixVoiture);
-            System.out.println(currentSpeed * 3.6 + "      ///////     " + accel + "     ///////     " + actualGear + "      ///////     " + rpm);
+            CalculateCurrentPosition(choixVoiture);
+            System.out.println(currentSpeed * 3.6 + "      ///////     " + currentPosition + "     ///////     " + actualGear + "      ///////     " + rpm);
+            a.consume();
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
@@ -72,15 +73,21 @@ public class Moteur {
         return accel;
     }
 
-    public void CalculateCurrentSpeed(Voiture v) {
-        if (currentSpeed >= v.getVitesseMax())
+    public double CalculateCurrentSpeed(Voiture v) {
+        if (currentSpeed >= v.getVitesseMax()) {
             currentSpeed = v.getVitesseMax();
-        else currentSpeed = (currentSpeed + (0.015) * CalculateAcceleration(v));
+            return currentSpeed;
+        } else currentSpeed = (currentSpeed + (0.015 * CalculateAcceleration(v)));
+        {
+            return currentSpeed;
+        }
 
     }
 
-    public void CalculateCurrentPosition(Voiture v) {
-        currentPosition = currentPosition + currentSpeed;
+    public double CalculateCurrentPosition(Voiture v) {
+        v.getImage().setX(currentPosition + 50);
+        currentPosition = v.getImage().getX();
+        return v.getImage().getX();
     }
 
     public int RPM(Voiture v) {
@@ -203,6 +210,7 @@ public class Moteur {
         }
 
         actualPower = choixVoiture.getPuissance1000rpm();
+        currentPosition = choixVoiture.getImage().getX();
 
         puissance.add(choixVoiture.getPuissance1000rpm());
         puissance.add(choixVoiture.getPuissance1500rpm());

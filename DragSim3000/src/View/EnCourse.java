@@ -27,6 +27,8 @@ public class EnCourse {
         addElements();
     }
 
+    //TODO: ajouter un bouton "menu" qui arrête tout et nous renvoie au menu principal
+
     private void addElements() {
         BackgroundImage backgroundImage = new BackgroundImage(background, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(300, 1080, false, false, false, false));
