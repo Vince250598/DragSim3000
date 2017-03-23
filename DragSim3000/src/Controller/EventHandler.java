@@ -45,7 +45,6 @@ public class EventHandler {
         }
     }
 
-    //TODO: arranger le vbox qui monte quand je check une case
     public void option(Options opt, Stage stage, EnCourse ec) {
         opt.getSec().setOnAction(event -> {
             if (opt.getSec().isSelected())
@@ -81,6 +80,7 @@ public class EventHandler {
 
         opt.getStart().setOnMouseClicked(event -> {
             stage.setScene(ec.getEnCourse());
+            ec.addElements();
             ec.loaderVoiture();
             engine.tableauData();
             engine.RPM(Moteur.getChoixVoiture());

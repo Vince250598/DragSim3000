@@ -5,6 +5,7 @@ import Controller.Moteur;
 import Main.Programme;
 import Model.ListeVoitures;
 import Model.Voiture;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,30 +18,33 @@ public class EnCourse {
 
     private Programme programme = new Programme();
     ListeVoitures lv = new ListeVoitures();
-    private Pane group = new Pane();
+    private StackPane group = new StackPane();
     private Scene enCourse = new Scene(group, programme.getLargeurEcran(), programme.getHauteurEcran());
     private Image background = new Image("Ressources\\road.png");
     private Voiture voiture;
     private ImageView imageVoiture = new ImageView();
+    static Moteur engine = new Moteur();
+    static Label temps;
+    static Label vitesse;
+    static Label RPM;
+    static Label distance;
 
-    public EnCourse() {
-        addElements();
-    }
+    public EnCourse() {}
 
     //TODO: ajouter un bouton "menu" qui arrête tout et nous renvoie au menu principal
 
-    private void addElements() {
+    public void addElements() {
         BackgroundImage backgroundImage = new BackgroundImage(background, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(300, 1080, false, false, false, false));
 
         VBox vb = new VBox(20);
-        Label temps = new Label("Temps: ");
+        temps = new Label("Temps: ");
         temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        Label vitesse = new Label("Vitesse: ");
+        vitesse = new Label("Vitesse: ");
         vitesse.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        Label RPM = new Label("RPM: ");
+        RPM = new Label("RPM: ");
         RPM.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        Label distance = new Label("Distance: ");
+        distance = new Label("Distance: ");
         distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
         vb.getChildren().addAll(temps, vitesse, RPM, distance);
 
@@ -53,12 +57,20 @@ public class EnCourse {
 
     public void loaderVoiture(){
         voiture = Moteur.getChoixVoiture();
-        imageVoiture.setImage(new Image(voiture.getURL()));
-        imageVoiture.setY(735);
-        imageVoiture.setX(-70);
-        imageVoiture.setScaleX(0.3);
-        imageVoiture.setScaleY(0.3);
-        group.getChildren().add(imageVoiture);
+        group.getChildren().add(Moteur.getChoixVoiture().getImage());
+        Moteur.getChoixVoiture().getImage().setScaleX(0.3);
+        Moteur.getChoixVoiture().getImage().setScaleY(0.3);
+        StackPane.setAlignment(Moteur.getChoixVoiture().getImage(), Pos.BOTTOM_LEFT );
+        Moteur.getChoixVoiture().getImage().setTranslateX(-50);
+        Moteur.getChoixVoiture().getImage().setTranslateY(-200);
+    }
+
+    public static void majUI(){
+        //TODO: ne se mete pas à jour, peut-être le changer de classe
+        temps.setText("Temps: " /*TODO: ajouter le temps*/);
+        vitesse.setText("Vitesse: " + engine.getCurrentSpeed() + " m/s");
+        RPM.setText("RPM: " + engine.getRpm());
+        distance.setText("Distance: " + engine.getCurrentPosition());
     }
 
     public Scene getEnCourse() {
