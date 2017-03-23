@@ -38,6 +38,7 @@ public class Voiture {
     double puissance8000rpm;
     String URL;
     ImageView image = new ImageView();
+    double CD;
 
     public Voiture(String modele,
                    double masse,
@@ -70,7 +71,8 @@ public class Voiture {
                    double puissance7000rpm,
                    double puissance7500rpm,
                    double puissance8000rpm,
-                   String URL
+                   String URL,
+                   double CD
 
     ) {
         this.modele = modele;
@@ -106,6 +108,7 @@ public class Voiture {
         this.vitesseMax = vitesseMax;
         this.URL = URL;
         image.setImage(new Image(URL));
+        this.CD = CD;
     }
 
     public ImageView getImage() {
@@ -364,5 +367,11 @@ public class Voiture {
         return URL;
     }
 
+    public double getCD() {
+        return CD;
+    }
 
+    public void setCD(double CD) {
+        this.CD = CD;
+    }
 }

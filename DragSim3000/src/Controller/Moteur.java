@@ -16,7 +16,7 @@ public class Moteur {
     private double wheelSpeed;
     private Vector gearRatio = new Vector();
     private Vector puissance = new Vector();
-    private double actualPower;
+    private double actualTorque;
     private boolean max = false;
     private int increase;
     private double currentSpeed = 1;
@@ -26,6 +26,9 @@ public class Moteur {
     private double maxWheelForce;
     private double totalForces;
     private double frictionForce;
+    private double b;
+    private double d;
+    private double c1,c2,c3;
 
     public Moteur() {
     }
@@ -68,14 +71,22 @@ public class Moteur {
         return frictionForce;
     }
 
-    private double CalculateAcceleration(Voiture v) {
+    /*private double CalculateAcceleration(Voiture v) {
         accel = (CalculateForces(v) / v.getMasse());
         return accel;
+    }*/
+
+    private double CalculC1(Voiture v){
+        c1 = -0.5 * v.getCD() * 1.225 * 
+    }
+
+    private double CalculateAcceleration(Voiture v){
+
     }
 
     public double CalculateCurrentSpeed(Voiture v) {
-        if (currentSpeed >= (v.getVitesseMax()/3.6) /*de km/h en m/s*/) {
-            currentSpeed = (v.getVitesseMax()/3.6);
+        if (currentSpeed >= (v.getVitesseMax() / 3.6) /*de km/h en m/s*/) {
+            currentSpeed = (v.getVitesseMax() / 3.6);
             return currentSpeed;
         } else currentSpeed = (currentSpeed + (0.015 * CalculateAcceleration(v)));
         {
@@ -108,7 +119,7 @@ public class Moteur {
         return rpm;
     }
 
-    private double CalculatePower(Voiture v) {
+    /*private double CalculatePower(Voiture v) {
         int div = rpm / 500;
         switch (div) {
             case 2:
@@ -158,6 +169,55 @@ public class Moteur {
                 break;
         }
         return actualPower;
+    }*/
+
+    private double CalculatePower(Voiture v) {
+        if (rpm > 1500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(1)) / 1500) - ((9.5488 * 0.7457 * (double) puissance.get(0)) / 1000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(0)) / 1000) - (b * 1000);
+        } else if (rpm < 2000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(2)) / 2000) - ((9.5488 * 0.7457 * (double) puissance.get(1)) / 1500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(1)) / 1500) - (b * 1500);
+        } else if (rpm < 2500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(3)) / 2500) - ((9.5488 * 0.7457 * (double) puissance.get(2)) / 2000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(2)) / 2000) - (b * 2000);
+        } else if (rpm < 3000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(4)) / 3000) - ((9.5488 * 0.7457 * (double) puissance.get(3)) / 2500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(3)) / 2500) - (b * 2500);
+        } else if (rpm < 3500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(5)) / 3500) - ((9.5488 * 0.7457 * (double) puissance.get(4)) / 3000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(4)) / 3000) - (b * 3000);
+        } else if (rpm < 4000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(6)) / 4000) - ((9.5488 * 0.7457 * (double) puissance.get(5)) / 3500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(5)) / 3500) - (b * 3500);
+        } else if (rpm < 4500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(7)) / 4500) - ((9.5488 * 0.7457 * (double) puissance.get(6)) / 4000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(6)) / 4000) - (b * 4000);
+        } else if (rpm < 5000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(8)) / 5000) - ((9.5488 * 0.7457 * (double) puissance.get(7)) / 4500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(7)) / 4500) - (b * 4500);
+        } else if (rpm < 5500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(9)) / 5500) - ((9.5488 * 0.7457 * (double) puissance.get(8)) / 5000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(8)) / 5000) - (b * 5000);
+        } else if (rpm < 6000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(10)) / 6000) - ((9.5488 * 0.7457 * (double) puissance.get(9)) / 5500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(9)) / 5500) - (b * 5500);
+        } else if (rpm < 6500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(11)) / 6500) - ((9.5488 * 0.7457 * (double) puissance.get(10)) / 6000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(10)) / 6000) - (b * 6000);
+        } else if (rpm < 7000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(12)) / 7000) - ((9.5488 * 0.7457 * (double) puissance.get(11)) / 6500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(11)) / 6500) - (b * 6500);
+        } else if (rpm < 7500) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(13)) / 7500) - ((9.5488 * 0.7457 * (double) puissance.get(12)) / 7000)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(12)) / 7000) - (b * 7000);
+        } else if (rpm < 8000) {
+            b = (((9.5488 * 0.7457 * (double) puissance.get(14)) / 8000) - ((9.5488 * 0.7457 * (double) puissance.get(13)) / 7500)) / 499;
+            d = ((9.5488 * 0.7457 * (double) puissance.get(13)) / 7500) - (b * 7500);
+        }
+
+        actualTorque = b*rpm + d;
+        return actualTorque;
     }
 
     private int RPMincrease(Voiture voiture) {

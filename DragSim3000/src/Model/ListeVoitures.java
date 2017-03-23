@@ -61,7 +61,8 @@ public class ListeVoitures {
                             Double.parseDouble(eElement.getElementsByTagName("P7000").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("P7500").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("P8000").item(0).getTextContent()),
-                            eElement.getElementsByTagName("URL").item(0).getTextContent()));
+                            eElement.getElementsByTagName("URL").item(0).getTextContent(),
+                            Double.parseDouble(eElement.getElementsByTagName("CD").item(0).getTextContent())));
                 }
             }
         } catch (Exception e) {
