@@ -74,8 +74,8 @@ public class Moteur {
     }
 
     public double CalculateCurrentSpeed(Voiture v) {
-        if (currentSpeed >= v.getVitesseMax()) {
-            currentSpeed = v.getVitesseMax();
+        if (currentSpeed >= (v.getVitesseMax()/3.6) /*de km/h en m/s*/) {
+            currentSpeed = (v.getVitesseMax()/3.6);
             return currentSpeed;
         } else currentSpeed = (currentSpeed + (0.015 * CalculateAcceleration(v)));
         {
@@ -85,7 +85,8 @@ public class Moteur {
     }
 
     public double CalculateCurrentPosition(Voiture v) {
-        v.getImage().setX(currentPosition + 50);
+        //TODO: l'image ne se déplace pas
+        v.getImage().setX(currentPosition + CalculateCurrentSpeed(v));
         currentPosition = v.getImage().getX();
         return v.getImage().getX();
     }
