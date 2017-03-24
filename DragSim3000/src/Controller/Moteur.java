@@ -33,11 +33,24 @@ public class Moteur {
     public Moteur() {
     }
 
+    public int getRpm() {
+        return rpm;
+    }
+
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public double getCurrentPosition() {
+        return currentPosition;
+    }
+
     public void test() {
         Timeline tl = new Timeline(new KeyFrame(Duration.millis(15), a -> {
             CalculateCurrentPosition(choixVoiture);
             System.out.println(currentSpeed * 3.6 + "      ///////     " + currentPosition + "     ///////     " + actualGear + "      ///////     " + rpm);
             a.consume();
+
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
@@ -77,7 +90,7 @@ public class Moteur {
     }*/
 
     private double CalculC1(Voiture v){
-        c1 = -0.5 * v.getCD() * 1.225 * 
+        c1 = -0.5 * v.getCD() * 1.225 *
     }
 
     private double CalculateAcceleration(Voiture v){
@@ -96,10 +109,9 @@ public class Moteur {
     }
 
     public double CalculateCurrentPosition(Voiture v) {
-        //TODO: l'image ne se déplace pas
-        v.getImage().setX(currentPosition + CalculateCurrentSpeed(v));
-        currentPosition = v.getImage().getX();
-        return v.getImage().getX();
+        currentPosition = currentPosition + CalculateCurrentSpeed(v);
+        choixVoiture.getImage().setTranslateX(currentPosition);
+        return currentPosition;
     }
 
     public int RPM(Voiture v) {
