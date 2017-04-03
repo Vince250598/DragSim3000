@@ -1,16 +1,15 @@
 package View;
 
 import Controller.EventHandler;
-import Main.Programme;
 import javafx.animation.Animation;
-import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,24 +17,25 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.net.URL;
+
 public class Demarrage {
 
-    private Programme prog = new Programme();
     private Pane group = new Pane();
-    private Scene start = new Scene(group, prog.getLargeurEcran(), prog.getHauteurEcran());
+    private Scene start = new Scene(group, 1920, 1080);
     private Image background = new Image("\\Ressources\\background.png");
+    private static MediaPlayer startingMusic;
 
-    public Demarrage(Stage s, EventHandler eh) {
-        demarrer(s, eh);
-        addElements();
+    public Demarrage(Stage s) {
         s.setMaximized(true);
         s.setTitle("DragSim3000");
     }
 
     public void demarrer(Stage stage, EventHandler eh) {
         stage.setScene(start);
-        eh.anyKey(start, stage, new Selection(stage, eh));
+        eh.anyKey(start);
         stage.show();
+        addElements();
     }
 
     public void addElements() {
@@ -43,8 +43,12 @@ public class Demarrage {
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true));
         Background bg = new Background(bgImg);
         group.setBackground(bg);
-        //TODO: ajouter le texte et autres trucs si nécessaire
 
+        if (startingMusic == null) {
+            URL url = getClass().getResource("/Ressources/startingMusic.mp3");
+            startingMusic = new MediaPlayer(new Media(url.toString()));
+            startingMusic.setCycleCount(MediaPlayer.INDEFINITE);
+        }
         Text txt = new Text("Press any key\n to continue");
         txt.setFill(Color.RED);
         txt.setFont(Font.font(null, FontWeight.BOLD, 100));
@@ -66,5 +70,11 @@ public class Demarrage {
         st.setByY(1.1);
         st.play();
 
+        startingMusic.play();
+
+    }
+
+    public static MediaPlayer getStartingMusic() {
+        return startingMusic;
     }
 }

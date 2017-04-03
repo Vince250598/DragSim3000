@@ -4,6 +4,8 @@ import Controller.EventHandler;
 import Controller.Moteur;
 import Model.ListeVoitures;
 import View.Demarrage;
+import View.EnCourse;
+import View.Options;
 import View.Selection;
 import javafx.application.Application;
 import javafx.stage.Screen;
@@ -11,25 +13,24 @@ import javafx.stage.Stage;
 
 public class Programme extends Application {
 
-    javafx.geometry.Rectangle2D screenSize = Screen.getPrimary().getBounds();
-    double largeurEcran = screenSize.getWidth();
-    double hauteurEcran = screenSize.getHeight();
+    EventHandler events = new EventHandler();
+    Demarrage starter;
+    Selection selec = new Selection();
+    static Stage stage;
 
-    public double getLargeurEcran() {
-        return largeurEcran;
+    public void demarrer(Stage stage) {
+        starter = new Demarrage(stage);
+        starter.demarrer(stage, events);
     }
 
-    public double getHauteurEcran() {
-        return hauteurEcran;
+    public static Stage getStage() {
+        return stage;
     }
 
     @Override
     public void start(Stage primaryStage) {
-
-        ListeVoitures liste = new ListeVoitures();
-        EventHandler events = new EventHandler();
-        Selection selection = new Selection(primaryStage, events);
-        Demarrage demarrage = new Demarrage(primaryStage, events);
+        stage = primaryStage;
+        demarrer(primaryStage);
     }
 
     public static void main(String[] args) {

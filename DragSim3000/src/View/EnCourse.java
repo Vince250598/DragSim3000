@@ -2,25 +2,31 @@ package View;
 
 
 import Controller.Moteur;
-import Main.Programme;
 import Model.ListeVoitures;
 import Model.Voiture;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.net.URL;
+
 public class EnCourse {
 
-    private Programme programme = new Programme();
     ListeVoitures lv = new ListeVoitures();
     private StackPane group = new StackPane();
-    private Scene enCourse = new Scene(group, programme.getLargeurEcran(), programme.getHauteurEcran());
-    private Image background = new Image("Ressources\\road.png");
+    private Scene enCourse = new Scene(group, 1920, 1080);
+    private Image driedBackground = new Image("Ressources\\road.png");
+    private Image wetBackground = new Image("Ressources\\rainyRoad.png");
     private Voiture voiture;
     private ImageView imageVoiture = new ImageView();
     static Moteur engine = new Moteur();
@@ -28,15 +34,30 @@ public class EnCourse {
     static Label vitesse;
     static Label RPM;
     static Label distance;
+    private boolean dried = true;
+    private Button stop = new Button("Stop");
+    private Alert stopDialog = new Alert(Alert.AlertType.CONFIRMATION);
+    private ButtonType menu = new ButtonType("Menu");
+    private ButtonType exit = new ButtonType("Exit");
+    private ButtonType cancel = new ButtonType("Cancel");
+    private static MediaPlayer runningMusic;
 
-    public EnCourse() {}
-
-    //TODO: ajouter un bouton "menu" qui arrête tout et nous renvoie au menu principal
+    public EnCourse() {
+    }
 
     public void addElements() {
-        BackgroundImage backgroundImage = new BackgroundImage(background, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(300, 1080, false, false, false, false));
 
+        if (runningMusic == null) {
+            URL url = getClass().getResource("/Ressources/runningMusic.mp3");
+            runningMusic = new MediaPlayer(new Media(url.toString()));
+        }
+        BackgroundImage backgroundImage;
+        if (isDried())
+            backgroundImage = new BackgroundImage(driedBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    new BackgroundSize(300, 1080, false, false, false, false));
+        else
+            backgroundImage = new BackgroundImage(wetBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    new BackgroundSize(300, 1080, false, false, false, false));
         VBox vb = new VBox(20);
         temps = new Label("Temps: ");
         temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
@@ -48,24 +69,31 @@ public class EnCourse {
         distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
         vb.getChildren().addAll(temps, vitesse, RPM, distance);
 
-
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
 
-        group.getChildren().add(vb);
+        stop.setTranslateX(850);
+        stop.setTranslateY(410);
+
+        stopDialog.setTitle("Stop");
+        stopDialog.setHeaderText(null);
+        stopDialog.setContentText("Program has been stop.\n What do you want to do?");
+        stopDialog.getButtonTypes().setAll(menu, exit, cancel);
+
+        group.getChildren().clear();
+        group.getChildren().addAll(vb, stop);
     }
 
-    public void loaderVoiture(){
-        voiture = Moteur.getChoixVoiture();
+    public void loaderVoiture() {
         group.getChildren().add(Moteur.getChoixVoiture().getImage());
         Moteur.getChoixVoiture().getImage().setScaleX(0.3);
         Moteur.getChoixVoiture().getImage().setScaleY(0.3);
-        StackPane.setAlignment(Moteur.getChoixVoiture().getImage(), Pos.BOTTOM_LEFT );
-        Moteur.getChoixVoiture().getImage().setTranslateX(-50);
+        StackPane.setAlignment(Moteur.getChoixVoiture().getImage(), Pos.BOTTOM_LEFT);
+        Moteur.getChoixVoiture().getImage().setTranslateX(-75);
         Moteur.getChoixVoiture().getImage().setTranslateY(-200);
     }
 
-    public static void majUI(){
+    public static void majUI() {
         //TODO: ne se mete pas à jour, peut-être le changer de classe
         temps.setText("Temps: " /*TODO: ajouter le temps*/);
         vitesse.setText("Vitesse: " + engine.getCurrentSpeed() + " m/s");
@@ -83,5 +111,37 @@ public class EnCourse {
 
     public ImageView getImageVoiture() {
         return imageVoiture;
+    }
+
+    public boolean isDried() {
+        return dried;
+    }
+
+    public void setDried(boolean dried) {
+        this.dried = dried;
+    }
+
+    public Alert getStopDialog() {
+        return stopDialog;
+    }
+
+    public Button getStop() {
+        return stop;
+    }
+
+    public ButtonType getMenu() {
+        return menu;
+    }
+
+    public ButtonType getCancel() {
+        return cancel;
+    }
+
+    public StackPane getGroup() {
+        return group;
+    }
+
+    public static MediaPlayer getRunningMusic() {
+        return runningMusic;
     }
 }

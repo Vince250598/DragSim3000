@@ -1,8 +1,10 @@
 package View;
 
 import Controller.EventHandler;
+import Controller.Moteur;
 import Main.Programme;
 import Model.ListeVoitures;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -10,28 +12,35 @@ import javafx.stage.Stage;
 
 public class Selection {
 
-    private Programme prog = new Programme();
-    private Stage stage = new Stage();
-    private ListeVoitures lv = new ListeVoitures();
+    private ListeVoitures list = new ListeVoitures();
     private GridPane grid = new GridPane();
-    private Scene choix = new Scene(grid, prog.getLargeurEcran(), prog.getHauteurEcran());
+    private Scene choix = new Scene(grid, 1920, 1080);
     private Image background = new Image("\\Ressources\\noRoad.png");
-    EventHandler eh = new EventHandler();
 
-    public Selection(Stage s, EventHandler eh) {
-        this.stage = s;
-        addElements(lv);
-        eh.choixVoiture(lv, s, new Options(s, eh));
+    public Selection(){
+    }
+
+    public Selection(EventHandler eh) {
+        addElements();
     }
 
     public Scene getChoix() {
         return choix;
     }
 
-    public void addElements(ListeVoitures liste) {
+    public void reset(){
+        //addElements();
+        Programme.getStage().setScene(choix);
+        Moteur.setChoixVoiture(null);
+        Demarrage.getStartingMusic().play();
+    }
 
+    public void addElements() {
 
-
+        list.getVoitures().clear();
+        list.loadVoitures();
+        grid.getChildren().clear();
+        grid.setAlignment(Pos.CENTER);
         int nbCol = 5;
         int nbRan = 3;
         for (int i = 0; i < nbCol; i++) {
@@ -47,8 +56,8 @@ public class Selection {
 
         int noCol = 0;
         int noRan = 0;
-        for (int x = 0; x < liste.voitures.size(); x++) {
-            grid.add(liste.voitures.get(x).getImage(), noCol, noRan);
+        for (int x = 0; x < list.voitures.size(); x++) {
+            grid.add(list.voitures.get(x).getImage(), noCol, noRan);
             noCol++;
             if (noCol > 4) {
                 noCol = 0;
@@ -60,5 +69,9 @@ public class Selection {
         Background bg = new Background(bgImg);
         grid.setBackground(bg);
 
+    }
+
+    public ListeVoitures getList() {
+        return list;
     }
 }

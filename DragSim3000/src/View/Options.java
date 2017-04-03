@@ -14,9 +14,8 @@ import javafx.stage.Stage;
 
 public class Options {
 
-    private Programme prog = new Programme();
     private StackPane group = new StackPane();
-    private Scene option = new Scene(group, prog.getLargeurEcran(), prog.getHauteurEcran());
+    private Scene option = new Scene(group, 1920, 1080);
     private Image background = new Image("Ressources\\noRoad.png");
     private CheckBox sec = new CheckBox("Sèche");
     private CheckBox trempe = new CheckBox("Mouillée");
@@ -24,11 +23,11 @@ public class Options {
     private CheckBox manuel = new CheckBox("Manuelle");
     private ImageView start = new ImageView(new Image("\\Ressources\\start.png"));
 
+    public Options(){}
 
-    public Options(Stage s, EventHandler eh) {
-//TODO: appeler les méthodes addElements et celle qui check si on clic sur START
+    public Options(EventHandler eh) {
         addElements();
-        eh.option(this, s, new EnCourse());
+        eh.option();
     }
 
     public void addElements(){
@@ -67,6 +66,7 @@ public class Options {
         start.setScaleY(2);
         vb.getChildren().addAll(vb1, vb2, start);
 
+        group.getChildren().clear();
         group.getChildren().add(vb);
         vb.setTranslateY(-100);
     }
@@ -93,5 +93,9 @@ public class Options {
 
     public ImageView getStart() {
         return start;
+    }
+
+    public StackPane getGroup() {
+        return group;
     }
 }

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Voiture;
+import View.EnCourse;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,7 +29,8 @@ public class Moteur {
     private double frictionForce;
     private double b;
     private double d;
-    private double c1,c2,c3;
+    private double c1, c2, c3;
+    private Timeline tl;
 
     public Moteur() {
     }
@@ -46,11 +48,10 @@ public class Moteur {
     }
 
     public void test() {
-        Timeline tl = new Timeline(new KeyFrame(Duration.millis(15), a -> {
+        tl = new Timeline(new KeyFrame(Duration.millis(15), a -> {
             CalculateCurrentPosition(choixVoiture);
             System.out.println(currentSpeed * 3.6 + "      ///////     " + currentPosition + "     ///////     " + actualGear + "      ///////     " + rpm);
             a.consume();
-
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
@@ -84,51 +85,24 @@ public class Moteur {
         return frictionForce;
     }
 
-    /*private double CalculateAcceleration(Voiture v) {
+    private double CalculateAcceleration(Voiture v) {
         accel = (CalculateForces(v) / v.getMasse());
         return accel;
+    }
+
+    /*private double CalculC1(Voiture v) {
+        c1 = -0.5 * v.getCD() * 1.225 *
     }*/
 
-    private double CalculC1(Voiture v){
-        c1 = -0.5 * v.getCD() * 1.225 *
-    }
-
-    private double CalculateAcceleration(Voiture v){
-
-    }
-
-    public double CalculateCurrentSpeed(Voiture v) {
-        if (currentSpeed >= (v.getVitesseMax() / 3.6) /*de km/h en m/s*/) {
-            currentSpeed = (v.getVitesseMax() / 3.6);
-            return currentSpeed;
-        } else currentSpeed = (currentSpeed + (0.015 * CalculateAcceleration(v)));
-        {
-            return currentSpeed;
-        }
-
-    }
+    /*private double CalculateAcceleration(Voiture v) {
+        double x = 0;
+        return x;
+    }*/
 
     public double CalculateCurrentPosition(Voiture v) {
         currentPosition = currentPosition + CalculateCurrentSpeed(v);
         choixVoiture.getImage().setTranslateX(currentPosition);
         return currentPosition;
-    }
-
-    public int RPM(Voiture v) {
-        if (max)
-            rpm = (int) v.getRpmMax();
-        if (!max) {
-            RPMincrease(v);
-            rpm += increase;
-        }
-        if (rpm >= v.getRpmMax()) {
-            findWheelSpeed(rpm, v);
-            if (actualGear < v.getNombreVit()) {
-                actualGear++;
-                rpm = (int) (wheelSpeed * v.getRatioDiff() * (double) gearRatio.get(actualGear - 1) * 60 / (2 * Math.PI));
-            } else max = true;
-        }
-        return rpm;
     }
 
     /*private double CalculatePower(Voiture v) {
@@ -183,7 +157,7 @@ public class Moteur {
         return actualPower;
     }*/
 
-    private double CalculatePower(Voiture v) {
+    private double CalculatePower (Voiture v){
         if (rpm > 1500) {
             b = (((9.5488 * 0.7457 * (double) puissance.get(1)) / 1500) - ((9.5488 * 0.7457 * (double) puissance.get(0)) / 1000)) / 499;
             d = ((9.5488 * 0.7457 * (double) puissance.get(0)) / 1000) - (b * 1000);
@@ -228,15 +202,15 @@ public class Moteur {
             d = ((9.5488 * 0.7457 * (double) puissance.get(13)) / 7500) - (b * 7500);
         }
 
-        actualTorque = b*rpm + d;
+        actualTorque = b * rpm + d;
         return actualTorque;
     }
 
-    private int RPMincrease(Voiture voiture) {
+    private int RPMincrease(Voiture voiture){
         increase = (int) (((double) gearRatio.get(actualGear - 1) * CalculatePower(voiture)) * accel * 0.5 / (currentSpeed * (voiture.getRatioDiff())));
-        /*switch (actualGear) {
+        switch (actualGear) {
             case 0:
-                increase = (int) (((double) gearRatio.get(actualGear - 1) * CalculatePower(voiture)) / ((voiture.getVitesseMax()/currentSpeed) * voiture.getRatioDiff()));
+                increase = (int) (((double) gearRatio.get(actualGear - 1) * CalculatePower(voiture)) / ((voiture.getVitesseMax() / currentSpeed) * voiture.getRatioDiff()));
                 break;
             case 1:
                 increase = (int) (((double) gearRatio.get(actualGear - 1) * CalculatePower(voiture)) / (4 * voiture.getRatioDiff()));
@@ -259,12 +233,40 @@ public class Moteur {
             case 7:
                 increase = (int) (((double) gearRatio.get(actualGear - 1) * CalculatePower(voiture)) / (10 * voiture.getRatioDiff()));
                 break;
-        }*/
+        }
         return increase;
     }
 
+
     private void findWheelSpeed(int rpm, Voiture v) {
         wheelSpeed = (rpm / (60 / (2 * Math.PI) * v.getRatioDiff() * (double) gearRatio.get(actualGear - 1)));
+    }
+
+    public int RPM(Voiture v) {
+        if (max)
+            rpm = (int) v.getRpmMax();
+        if (!max) {
+            RPMincrease(v);
+            rpm += increase;
+        }
+        if (rpm >= v.getRpmMax()) {
+            findWheelSpeed(rpm, v);
+            if (actualGear < v.getNombreVit()) {
+                actualGear++;
+                rpm = (int) (wheelSpeed * v.getRatioDiff() * (double) gearRatio.get(actualGear - 1) * 60 / (2 * Math.PI));
+            } else max = true;
+        }
+        return rpm;
+    }
+
+    public double CalculateCurrentSpeed(Voiture v) {
+        if (currentSpeed >= (v.getVitesseMax() / 3.6)) /*de km/h en m/s*/ {
+            currentSpeed = (v.getVitesseMax() / 3.6);
+            return currentSpeed;
+        } else currentSpeed = (currentSpeed + (0.015 * CalculateAcceleration(v)));
+        {
+            return currentSpeed;
+        }
     }
 
     public void tableauData() {
@@ -282,7 +284,7 @@ public class Moteur {
             }
         }
 
-        actualPower = choixVoiture.getPuissance1000rpm();
+        //actualPower = choixVoiture.getPuissance1000rpm();
         currentPosition = choixVoiture.getImage().getX();
 
         puissance.add(choixVoiture.getPuissance1000rpm());
@@ -314,4 +316,21 @@ public class Moteur {
     public static void setChoixVoiture(Voiture v) {
         choixVoiture = v;
     }
+
+    public Timeline getTl() {
+        return tl;
+    }
+
+    public void setActualGear(int actualGear) {
+        this.actualGear = actualGear;
+    }
+
+    public void setCurrentSpeed(double currentSpeed) {
+        this.currentSpeed = currentSpeed;
+    }
+
+    public void setCurrentPosition(double currentPosition) {
+        this.currentPosition = currentPosition;
+    }
 }
+

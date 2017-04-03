@@ -14,7 +14,6 @@ public class ListeVoitures {
     public Vector<Voiture> voitures = new Vector<Voiture>();
 
     public ListeVoitures() {
-        loadVoitures();
     }
 
     public void loadVoitures() {
