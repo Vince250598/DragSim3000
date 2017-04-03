@@ -10,7 +10,6 @@ public class Voiture {
     double efficaciteTransmission;
     double rayonRoue;
     double ratioDiff;
-    double vitesseMax;
     double rpmMax;
     double ratioVit1;
     double ratioVit2;
@@ -52,6 +51,7 @@ public class Voiture {
     double FMoteur;
     double FTotal;
     double Frr;
+    double Cf;
 
     public Voiture(double masse, double area, double Cd, String modele,
                    double efficaciteTransmission,
@@ -129,6 +129,7 @@ public class Voiture {
         densite = 1;
         accel = 0;
         Frr = 0.03 * getMasse() * 9.8;
+        Cf = 0.85;
 
         setGearRatio(ratioVit1, 0);
         setGearRatio(ratioVit2, 1);
@@ -204,7 +205,11 @@ public class Voiture {
     }
 
     private double CalculFMoteur() {
+        //maxForce == force de traction maximale TODO peut être qu'il va falloir ajuster ça pour le dragster pi la f1
+        double maxForce = getCf() * 9.8 * getMasse();
         FMoteur = (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
+        if (maxForce < FMoteur)
+            FMoteur = maxForce;
         return FMoteur;
     }
 
@@ -213,7 +218,7 @@ public class Voiture {
     }
 
     private double CalculFTotal() {
-        double FTotal = CalculFMoteur() - CalculFd() - getFrr();
+        FTotal = CalculFMoteur() - CalculFd() - getFrr();
         return FTotal;
     }
 
@@ -248,6 +253,10 @@ public class Voiture {
 
     public double getArea() {
         return area;
+    }
+
+    public double getCf() {
+        return Cf;
     }
 
     public void setVx(double vx) {
