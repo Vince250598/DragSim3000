@@ -39,6 +39,7 @@ public class Voiture {
     String URL;
     ImageView image = new ImageView();
     double CD;
+    double hauteur, largeur;
 
     public Voiture(String modele,
                    double masse,
@@ -72,7 +73,9 @@ public class Voiture {
                    double puissance7500rpm,
                    double puissance8000rpm,
                    String URL,
-                   double CD
+                   double CD,
+                   double hauteur,
+                   double largeur
 
     ) {
         this.modele = modele;
@@ -109,6 +112,8 @@ public class Voiture {
         this.URL = URL;
         image.setImage(new Image(URL));
         this.CD = CD;
+        this.hauteur = hauteur;
+        this.largeur = largeur;
     }
 
     public ImageView getImage() {
@@ -373,5 +378,21 @@ public class Voiture {
 
     public void setCD(double CD) {
         this.CD = CD;
+    }
+
+    public double getHauteur() {
+        return hauteur;
+    }
+
+    public void setHauteur(double hauteur) {
+        this.hauteur = hauteur;
+    }
+
+    public double getLargeur() {
+        return largeur;
+    }
+
+    public void setLargeur(double largeur) {
+        this.largeur = largeur;
     }
 }
