@@ -31,6 +31,7 @@ public class Moteur {
     private double d;
     private double c1, c2, c3;
     private Timeline tl;
+    private double timeIncrement = 0.015;
 
     public Moteur() {
     }
@@ -48,16 +49,15 @@ public class Moteur {
     }
 
     public void test() {
-        tl = new Timeline(new KeyFrame(Duration.millis(15), a -> {
-            CalculateCurrentPosition(choixVoiture);
-            System.out.println(currentSpeed * 3.6 + "      ///////     " + currentPosition + "     ///////     " + actualGear + "      ///////     " + rpm);
-            a.consume();
+        tl = new Timeline(new KeyFrame(Duration.seconds(timeIncrement), a -> {
+            choixVoiture.CalculVx(timeIncrement);
+            choixVoiture.CalculRPM();
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
     }
 
-    private double CalculateTorque(Voiture v) {
+    /*private double CalculateTorque(Voiture v) {
         //calcul en lb.in jusqu'à n.m
         torque = (63025 * (CalculatePower(v) / RPM(v))) * 0.112984829333;
         return torque;
@@ -99,7 +99,7 @@ public class Moteur {
         return x;
     }*/
 
-    public double CalculateCurrentPosition(Voiture v) {
+   /* public double CalculateCurrentPosition(Voiture v) {
         currentPosition = currentPosition + CalculateCurrentSpeed(v);
         choixVoiture.getImage().setTranslateX(currentPosition);
         return currentPosition;
@@ -157,7 +157,7 @@ public class Moteur {
         return actualPower;
     }*/
 
-    private double CalculatePower (Voiture v){
+    /*private double CalculatePower (Voiture v){
         if (rpm > 1500) {
             b = (((9.5488 * 0.7457 * (double) puissance.get(1)) / 1500) - ((9.5488 * 0.7457 * (double) puissance.get(0)) / 1000)) / 499;
             d = ((9.5488 * 0.7457 * (double) puissance.get(0)) / 1000) - (b * 1000);
@@ -259,10 +259,10 @@ public class Moteur {
         return rpm;
     }
 
-    public double CalculateCurrentSpeed(Voiture v) {
-        if (currentSpeed >= (v.getVitesseMax() / 3.6)) /*de km/h en m/s*/ {
-            currentSpeed = (v.getVitesseMax() / 3.6);
-            return currentSpeed;
+   /* public double CalculateCurrentSpeed(Voiture v) {
+        if (currentSpeed >= (v.getVitesseMax() / 3.6)) /*de km/h en m/s*/
+            /*currentSpeed = (v.getVitesseMax() / 3.6);
+            eturn currentSpeed;
         } else currentSpeed = (currentSpeed + (0.015 * CalculateAcceleration(v)));
         {
             return currentSpeed;
@@ -331,6 +331,6 @@ public class Moteur {
 
     public void setCurrentPosition(double currentPosition) {
         this.currentPosition = currentPosition;
-    }
+    }*/
 }
 

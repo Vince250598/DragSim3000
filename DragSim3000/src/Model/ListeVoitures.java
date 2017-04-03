@@ -11,12 +11,9 @@ import java.io.File;
 import java.util.Vector;
 
 public class ListeVoitures {
-    public Vector<Voiture> voitures = new Vector<Voiture>();
+    public static Vector<Voiture> voitures = new Vector<Voiture>();
 
-    public ListeVoitures() {
-    }
-
-    public void loadVoitures() {
+    public static void loadVoitures() {
         try {
             File xml = new File("C:/Users/Public/Documents/Voitures.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -29,12 +26,13 @@ public class ListeVoitures {
                 Node nNode = list.item(x);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    voitures.add(x, new Voiture(eElement.getElementsByTagName("Modele").item(0).getTextContent(),
-                            Double.parseDouble(eElement.getElementsByTagName("Masse").item(0).getTextContent()),
+                    voitures.add(x, new Voiture(Double.parseDouble(eElement.getElementsByTagName("Masse").item(0).getTextContent()),
+                            Double.parseDouble(eElement.getElementsByTagName("Aire").item(0).getTextContent()),
+                            Double.parseDouble(eElement.getElementsByTagName("CD").item(0).getTextContent()),
+                            eElement.getElementsByTagName("Modele").item(0).getTextContent(),
                             Double.parseDouble(eElement.getElementsByTagName("EF").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("Rayon").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("RD").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("VM").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("RPM").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("RV1").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("RV2").item(0).getTextContent()),
@@ -60,10 +58,7 @@ public class ListeVoitures {
                             Double.parseDouble(eElement.getElementsByTagName("P7000").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("P7500").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("P8000").item(0).getTextContent()),
-                            eElement.getElementsByTagName("URL").item(0).getTextContent(),
-                            Double.parseDouble(eElement.getElementsByTagName("CD").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("Hauteur").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("Largeur").item(0).getTextContent())));
+                            eElement.getElementsByTagName("URL").item(0).getTextContent()));
                 }
             }
         } catch (Exception e) {
@@ -71,7 +66,11 @@ public class ListeVoitures {
         }
     }
 
-    public Vector<Voiture> getVoitures() {
+    public static Vector<Voiture> getVoitures() {
         return voitures;
+    }
+
+    public static Voiture getVoiture(int index) {
+        return voitures.get(index);
     }
 }

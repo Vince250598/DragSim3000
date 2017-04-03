@@ -38,15 +38,25 @@ public class Voiture {
     double puissance8000rpm;
     String URL;
     ImageView image = new ImageView();
-    double CD;
-    double hauteur, largeur;
+    double area;
+    double x;
+    double vx;
+    double time;
+    double Cd;
+    double accel;
+    double rpm;
+    int actualGear;
+    double gearRatio[] = new double[8];
+    double densite;
+    double Fd;
+    double FMoteur;
+    double FTotal;
+    double Frr;
 
-    public Voiture(String modele,
-                   double masse,
+    public Voiture(double masse, double area, double Cd, String modele,
                    double efficaciteTransmission,
                    double rayonRoue,
                    double ratioDiff,
-                   double vitesseMax,
                    double rpmMax,
                    double ratioVit1,
                    double ratioVit2,
@@ -72,15 +82,12 @@ public class Voiture {
                    double puissance7000rpm,
                    double puissance7500rpm,
                    double puissance8000rpm,
-                   String URL,
-                   double CD,
-                   double hauteur,
-                   double largeur
+                   String URL
 
     ) {
+
         this.modele = modele;
         this.efficaciteTransmission = efficaciteTransmission;
-        this.masse = masse;
         this.nombreVit = nombreVit;
         this.puissance1000rpm = puissance1000rpm;
         this.puissance1500rpm = puissance1500rpm;
@@ -108,291 +115,220 @@ public class Voiture {
         this.ratioVit8 = ratioVit8;
         this.rayonRoue = rayonRoue;
         this.rpmMax = rpmMax;
-        this.vitesseMax = vitesseMax;
         this.URL = URL;
+        this.masse = masse;
+        this.Cd = Cd;
+        this.area = area;
         image.setImage(new Image(URL));
-        this.CD = CD;
-        this.hauteur = hauteur;
-        this.largeur = largeur;
+
+        time = 0;
+        x = 0;
+        vx = 0;
+        rpm = 1000;
+        actualGear = 1;
+        densite = 1;
+        accel = 0;
+        Frr = 0.03 * getMasse() * 9.8;
+
+        setGearRatio(ratioVit1, 0);
+        setGearRatio(ratioVit2, 1);
+        setGearRatio(ratioVit3, 2);
+        setGearRatio(ratioVit4, 3);
+        setGearRatio(ratioVit5, 4);
+        setGearRatio(ratioVit6, 5);
+        setGearRatio(ratioVit7, 6);
+        setGearRatio(ratioVit8, 7);
+    }
+
+    private double getPuissance() {
+        double b;
+        double d;
+
+        if (rpm > 1500) {
+            b = (((puissance1500rpm)) / 1500) - ((puissance1000rpm) / 1000) / 499;
+            d = ((puissance1000rpm) / 1000) - (b * 1000);
+        } else if (rpm < 2000) {
+            b = (((puissance2000rpm) / 2000) - ((puissance1500rpm) / 1500)) / 499;
+            d = ((puissance1500rpm) / 1500) - (b * 1500);
+        } else if (rpm < 2500) {
+            b = (((puissance2500rpm)) / 2500) - ((puissance2000rpm) / 2000) / 499;
+            d = ((puissance2000rpm) / 2000) - (b * 2000);
+        } else if (rpm < 3000) {
+            b = (((puissance3000rpm) / 3000) - ((puissance2500rpm) / 2500)) / 499;
+            d = ((puissance2500rpm) / 2500) - (b * 2500);
+        } else if (rpm < 3500) {
+            b = (((puissance3500rpm) / 3500) - ((puissance3000rpm) / 3000)) / 499;
+            d = ((puissance3000rpm) / 3000) - (b * 3000);
+        } else if (rpm < 4000) {
+            b = (((puissance4000rpm) / 4000) - ((puissance3500rpm) / 3500)) / 499;
+            d = ((puissance3500rpm) / 3500) - (b * 3500);
+        } else if (rpm < 4500) {
+            b = (((puissance4500rpm) / 4500) - ((puissance4000rpm) / 4000)) / 499;
+            d = ((puissance4000rpm) / 4000) - (b * 4000);
+        } else if (rpm < 5000) {
+            b = (((puissance5000rpm) / 5000) - ((puissance4500rpm) / 4500)) / 499;
+            d = ((puissance4500rpm) / 4500) - (b * 4500);
+        } else if (rpm < 5500) {
+            b = (((puissance5500rpm) / 5500) - ((puissance5000rpm) / 5000)) / 499;
+            d = ((puissance5000rpm) / 5000) - (b * 5000);
+        } else if (rpm < 6000) {
+            b = (((puissance6000rpm) / 6000) - ((puissance5500rpm) / 5500)) / 499;
+            d = ((puissance5500rpm) / 5500) - (b * 5500);
+        } else if (rpm < 6500) {
+            b = (((puissance6500rpm) / 6500) - ((puissance6000rpm) / 6000)) / 499;
+            d = ((puissance6000rpm) / 6000) - (b * 6000);
+        } else if (rpm < 7000) {
+            b = (((puissance7000rpm) / 7000) - ((puissance6500rpm) / 6500)) / 499;
+            d = ((puissance6500rpm) / 6500) - (b * 6500);
+        } else if (rpm < 7500) {
+            b = (((puissance7500rpm) / 7500) - ((puissance7000rpm) / 7000)) / 499;
+            d = ((puissance7000rpm) / 7000) - (b * 7000);
+        } else if (rpm > 7490) {
+            b = (((puissance8000rpm) / 8000) - ((puissance7500rpm) / 7500)) / 499;
+            d = ((puissance7500rpm) / 7500) - (b * 7500);
+        } else {
+            b = 0;
+            d = 0;
+        }
+        return getRpm() * b + d;
+    }
+
+    private double HPtoNM() {
+        double answer = (63025 * getPuissance() / getRpm()) * 0.18;
+        return answer;
+    }
+
+    private double CalculFd() {
+        Fd = 0.5 * getCd() * getArea() * getDensite() * getVx() * getVx();
+        return Fd;
+    }
+
+    private double CalculFMoteur() {
+        FMoteur = (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
+        return FMoteur;
+    }
+
+    public void CalculRPM() {
+        setRpm(getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
+    }
+
+    private double CalculFTotal() {
+        double FTotal = CalculFMoteur() - CalculFd() - getFrr();
+        return FTotal;
+    }
+
+    private double CalculAccel() {
+        double accel = CalculFTotal() / getMasse();
+        return accel;
+    }
+
+    public void CalculVx(double deltaTime) {
+        if (getVx() < 0)
+            setVx(0);
+        setVx(getVx() + deltaTime * CalculAccel());
+    }
+
+    public void CalculX(double deltaTime) {
+        setX(getX() + deltaTime * getVx());
+    }
+
+    public void gearShift(int shift) {
+        if (shift + getActualGear() > getNombreVit())
+            return;
+        else if (shift + getActualGear() < 1)
+            return;
+        else {
+            double oldGearRatio = getGearRatio();
+            setActualGear(getActualGear() + shift);
+            double newGearRatio = getGearRatio();
+            setRpm(getRpm() * newGearRatio / oldGearRatio);
+        }
+        return;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setVx(double vx) {
+        this.vx = vx;
+    }
+
+    public double getFrr() {
+        return Frr;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getVx() {
+        return vx;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public double getCd() {
+        return Cd;
+    }
+
+    public double getDensite() {
+        return densite;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getGearRatio() {
+        return gearRatio[actualGear = 1];
     }
 
     public ImageView getImage() {
         return image;
     }
 
-    public String getModele() {
-        return modele;
-    }
-
-    public void setModele(String modele) {
-        this.modele = modele;
-    }
-
     public double getMasse() {
         return masse;
     }
 
-    public void setMasse(double masse) {
-        this.masse = masse;
-    }
 
     public double getEfficaciteTransmission() {
         return efficaciteTransmission;
-    }
-
-    public void setEfficaciteTransmission(double efficaciteTransmission) {
-        this.efficaciteTransmission = efficaciteTransmission;
     }
 
     public double getRayonRoue() {
         return rayonRoue;
     }
 
-    public void setRayonRoue(double rayonRoue) {
-        this.rayonRoue = rayonRoue;
-    }
-
     public double getRatioDiff() {
         return ratioDiff;
-    }
-
-    public void setRatioDiff(double ratioDiff) {
-        this.ratioDiff = ratioDiff;
-    }
-
-    public double getVitesseMax() {
-        return vitesseMax;
-    }
-
-    public void setVitesseMax(double vitesseMax) {
-        this.vitesseMax = vitesseMax;
-    }
-
-    public double getRpmMax() {
-        return rpmMax;
-    }
-
-    public void setRpmMax(double rpmMax) {
-        this.rpmMax = rpmMax;
-    }
-
-    public double getRatioVit1() {
-        return ratioVit1;
-    }
-
-    public void setRatioVit1(double ratioVit1) {
-        this.ratioVit1 = ratioVit1;
-    }
-
-    public double getRatioVit2() {
-        return ratioVit2;
-    }
-
-    public void setRatioVit2(double ratioVit2) {
-        this.ratioVit2 = ratioVit2;
-    }
-
-    public double getRatioVit3() {
-        return ratioVit3;
-    }
-
-    public void setRatioVit3(double ratioVit3) {
-        this.ratioVit3 = ratioVit3;
-    }
-
-    public double getRatioVit4() {
-        return ratioVit4;
-    }
-
-    public void setRatioVit4(double ratioVit4) {
-        this.ratioVit4 = ratioVit4;
-    }
-
-    public double getRatioVit5() {
-        return ratioVit5;
-    }
-
-    public void setRatioVit5(double ratioVit5) {
-        this.ratioVit5 = ratioVit5;
-    }
-
-    public double getRatioVit6() {
-        return ratioVit6;
-    }
-
-    public void setRatioVit6(double ratioVit6) {
-        this.ratioVit6 = ratioVit6;
-    }
-
-    public double getRatioVit7() {
-        return ratioVit7;
-    }
-
-    public void setRatioVit7(double ratioVit7) {
-        this.ratioVit7 = ratioVit7;
-    }
-
-    public double getRatioVit8() {
-        return ratioVit8;
-    }
-
-    public void setRatioVit8(double ratioVit8) {
-        this.ratioVit8 = ratioVit8;
     }
 
     public int getNombreVit() {
         return nombreVit;
     }
 
-    public void setNombreVit(int nombreVit) {
-        this.nombreVit = nombreVit;
+    public double getRpm() {
+        return rpm;
     }
 
-    public double getPuissance1000rpm() {
-        return puissance1000rpm;
+    public void setRpm(double rpm) {
+        this.rpm = rpm;
     }
 
-    public void setPuissance1000rpm(double puissance1000rpm) {
-        this.puissance1000rpm = puissance1000rpm;
+
+    public int getActualGear() {
+        return actualGear;
     }
 
-    public double getPuissance1500rpm() {
-        return puissance1500rpm;
+    public void setActualGear(int actualGear) {
+        this.actualGear = actualGear;
     }
 
-    public void setPuissance1500rpm(double puissance1500rpm) {
-        this.puissance1500rpm = puissance1500rpm;
-    }
-
-    public double getPuissance2000rpm() {
-        return puissance2000rpm;
-    }
-
-    public void setPuissance2000rpm(double puissance2000rpm) {
-        this.puissance2000rpm = puissance2000rpm;
-    }
-
-    public double getPuissance2500rpm() {
-        return puissance2500rpm;
-    }
-
-    public void setPuissance2500rpm(double puissance2500rpm) {
-        this.puissance2500rpm = puissance2500rpm;
-    }
-
-    public double getPuissance3000rpm() {
-        return puissance3000rpm;
-    }
-
-    public void setPuissance3000rpm(double puissance3000rpm) {
-        this.puissance3000rpm = puissance3000rpm;
-    }
-
-    public double getPuissance3500rpm() {
-        return puissance3500rpm;
-    }
-
-    public void setPuissance3500rpm(double puissance3500rpm) {
-        this.puissance3500rpm = puissance3500rpm;
-    }
-
-    public double getPuissance4000rpm() {
-        return puissance4000rpm;
-    }
-
-    public void setPuissance4000rpm(double puissance4000rpm) {
-        this.puissance4000rpm = puissance4000rpm;
-    }
-
-    public double getPuissance4500rpm() {
-        return puissance4500rpm;
-    }
-
-    public void setPuissance4500rpm(double puissance4500rpm) {
-        this.puissance4500rpm = puissance4500rpm;
-    }
-
-    public double getPuissance5000rpm() {
-        return puissance5000rpm;
-    }
-
-    public void setPuissance5000rpm(double puissance5000rpm) {
-        this.puissance5000rpm = puissance5000rpm;
-    }
-
-    public double getPuissance5500rpm() {
-        return puissance5500rpm;
-    }
-
-    public void setPuissance5500rpm(double puissance5500rpm) {
-        this.puissance5500rpm = puissance5500rpm;
-    }
-
-    public double getPuissance6000rpm() {
-        return puissance6000rpm;
-    }
-
-    public void setPuissance6000rpm(double puissance6000rpm) {
-        this.puissance6000rpm = puissance6000rpm;
-    }
-
-    public double getPuissance6500rpm() {
-        return puissance6500rpm;
-    }
-
-    public void setPuissance6500rpm(double puissance6500rpm) {
-        this.puissance6500rpm = puissance6500rpm;
-    }
-
-    public double getPuissance7000rpm() {
-        return puissance7000rpm;
-    }
-
-    public void setPuissance7000rpm(double puissance7000rpm) {
-        this.puissance7000rpm = puissance7000rpm;
-    }
-
-    public double getPuissance7500rpm() {
-        return puissance7500rpm;
-    }
-
-    public void setPuissance7500rpm(double puissance7500rpm) {
-        this.puissance7500rpm = puissance7500rpm;
-    }
-
-    public double getPuissance8000rpm() {
-        return puissance8000rpm;
-    }
-
-    public void setPuissance8000rpm(double puissance8000rpm) {
-        this.puissance8000rpm = puissance8000rpm;
-    }
-
-    public String getURL() {
-        return URL;
-    }
-
-    public double getCD() {
-        return CD;
-    }
-
-    public void setCD(double CD) {
-        this.CD = CD;
-    }
-
-    public double getHauteur() {
-        return hauteur;
-    }
-
-    public void setHauteur(double hauteur) {
-        this.hauteur = hauteur;
-    }
-
-    public double getLargeur() {
-        return largeur;
-    }
-
-    public void setLargeur(double largeur) {
-        this.largeur = largeur;
+    public void setGearRatio(double value, int index) {
+        this.gearRatio[index] = value;
     }
 }
