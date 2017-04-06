@@ -51,7 +51,10 @@ public class Moteur {
     public void test() {
         tl = new Timeline(new KeyFrame(Duration.seconds(timeIncrement), a -> {
             Voiture.getChoice().CalculVx(timeIncrement);
+            Voiture.getChoice().CalculX(timeIncrement);
             Voiture.getChoice().CalculRPM();
+            Voiture.getChoice().updateUI();
+            System.out.println(Voiture.getChoice().getAccel() + "\n");
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();

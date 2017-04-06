@@ -59,7 +59,7 @@ public class EnCourse {
 
         temps = new Label("Temps: ");
         temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
-        temps.setTranslateX(-780);
+        temps.setTranslateX(-650);
         temps.setTranslateY(-490);
 
         distance = new Label("Distance: ");

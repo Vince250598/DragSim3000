@@ -103,9 +103,10 @@ public class EventHandler {
         });
 
         opt.getManuel().setOnAction(event -> {
-            if (opt.getManuel().isSelected())
+            if (opt.getManuel().isSelected()) {
                 opt.getAutom().setSelected(false);
-            else
+                Shift(ec.getEnCourse());
+            } else
                 opt.getAutom().setSelected(true);
         });
 
@@ -121,6 +122,12 @@ public class EventHandler {
             Demarrage.getStartingMusic().pause();
             EnCourse.getRunningMusic().play();
             stop();
+        });
+    }
+
+    public void Shift(Scene scene) {
+        scene.setOnKeyPressed(a -> {
+            Voiture.getChoice().gearShift();
         });
     }
 
