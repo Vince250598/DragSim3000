@@ -32,6 +32,7 @@ public class EnCourse {
     static Label vitesse;
     static Label RPM;
     static Label distance;
+    static Label currentGear;
     private boolean dried = true;
     private Button stop = new Button("Stop");
     private Alert stopDialog = new Alert(Alert.AlertType.CONFIRMATION);
@@ -65,7 +66,9 @@ public class EnCourse {
         RPM.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
         distance = new Label("Distance: ");
         distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        vb.getChildren().addAll(temps, vitesse, RPM, distance);
+        currentGear = new Label("Current Gear: ");
+        currentGear.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
+        vb.getChildren().addAll(temps, vitesse, RPM, distance, currentGear);
 
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
@@ -153,5 +156,9 @@ public class EnCourse {
 
     public static Label getDistance() {
         return distance;
+    }
+
+    public static Label getCurrentGear() {
+        return currentGear;
     }
 }

@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Voiture {
-    
+
     static Voiture choice;
     String modele;
     double masse;
@@ -126,7 +126,7 @@ public class Voiture {
 
         time = 0;
         x = 0;
-        vx = 0;
+        vx = 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue() * 1000);
         rpm = 1000;
         currentGear = 1;
         densite = 1;
@@ -145,65 +145,44 @@ public class Voiture {
     }
 
     private double getPuissance() {
-        double b;
-        double d;
+        if (rpm < 1000)
+            return puissance1000rpm;
+        else if (rpm < 2000)
+            return puissance1500rpm;
+        else if (rpm < 2500)
+            return puissance2000rpm;
+        else if (rpm < 3000)
+            return puissance2500rpm;
+        else if (rpm < 3500)
+            return puissance3000rpm;
+        else if (rpm < 4000)
+            return puissance3500rpm;
+        else if (rpm < 4500)
+            return puissance4000rpm;
+        else if (rpm < 5000)
+            return puissance4500rpm;
+        else if (rpm < 5500)
+            return puissance5000rpm;
+        else if (rpm < 6000)
+            return puissance5500rpm;
+        else if (rpm < 6500)
+            return puissance6000rpm;
+        else if (rpm < 7000)
+            return puissance6500rpm;
+        else if (rpm < 7500)
+            return puissance7000rpm;
+        else if (rpm < 8000)
+            return puissance7500rpm;
+        else return 0;
 
-        if (rpm > 1500) {
-            b = (((puissance1500rpm)) / 1500) - ((puissance1000rpm) / 1000) / 499;
-            d = ((puissance1000rpm) / 1000) - (b * 1000);
-        } else if (rpm < 2000) {
-            b = (((puissance2000rpm) / 2000) - ((puissance1500rpm) / 1500)) / 499;
-            d = ((puissance1500rpm) / 1500) - (b * 1500);
-        } else if (rpm < 2500) {
-            b = (((puissance2500rpm)) / 2500) - ((puissance2000rpm) / 2000) / 499;
-            d = ((puissance2000rpm) / 2000) - (b * 2000);
-        } else if (rpm < 3000) {
-            b = (((puissance3000rpm) / 3000) - ((puissance2500rpm) / 2500)) / 499;
-            d = ((puissance2500rpm) / 2500) - (b * 2500);
-        } else if (rpm < 3500) {
-            b = (((puissance3500rpm) / 3500) - ((puissance3000rpm) / 3000)) / 499;
-            d = ((puissance3000rpm) / 3000) - (b * 3000);
-        } else if (rpm < 4000) {
-            b = (((puissance4000rpm) / 4000) - ((puissance3500rpm) / 3500)) / 499;
-            d = ((puissance3500rpm) / 3500) - (b * 3500);
-        } else if (rpm < 4500) {
-            b = (((puissance4500rpm) / 4500) - ((puissance4000rpm) / 4000)) / 499;
-            d = ((puissance4000rpm) / 4000) - (b * 4000);
-        } else if (rpm < 5000) {
-            b = (((puissance5000rpm) / 5000) - ((puissance4500rpm) / 4500)) / 499;
-            d = ((puissance4500rpm) / 4500) - (b * 4500);
-        } else if (rpm < 5500) {
-            b = (((puissance5500rpm) / 5500) - ((puissance5000rpm) / 5000)) / 499;
-            d = ((puissance5000rpm) / 5000) - (b * 5000);
-        } else if (rpm < 6000) {
-            b = (((puissance6000rpm) / 6000) - ((puissance5500rpm) / 5500)) / 499;
-            d = ((puissance5500rpm) / 5500) - (b * 5500);
-        } else if (rpm < 6500) {
-            b = (((puissance6500rpm) / 6500) - ((puissance6000rpm) / 6000)) / 499;
-            d = ((puissance6000rpm) / 6000) - (b * 6000);
-        } else if (rpm < 7000) {
-            b = (((puissance7000rpm) / 7000) - ((puissance6500rpm) / 6500)) / 499;
-            d = ((puissance6500rpm) / 6500) - (b * 6500);
-        } else if (rpm < 7500) {
-            b = (((puissance7500rpm) / 7500) - ((puissance7000rpm) / 7000)) / 499;
-            d = ((puissance7000rpm) / 7000) - (b * 7000);
-        } else if (rpm > 7490) {
-            b = (((puissance8000rpm) / 8000) - ((puissance7500rpm) / 7500)) / 499;
-            d = ((puissance7500rpm) / 7500) - (b * 7500);
-        } else {
-            b = 0;
-            d = 0;
-        }
-        return getRpm() * b + d;
     }
 
     private double HPtoNM() {
-        double answer = (63025 * getPuissance() / getRpm()) * 0.18;
-        return answer;
+        return (63025 * getPuissance() / getRpm()) * 0.18;
     }
 
     private double CalculFd() {
-        Fd = 0.5 * getCd() * getArea() * getDensite() * getVx() * getVx();
+        Fd = 0.45 * getCd() * getArea() * getDensite() * getVx()* getVx();
         return Fd;
     }
 
@@ -217,7 +196,12 @@ public class Voiture {
     }
 
     public void CalculRPM() {
-        setRpm(getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
+        if (getRpm() >= getRpmMax())
+            if (getcurrentGear() + 1 <= getNombreVit())
+            currentGear = (getcurrentGear() + 1);
+        rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
+        if (rpm > rpmMax)
+            rpm = rpmMax;
     }
 
     private double CalculFTotal() {
@@ -226,7 +210,7 @@ public class Voiture {
     }
 
     private double CalculAccel() {
-        double accel = CalculFTotal() / getMasse();
+        accel = (CalculFTotal() / getMasse()) * 2;
         return accel;
     }
 
@@ -240,25 +224,27 @@ public class Voiture {
         setX(getX() + deltaTime * getVx());
     }
 
-    public void gearShift(int shift) {
-        if (shift + getcurrentGear() > getNombreVit())
+    public void gearShift() {
+        if (1 + getcurrentGear() > getNombreVit())
             return;
-        else if (shift + getcurrentGear() < 1)
+        else if (1 + getcurrentGear() < 1)
             return;
         else {
             double oldGearRatio = getGearRatio();
-            setcurrentGear(getcurrentGear() + shift);
+            setcurrentGear(getcurrentGear() + 1);
             double newGearRatio = getGearRatio();
             setRpm(getRpm() * newGearRatio / oldGearRatio);
         }
         return;
     }
 
-    public void updateUI(){
-        EnCourse.getTemps().setText("Temps: " /*ajouter le temps*/);
-        EnCourse.getDistance().setText("Distance: " + getX());
-        EnCourse.getRPM().setText("RPM: " + getRpm());
-        EnCourse.getVitesse().setText("Vitesse: " + getVx() /*peut-être mettre en km/h*/);
+    public void updateUI() {
+        EnCourse.getTemps().setText("Temps: " + Math.round(getTime() * 100.00) / 100.00 + "  s");
+        EnCourse.getDistance().setText("Distance: " + Math.round(getX()) + "   m");
+        EnCourse.getRPM().setText("RPM: " + Math.round(getRpm()));
+        EnCourse.getVitesse().setText("Vitesse: " + Math.round(getVx() * 3.6) + "   km/h" /*peut-être mettre en km/h*/);
+        EnCourse.getCurrentGear().setText("Current Gear: " + getcurrentGear());
+        setTime(getTime() + 0.015);
     }
 
     public double getArea() {
@@ -293,6 +279,10 @@ public class Voiture {
         return Cd;
     }
 
+    public double getAccel() {
+        return accel;
+    }
+
     public double getDensite() {
         return densite;
     }
@@ -301,12 +291,20 @@ public class Voiture {
         this.x = x;
     }
 
+    public void setTime(double time) {
+        this.time = time;
+    }
+
     public double getGearRatio() {
-        return gearRatio[currentGear = 1];
+        return gearRatio[currentGear - 1];
     }
 
     public ImageView getImage() {
         return image;
+    }
+
+    public double getRpmMax() {
+        return rpmMax;
     }
 
     public double getMasse() {
@@ -341,6 +339,10 @@ public class Voiture {
 
     public int getcurrentGear() {
         return currentGear;
+    }
+
+    public void setCf(double cf) {
+        Cf = cf;
     }
 
     public void setcurrentGear(int currentGear) {
