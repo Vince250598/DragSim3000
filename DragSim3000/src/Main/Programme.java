@@ -15,12 +15,11 @@ public class Programme extends Application {
 
     EventHandler events = new EventHandler();
     Demarrage starter;
-    Selection selec = new Selection();
     static Stage stage;
 
     public void demarrer(Stage stage) {
         starter = new Demarrage(stage);
-        starter.demarrer(stage, events);
+        starter.demarrer(events);
     }
 
     public static Stage getStage() {

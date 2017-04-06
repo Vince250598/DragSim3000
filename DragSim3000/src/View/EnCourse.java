@@ -22,12 +22,10 @@ import java.net.URL;
 
 public class EnCourse {
 
-    ListeVoitures lv = new ListeVoitures();
     private StackPane group = new StackPane();
     private Scene enCourse = new Scene(group, 1920, 1080);
     private Image driedBackground = new Image("Ressources\\road.png");
     private Image wetBackground = new Image("Ressources\\rainyRoad.png");
-    private Voiture voiture;
     private ImageView imageVoiture = new ImageView();
     static Moteur engine = new Moteur();
     static Label temps;
@@ -85,12 +83,12 @@ public class EnCourse {
     }
 
     public void loaderVoiture() {
-        group.getChildren().add(Moteur.getChoixVoiture().getImage());
-        Moteur.getChoixVoiture().getImage().setScaleX(0.3);
-        Moteur.getChoixVoiture().getImage().setScaleY(0.3);
-        StackPane.setAlignment(Moteur.getChoixVoiture().getImage(), Pos.BOTTOM_LEFT);
-        Moteur.getChoixVoiture().getImage().setTranslateX(-75);
-        Moteur.getChoixVoiture().getImage().setTranslateY(-200);
+        group.getChildren().add(Voiture.getChoice().getImage());
+        Voiture.getChoice().getImage().setScaleX(0.3);
+        Voiture.getChoice().getImage().setScaleY(0.3);
+        StackPane.setAlignment(Voiture.getChoice().getImage(), Pos.BOTTOM_LEFT);
+        Voiture.getChoice().getImage().setTranslateX(-75);
+        Voiture.getChoice().getImage().setTranslateY(-200);
     }
 
     public static void majUI() {
@@ -103,10 +101,6 @@ public class EnCourse {
 
     public Scene getEnCourse() {
         return enCourse;
-    }
-
-    public Voiture getVoiture() {
-        return voiture;
     }
 
     public ImageView getImageVoiture() {
@@ -143,5 +137,21 @@ public class EnCourse {
 
     public static MediaPlayer getRunningMusic() {
         return runningMusic;
+    }
+
+    public static Label getTemps() {
+        return temps;
+    }
+
+    public static Label getVitesse() {
+        return vitesse;
+    }
+
+    public static Label getRPM() {
+        return RPM;
+    }
+
+    public static Label getDistance() {
+        return distance;
     }
 }

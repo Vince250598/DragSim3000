@@ -1,10 +1,13 @@
 package Model;
 
 
+import View.EnCourse;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Voiture {
+    
+    static Voiture choice;
     String modele;
     double masse;
     double efficaciteTransmission;
@@ -44,8 +47,8 @@ public class Voiture {
     double time;
     double Cd;
     double accel;
-    double rpm;
-    int actualGear;
+    double rpm = 1000;
+    int currentGear = 1;
     double gearRatio[] = new double[8];
     double densite;
     double Fd;
@@ -125,7 +128,7 @@ public class Voiture {
         x = 0;
         vx = 0;
         rpm = 1000;
-        actualGear = 1;
+        currentGear = 1;
         densite = 1;
         accel = 0;
         Frr = 0.03 * getMasse() * 9.8;
@@ -233,17 +236,24 @@ public class Voiture {
     }
 
     public void gearShift(int shift) {
-        if (shift + getActualGear() > getNombreVit())
+        if (shift + getcurrentGear() > getNombreVit())
             return;
-        else if (shift + getActualGear() < 1)
+        else if (shift + getcurrentGear() < 1)
             return;
         else {
             double oldGearRatio = getGearRatio();
-            setActualGear(getActualGear() + shift);
+            setcurrentGear(getcurrentGear() + shift);
             double newGearRatio = getGearRatio();
             setRpm(getRpm() * newGearRatio / oldGearRatio);
         }
         return;
+    }
+
+    public void updateUI(){
+        EnCourse.getTemps().setText("Temps: " /*ajouter le temps*/);
+        EnCourse.getDistance().setText("Distance: " + getX());
+        EnCourse.getRPM().setText("RPM: " + getRpm());
+        EnCourse.getVitesse().setText("Vitesse: " + getVx() /*peut-être mettre en km/h*/);
     }
 
     public double getArea() {
@@ -283,7 +293,7 @@ public class Voiture {
     }
 
     public double getGearRatio() {
-        return gearRatio[actualGear = 1];
+        return gearRatio[currentGear = 1];
     }
 
     public ImageView getImage() {
@@ -320,15 +330,23 @@ public class Voiture {
     }
 
 
-    public int getActualGear() {
-        return actualGear;
+    public int getcurrentGear() {
+        return currentGear;
     }
 
-    public void setActualGear(int actualGear) {
-        this.actualGear = actualGear;
+    public void setcurrentGear(int currentGear) {
+        this.currentGear = currentGear;
     }
 
     public void setGearRatio(double value, int index) {
         this.gearRatio[index] = value;
+    }
+
+    public static Voiture getChoice() {
+        return choice;
+    }
+
+    public static void setChoice(Voiture choice) {
+        Voiture.choice = choice;
     }
 }

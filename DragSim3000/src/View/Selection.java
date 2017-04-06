@@ -1,14 +1,13 @@
 package View;
 
-import Controller.EventHandler;
-import Controller.Moteur;
+
 import Main.Programme;
 import Model.ListeVoitures;
+import Model.Voiture;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class Selection {
 
@@ -17,10 +16,7 @@ public class Selection {
     private Scene choix = new Scene(grid, 1920, 1080);
     private Image background = new Image("\\Ressources\\noRoad.png");
 
-    public Selection(){
-    }
-
-    public Selection(EventHandler eh) {
+    public Selection() {
         addElements();
     }
 
@@ -31,12 +27,13 @@ public class Selection {
     public void reset(){
         //addElements();
         Programme.getStage().setScene(choix);
-        Moteur.setChoixVoiture(null);
+        Voiture.setChoice(null);
         Demarrage.getStartingMusic().play();
     }
 
     public void addElements() {
 
+        //TODO: présentement, les voitures ne load pas, je peux rien choisir dans l'écran de sélection
         list.getVoitures().clear();
         list.loadVoitures();
         grid.getChildren().clear();
@@ -56,8 +53,8 @@ public class Selection {
 
         int noCol = 0;
         int noRan = 0;
-        for (int x = 0; x < list.voitures.size(); x++) {
-            grid.add(list.voitures.get(x).getImage(), noCol, noRan);
+        for (int x = 0; x < list.getVoitures().size(); x++) {
+            grid.add(list.getVoitures().get(x).getImage(), noCol, noRan);
             noCol++;
             if (noCol > 4) {
                 noCol = 0;

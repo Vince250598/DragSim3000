@@ -50,8 +50,8 @@ public class Moteur {
 
     public void test() {
         tl = new Timeline(new KeyFrame(Duration.seconds(timeIncrement), a -> {
-            choixVoiture.CalculVx(timeIncrement);
-            choixVoiture.CalculRPM();
+            Voiture.getChoice().CalculVx(timeIncrement);
+            Voiture.getChoice().CalculRPM();
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
@@ -317,9 +317,6 @@ public class Moteur {
         choixVoiture = v;
     }
 
-    public Timeline getTl() {
-        return tl;
-    }
 
     public void setActualGear(int actualGear) {
         this.actualGear = actualGear;
@@ -332,5 +329,10 @@ public class Moteur {
     public void setCurrentPosition(double currentPosition) {
         this.currentPosition = currentPosition;
     }*/
+
+    public Timeline getTl() {
+        return tl;
+    }
+
 }
 

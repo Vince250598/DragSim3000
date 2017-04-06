@@ -1,6 +1,7 @@
 package View;
 
 import Controller.EventHandler;
+import Main.Programme;
 import javafx.animation.Animation;
 import javafx.animation.ScaleTransition;
 import javafx.scene.Scene;
@@ -31,10 +32,10 @@ public class Demarrage {
         s.setTitle("DragSim3000");
     }
 
-    public void demarrer(Stage stage, EventHandler eh) {
-        stage.setScene(start);
+    public void demarrer(EventHandler eh) {
+        Programme.getStage().setScene(start);
         eh.anyKey(start);
-        stage.show();
+        Programme.getStage().show();
         addElements();
     }
 

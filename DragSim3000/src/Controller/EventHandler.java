@@ -32,7 +32,7 @@ public class EventHandler {
     Moteur engine = new Moteur();
     Options opt = new Options();
     EnCourse ec = new EnCourse();
-    Selection selec = new Selection(this);
+    Selection selec = new Selection();
 
     public EventHandler() {
     }
@@ -54,7 +54,7 @@ public class EventHandler {
 
             iv.setOnMouseClicked(event -> {
                 Voiture v = selec.getList().getVoitures().get(i);
-                Moteur.setChoixVoiture(v);
+                Voiture.setChoice(v);
                 Programme.getStage().setScene(opt.getOption());
                 opt.addElements();
                 option();
@@ -118,8 +118,6 @@ public class EventHandler {
             Programme.getStage().setScene(ec.getEnCourse());
             ec.addElements();
             ec.loaderVoiture();
-            engine.tableauData();
-            engine.RPM(Moteur.getChoixVoiture());
             engine.test();
             Demarrage.getStartingMusic().pause();
             EnCourse.getRunningMusic().play();
@@ -134,9 +132,9 @@ public class EventHandler {
             if (button.get() == ec.getMenu()) {
                 engine.getTl().stop();
                 selec.reset();
-                engine.setActualGear(1);
+                /*engine.setActualGear(1);
                 engine.setCurrentPosition(0);
-                engine.setCurrentSpeed(1);
+                engine.setCurrentSpeed(1);*/
                 choixVoiture();
             } else if (button.get() == ec.getCancel()) {
                 ec.getStopDialog().close();
