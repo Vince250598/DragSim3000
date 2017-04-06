@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Voiture {
-    
+
     static Voiture choice;
     String modele;
     double masse;
@@ -55,6 +55,7 @@ public class Voiture {
     double FTotal;
     double Frr;
     double Cf;
+    boolean isDried = true;
 
     public Voiture(double masse, double area, double Cd, String modele,
                    double efficaciteTransmission,
@@ -132,7 +133,9 @@ public class Voiture {
         densite = 1;
         accel = 0;
         Frr = 0.03 * getMasse() * 9.8;
-        Cf = 0.85;
+        if (isDried())
+            Cf = 0.85;
+        else Cf = 0.45;
 
         setGearRatio(ratioVit1, 0);
         setGearRatio(ratioVit2, 1);
@@ -254,7 +257,7 @@ public class Voiture {
         return;
     }
 
-    public void updateUI(){
+    public void updateUI() {
         EnCourse.getTemps().setText("Temps: " /*ajouter le temps*/);
         EnCourse.getDistance().setText("Distance: " + getX());
         EnCourse.getRPM().setText("RPM: " + getRpm());
@@ -357,5 +360,13 @@ public class Voiture {
 
     public static void setChoice(Voiture choice) {
         Voiture.choice = choice;
+    }
+
+    public boolean isDried() {
+        return isDried;
+    }
+
+    public void setDried(boolean dried) {
+        isDried = dried;
     }
 }

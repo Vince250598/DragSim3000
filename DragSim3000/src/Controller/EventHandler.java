@@ -75,24 +75,23 @@ public class EventHandler {
     }
 
     public void option() {
-        //TODO: ne pas oublier de modifier les coefficients de friction et de max force selon que isDried ou non
         opt.getSec().setOnAction(event -> {
             if (opt.getSec().isSelected()) {
                 opt.getTrempe().setSelected(false);
-                ec.setDried(true);
+                Voiture.getChoice().setDried(true);
             } else {
                 opt.getTrempe().setSelected(true);
-                ec.setDried(false);
+                Voiture.getChoice().setDried(false);
             }
         });
 
         opt.getTrempe().setOnAction(event -> {
             if (opt.getTrempe().isSelected()) {
                 opt.getSec().setSelected(false);
-                ec.setDried(false);
+                Voiture.getChoice().setDried(false);
             } else {
                 opt.getSec().setSelected(true);
-                ec.setDried(true);
+                Voiture.getChoice().setDried(true);
             }
         });
 
@@ -132,9 +131,10 @@ public class EventHandler {
             if (button.get() == ec.getMenu()) {
                 engine.getTl().stop();
                 selec.reset();
-                /*engine.setActualGear(1);
-                engine.setCurrentPosition(0);
-                engine.setCurrentSpeed(1);*/
+                if (opt.getTrempe().isSelected())
+                    opt.getTrempe().setSelected(false);
+                if (opt.getManuel().isSelected())
+                    opt.getManuel().setSelected(false);
                 choixVoiture();
             } else if (button.get() == ec.getCancel()) {
                 ec.getStopDialog().close();

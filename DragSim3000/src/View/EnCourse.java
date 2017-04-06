@@ -50,22 +50,32 @@ public class EnCourse {
             runningMusic = new MediaPlayer(new Media(url.toString()));
         }
         BackgroundImage backgroundImage;
-        if (isDried())
+        if (Voiture.getChoice().isDried())
             backgroundImage = new BackgroundImage(driedBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                     new BackgroundSize(300, 1080, false, false, false, false));
         else
             backgroundImage = new BackgroundImage(wetBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                     new BackgroundSize(300, 1080, false, false, false, false));
-        VBox vb = new VBox(20);
+
         temps = new Label("Temps: ");
-        temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        vitesse = new Label("Vitesse: ");
-        vitesse.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        RPM = new Label("RPM: ");
-        RPM.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
+        temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        temps.setTranslateX(-780);
+        temps.setTranslateY(-490);
+
         distance = new Label("Distance: ");
-        distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 15));
-        vb.getChildren().addAll(temps, vitesse, RPM, distance);
+        distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        distance.setTranslateX(-740);
+        distance.setTranslateY(-340);
+
+        vitesse = new Label("Vitesse: ");
+        vitesse.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        vitesse.setTranslateX(190);
+        vitesse.setTranslateY(-490);
+
+        RPM = new Label("RPM: ");
+        RPM.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        RPM.setTranslateX(140);
+        RPM.setTranslateY(-340);
 
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
@@ -79,7 +89,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(vb, stop);
+        group.getChildren().addAll(temps, vitesse, RPM, distance, stop);
     }
 
     public void loaderVoiture() {
