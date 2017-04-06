@@ -59,23 +59,27 @@ public class EnCourse {
 
         temps = new Label("Temps: ");
         temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
-        temps.setTranslateX(-650);
-        temps.setTranslateY(-490);
+        temps.setMinWidth(1000);
+        temps.setTranslateX(750);
+        temps.setTranslateY(-470);
 
         distance = new Label("Distance: ");
         distance.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
-        distance.setTranslateX(-740);
-        distance.setTranslateY(-340);
+        distance.setMinWidth(1000);
+        distance.setTranslateX(700);
+        distance.setTranslateY(-320);
 
         vitesse = new Label("Vitesse: ");
         vitesse.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
-        vitesse.setTranslateX(190);
-        vitesse.setTranslateY(-490);
+        vitesse.setMinWidth(1000);
+        vitesse.setTranslateX(-450);
+        vitesse.setTranslateY(-470);
 
         RPM = new Label("RPM: ");
         RPM.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
-        RPM.setTranslateX(140);
-        RPM.setTranslateY(-340);
+        RPM.setMinWidth(1000);
+        RPM.setTranslateX(-450);
+        RPM.setTranslateY(-320);
 
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
@@ -94,35 +98,15 @@ public class EnCourse {
 
     public void loaderVoiture() {
         group.getChildren().add(Voiture.getChoice().getImage());
-        Voiture.getChoice().getImage().setScaleX(0.3);
-        Voiture.getChoice().getImage().setScaleY(0.3);
+        Voiture.getChoice().getImage().setScaleX(0.6);
+        Voiture.getChoice().getImage().setScaleY(0.6);
         StackPane.setAlignment(Voiture.getChoice().getImage(), Pos.BOTTOM_LEFT);
-        Voiture.getChoice().getImage().setTranslateX(-75);
-        Voiture.getChoice().getImage().setTranslateY(-200);
-    }
-
-    public static void majUI() {
-        //TODO: ne se mete pas à jour, peut-être le changer de classe
-        temps.setText("Temps: " /*TODO: ajouter le temps*/);
-        vitesse.setText("Vitesse: " + engine.getCurrentSpeed() + " m/s");
-        RPM.setText("RPM: " + engine.getRpm());
-        distance.setText("Distance: " + engine.getCurrentPosition());
+        Voiture.getChoice().getImage().setTranslateX(-40);
+        Voiture.getChoice().getImage().setTranslateY(-210);
     }
 
     public Scene getEnCourse() {
         return enCourse;
-    }
-
-    public ImageView getImageVoiture() {
-        return imageVoiture;
-    }
-
-    public boolean isDried() {
-        return dried;
-    }
-
-    public void setDried(boolean dried) {
-        this.dried = dried;
     }
 
     public Alert getStopDialog() {

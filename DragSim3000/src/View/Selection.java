@@ -6,6 +6,7 @@ import Model.ListeVoitures;
 import Model.Voiture;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
@@ -15,6 +16,7 @@ public class Selection {
     private GridPane grid = new GridPane();
     private Scene choix = new Scene(grid, 1920, 1080);
     private Image background = new Image("\\Ressources\\noRoad.png");
+    private Button back = new Button("Back");
 
     public Selection() {
         addElements();
@@ -66,6 +68,14 @@ public class Selection {
         Background bg = new Background(bgImg);
         grid.setBackground(bg);
 
+        grid.getChildren().add(back);
+        back.setTranslateX(1820);
+        back.setTranslateY(810);
+
+    }
+
+    public Button getBack() {
+        return back;
     }
 
     public ListeVoitures getList() {

@@ -30,6 +30,7 @@ public class EventHandler {
     * */
 
     Moteur engine = new Moteur();
+    Demarrage dem = new Demarrage();
     Options opt = new Options();
     EnCourse ec = new EnCourse();
     Selection selec = new Selection();
@@ -47,6 +48,8 @@ public class EventHandler {
     }
 
     public void choixVoiture() {
+
+        selec.getBack().setOnMouseClicked(event -> dem.demarrer(this));
 
         for (int x = 0; x < selec.getList().getVoitures().size(); x++) {
             ImageView iv = selec.getList().getVoitures().get(x).getImage();

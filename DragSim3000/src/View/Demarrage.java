@@ -27,6 +27,8 @@ public class Demarrage {
     private Image background = new Image("\\Ressources\\background.png");
     private static MediaPlayer startingMusic;
 
+    public Demarrage(){}
+
     public Demarrage(Stage s) {
         s.setMaximized(true);
         s.setTitle("DragSim3000");
@@ -36,7 +38,8 @@ public class Demarrage {
         Programme.getStage().setScene(start);
         eh.anyKey(start);
         Programme.getStage().show();
-        addElements();
+        if (group.getChildren().isEmpty())
+            addElements();
     }
 
     public void addElements() {
