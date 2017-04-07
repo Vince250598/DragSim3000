@@ -15,7 +15,7 @@ public class ListeVoitures {
     public ListeVoitures() {
     }
 
-    private Vector<Voiture> voitures = new Vector<Voiture>();
+    private static Vector<Voiture> voitures = new Vector<Voiture>();
 
     public void loadVoitures() {
         try {
@@ -75,7 +75,7 @@ public class ListeVoitures {
         return voitures;
     }
 
-    public Voiture getVoiture(int index) {
+    public static Voiture getVoiture(int index) {
         return voitures.get(index);
     }
 }

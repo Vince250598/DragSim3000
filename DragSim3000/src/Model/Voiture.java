@@ -185,23 +185,29 @@ public class Voiture {
     }
 
     private double CalculFd() {
-        Fd = 0.45 * getCd() * getArea() * getDensite() * getVx()* getVx();
+        Fd = 0.45 * getCd() * getArea() * getDensite() * getVx() * getVx();
         return Fd;
     }
 
     private double CalculFMoteur() {
-        //maxForce == force de traction maximale TODO peut être qu'il va falloir ajuster ça pour le dragster pi la f1
+        //maxForce == force de traction maximale
         double maxForce = getCf() * 9.8 * getMasse();
+        if (getChoice() == ListeVoitures.getVoiture(9))
+            maxForce = 3 * getCf() * 9.8 * getMasse();
         FMoteur = (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
         if (maxForce < FMoteur)
             FMoteur = maxForce;
+        if (getRpmMax() <= getRpm())
+            FMoteur = 0;
         return FMoteur;
     }
 
     public void CalculRPM() {
         if (getRpm() >= getRpmMax())
             if (getcurrentGear() + 1 <= getNombreVit())
-            currentGear = (getcurrentGear() + 1);
+                currentGear = (getcurrentGear() + 1);
+        if (FTotal < 0 && rpm < rpmMax && getcurrentGear() - 1 >= 1)
+            currentGear = getcurrentGear() - 1;
         rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
         if (rpm > rpmMax)
             rpm = rpmMax;
@@ -242,6 +248,7 @@ public class Voiture {
     }
 
     public void updateUI() {
+        //TODO barre de pourcentage pour rpm + current gear
         EnCourse.getTemps().setText("Temps: " + Math.round(getTime() * 100.00) / 100.00 + " s");
         EnCourse.getDistance().setText("Distance: " + Math.round(getX()) + " m");
         EnCourse.getRPM().setText("RPM: " + Math.round(getRpm()));
