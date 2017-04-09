@@ -18,7 +18,7 @@ public class Options {
     private Scene option = new Scene(group, 1920, 1080);
     private Image background = new Image("Ressources\\noRoad.png");
     private CheckBox sec = new CheckBox("Sèche");
-    private CheckBox trempe = new CheckBox("Mouillée");
+    private CheckBox trempe = new CheckBox("Glissante");
     private CheckBox autom = new CheckBox("Automatique");
     private CheckBox manuel = new CheckBox("Manuelle");
     private ImageView start = new ImageView(new Image("\\Ressources\\start.png"));
