@@ -150,35 +150,59 @@ public class Voiture {
     }
 
     private double getPuissance() {
-        if (rpm < 1000)
+        double b;
+        double d;
+        
+        if (rpm <= 1000) {
             return puissance1000rpm;
-        else if (rpm < 2000)
-            return puissance1500rpm;
-        else if (rpm < 2500)
-            return puissance2000rpm;
-        else if (rpm < 3000)
-            return puissance2500rpm;
-        else if (rpm < 3500)
-            return puissance3000rpm;
-        else if (rpm < 4000)
-            return puissance3500rpm;
-        else if (rpm < 4500)
-            return puissance4000rpm;
-        else if (rpm < 5000)
-            return puissance4500rpm;
-        else if (rpm < 5500)
-            return puissance5000rpm;
-        else if (rpm < 6000)
-            return puissance5500rpm;
-        else if (rpm < 6500)
-            return puissance6000rpm;
-        else if (rpm < 7000)
-            return puissance6500rpm;
-        else if (rpm < 7500)
-            return puissance7000rpm;
-        else if (rpm < 8000)
-            return puissance7500rpm;
-        else return 0;
+        } else if (rpm < 1500) {
+            b = ((puissance1500rpm) - (puissance1000rpm)) / 500;
+            d = (puissance1000rpm) - (b * 1000);
+        } else if (rpm < 2000) {
+            b = ((puissance2000rpm) - (puissance1500rpm)) / 500;
+            d = (puissance1500rpm) - (b * 1500);
+        } else if (rpm < 2500) {
+            b = ((puissance2500rpm) - (puissance2000rpm)) / 500;
+            d = (puissance2000rpm) - (b * 2000);
+        } else if (rpm < 3000) {
+            b = ((puissance3000rpm) - (puissance2500rpm)) / 500;
+            d = (puissance2500rpm) - (b * 2500);
+        } else if (rpm < 3500) {
+            b = ((puissance3500rpm) - (puissance3000rpm)) / 500;
+            d = (puissance3000rpm) - (b * 3000);
+        } else if (rpm < 4000) {
+            b = ((puissance4000rpm) - (puissance3500rpm)) / 500;
+            d = (puissance3500rpm) - (b * 3500);
+        } else if (rpm < 4500) {
+            b = ((puissance4500rpm) - (puissance4000rpm)) / 500;
+            d = (puissance4000rpm) - (b * 4000);
+        } else if (rpm < 5000) {
+            b = ((puissance5000rpm) - (puissance4500rpm)) / 500;
+            d = (puissance4500rpm) - (b * 4500);
+        } else if (rpm < 5500) {
+            b = ((puissance5500rpm) - (puissance5000rpm)) / 500;
+            d = (puissance5000rpm) - (b * 5000);
+        } else if (rpm < 6000) {
+            b = ((puissance6000rpm) - (puissance5500rpm)) / 500;
+            d = (puissance5500rpm) - (b * 5500);
+        } else if (rpm < 6500) {
+            b = ((puissance6500rpm) - (puissance6000rpm)) / 500;
+            d = (puissance6000rpm) - (b * 6000);
+        } else if (rpm < 7000) {
+            b = ((puissance7000rpm) - (puissance6500rpm)) / 500;
+            d = (puissance6500rpm) - (b * 6500);
+        } else if (rpm < 7500) {
+            b = ((puissance7500rpm) - (puissance7000rpm)) / 500;
+            d = (puissance7000rpm) - (b * 7000);
+        } else if (rpm > 7499) {
+            b = ((puissance8000rpm) - (puissance7500rpm)) / 500;
+            d = (puissance7500rpm) - (b * 7500);
+        } else {
+            b = 0;
+            d = 0;
+        }
+        double puissance = (getRpm() * b + d);
+        return puissance;
 
     }
 
@@ -405,5 +429,13 @@ public class Voiture {
 
     public void setCf(double cf) {
         Cf = cf;
+    }
+
+    public boolean isManual() {
+        return manual;
+    }
+
+    public void setManual(boolean manual) {
+        this.manual = manual;
     }
 }
