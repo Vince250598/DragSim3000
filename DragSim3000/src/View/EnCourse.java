@@ -4,17 +4,17 @@ package View;
 import Controller.Moteur;
 import Model.ListeVoitures;
 import Model.Voiture;
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -26,8 +26,6 @@ public class EnCourse {
     private Scene enCourse = new Scene(group, 1920, 1080);
     private Image driedBackground = new Image("Ressources\\road.png");
     private Image wetBackground = new Image("Ressources\\rainyRoad.png");
-    private ImageView imageVoiture = new ImageView();
-    static Moteur engine = new Moteur();
     static Label temps;
     static Label vitesse;
     static Label RPM;
@@ -39,6 +37,12 @@ public class EnCourse {
     private ButtonType exit = new ButtonType("Exit");
     private ButtonType cancel = new ButtonType("Cancel");
     private static MediaPlayer runningMusic;
+    static ProgressBar pg;
+    static HBox cadran;
+    static Label actualGear;
+    static Label traction;
+    static Image tractionImage = new Image("Ressources\\Traction.png");
+    static ImageView tractionIV = new ImageView(tractionImage);
 
     public EnCourse() {
     }
@@ -81,6 +85,26 @@ public class EnCourse {
         RPM.setTranslateX(-450);
         RPM.setTranslateY(-320);
 
+        pg = new ProgressBar(0);
+        pg.setMinWidth(500);
+        pg.setMinHeight(50);
+
+        actualGear = new Label(" ");
+        actualGear.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
+        actualGear.setTranslateY(-12);
+        actualGear.setTranslateX(-5);
+
+        traction = new Label("",tractionIV);
+        tractionIV.setScaleX(0.5);
+        tractionIV.setScaleY(0.5);
+        tractionIV.setTranslateX(-40);
+        tractionIV.setTranslateY(-39);
+
+
+        cadran = new HBox(50, pg, actualGear, traction);
+        cadran.setTranslateY(900);
+        cadran.setTranslateX(5);
+
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
 
@@ -93,7 +117,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(temps, vitesse, RPM, distance, stop);
+        group.getChildren().addAll(temps, vitesse, RPM, distance, stop, cadran);
     }
 
     public void loaderVoiture() {
@@ -147,5 +171,21 @@ public class EnCourse {
 
     public static Label getDistance() {
         return distance;
+    }
+
+    public static HBox getCadran() {
+        return cadran;
+    }
+
+    public static ProgressBar getPg() {
+        return pg;
+    }
+
+    public static Label getActualGear() {
+        return actualGear;
+    }
+
+    public static ImageView getTractionIV() {
+        return tractionIV;
     }
 }

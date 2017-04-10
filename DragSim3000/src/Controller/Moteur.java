@@ -54,7 +54,6 @@ public class Moteur {
             Voiture.getChoice().CalculX(timeIncrement);
             Voiture.getChoice().CalculRPM();
             Voiture.getChoice().updateUI();
-            System.out.println(Voiture.getChoice().getcurrentGear() + "\n");
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();

@@ -91,24 +91,26 @@ public class EventHandler {
         opt.getTrempe().setOnAction(event -> {
             if (opt.getTrempe().isSelected()) {
                 opt.getSec().setSelected(false);
-                Voiture.getChoice().setDried(false);
+                Voiture.getChoice().setCf(0.45);
             } else {
                 opt.getSec().setSelected(true);
                 Voiture.getChoice().setDried(true);
+                Voiture.getChoice().setCf(0.85);
             }
         });
 
         opt.getAutom().setOnAction(event -> {
-            if (opt.getAutom().isSelected())
+            if (opt.getAutom().isSelected()) {
                 opt.getManuel().setSelected(false);
-            else
+                Voiture.getChoice().setManual(false);
+            }else
                 opt.getManuel().setSelected(true);
         });
 
         opt.getManuel().setOnAction(event -> {
             if (opt.getManuel().isSelected()) {
                 opt.getAutom().setSelected(false);
-                Shift(ec.getEnCourse());
+                Voiture.getChoice().setManual(true);
             } else
                 opt.getAutom().setSelected(true);
         });
