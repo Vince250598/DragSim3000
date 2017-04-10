@@ -2,6 +2,7 @@ package Model;
 
 
 import View.EnCourse;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -57,6 +58,8 @@ public class Voiture {
     double Frr;
     double Cf;
     boolean isDried = true;
+    boolean manual = false;
+    double maxForce;
 
     public Voiture(double masse, double area, double Cd, String modele,
                    double efficaciteTransmission,
@@ -134,9 +137,7 @@ public class Voiture {
         densite = 1;
         accel = 0;
         Frr = 0.03 * getMasse() * 9.8;
-        if (isDried())
-            Cf = 0.85;
-        else Cf = 0.45;
+        Cf = 0.85;
 
         setGearRatio(ratioVit1, 0);
         setGearRatio(ratioVit2, 1);
@@ -192,7 +193,7 @@ public class Voiture {
 
     private double CalculFMoteur() {
         //maxForce == force de traction maximale
-        double maxForce = getCf() * 9.8 * getMasse();
+        maxForce = getCf() * 9.8 * getMasse();
         if (getChoice() == ListeVoitures.getVoiture(9))
             maxForce = 3 * getCf() * 9.8 * getMasse();
         FMoteur = (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
@@ -204,14 +205,18 @@ public class Voiture {
     }
 
     public void CalculRPM() {
-        if (getRpm() >= getRpmMax())
-            if (getcurrentGear() + 1 <= getNombreVit())
-                currentGear = (getcurrentGear() + 1);
-        if (FTotal < 0 && rpm < rpmMax && getcurrentGear() - 1 >= 1)
-            currentGear = getcurrentGear() - 1;
-        rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
-        if (rpm > rpmMax)
-            rpm = rpmMax;
+        if (!manual) {
+            if (getRpm() >= getRpmMax())
+                if (getcurrentGear() + 1 <= getNombreVit())
+                    currentGear = (getcurrentGear() + 1);
+            if (FTotal < 0 && rpm < rpmMax && getcurrentGear() - 1 >= 1)
+                currentGear = getcurrentGear() - 1;
+            rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
+            if (rpm > rpmMax)
+                rpm = rpmMax;
+        } else if (manual)
+            return;
+        //TODO fnjnjfdngdfg
     }
 
     private double CalculFTotal() {
@@ -243,7 +248,7 @@ public class Voiture {
     public void gearShift() {
         if (1 + getcurrentGear() > getNombreVit())
             return;
-        else if (1 + getcurrentGear() < 1)
+        else if (getcurrentGear() - 1 < 1)
             return;
         else {
             double oldGearRatio = getGearRatio();
@@ -251,16 +256,25 @@ public class Voiture {
             double newGearRatio = getGearRatio();
             setRpm(getRpm() * newGearRatio / oldGearRatio);
         }
-        return;
     }
 
     public void updateUI() {
-        //TODO barre de pourcentage pour rpm + current gear
         EnCourse.getTemps().setText("Temps: " + Math.round(getTime() * 100.00) / 100.00 + " s");
         EnCourse.getDistance().setText("Distance: " + Math.round(getxLabel()) + " m");
         EnCourse.getRPM().setText("RPM: " + Math.round(getRpm()));
         EnCourse.getVitesse().setText("Vitesse: " + Math.round(getVx() * 3.6) + " km/h");
+        EnCourse.getPg().setProgress(getRpm() / getRpmMax());
+        if (getRpm() / getRpmMax() < 0.85)
+            EnCourse.getPg().setStyle("-fx-accent: green");
+        if (getRpm() / getRpmMax() > 0.85)
+            EnCourse.getPg().setStyle("-fx-accent: yellow;");
+        if (getRpm() / getRpmMax() > 0.95)
+            EnCourse.getPg().setStyle("-fx-accent: red");
         setTime(getTime() + 0.015);
+        EnCourse.getActualGear().setText(getcurrentGear() + "");
+        if (FMoteur >= maxForce)
+            EnCourse.getTractionIV().setEffect(new Glow(4));
+        else EnCourse.getTractionIV().setEffect(new Glow(0));
     }
 
     public double getArea() {
@@ -357,10 +371,6 @@ public class Voiture {
         return currentGear;
     }
 
-    public void setCf(double cf) {
-        Cf = cf;
-    }
-
     public void setcurrentGear(int currentGear) {
         this.currentGear = currentGear;
     }
@@ -391,5 +401,9 @@ public class Voiture {
 
     public void setxLabel(double xLabel) {
         this.xLabel = xLabel;
+    }
+
+    public void setCf(double cf) {
+        Cf = cf;
     }
 }
