@@ -42,6 +42,7 @@ public class Voiture {
     ImageView image = new ImageView();
     double area;
     double x;
+    double xLabel;
     double vx;
     double time;
     double Cd;
@@ -231,6 +232,12 @@ public class Voiture {
 
     public void CalculX(double deltaTime) {
         setX(getX() + deltaTime * getVx());
+        setxLabel(getxLabel() + deltaTime * getVx());
+        Voiture.getChoice().getImage().setX(getX() * 30);
+        Voiture.getChoice().getImage().setTranslateX(Voiture.getChoice().getImage().getX() + Voiture.getChoice().getVx());
+        if (getX() > 60)
+            setX(-10);
+
     }
 
     public void gearShift() {
@@ -250,7 +257,7 @@ public class Voiture {
     public void updateUI() {
         //TODO barre de pourcentage pour rpm + current gear
         EnCourse.getTemps().setText("Temps: " + Math.round(getTime() * 100.00) / 100.00 + " s");
-        EnCourse.getDistance().setText("Distance: " + Math.round(getX()) + " m");
+        EnCourse.getDistance().setText("Distance: " + Math.round(getxLabel()) + " m");
         EnCourse.getRPM().setText("RPM: " + Math.round(getRpm()));
         EnCourse.getVitesse().setText("Vitesse: " + Math.round(getVx() * 3.6) + " km/h");
         setTime(getTime() + 0.015);
@@ -376,5 +383,13 @@ public class Voiture {
 
     public void setDried(boolean dried) {
         isDried = dried;
+    }
+
+    public double getxLabel() {
+        return xLabel;
+    }
+
+    public void setxLabel(double xLabel) {
+        this.xLabel = xLabel;
     }
 }

@@ -31,7 +31,6 @@ public class ListeVoitures {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     voitures.add(x, new Voiture(Double.parseDouble(eElement.getElementsByTagName("Masse").item(0).getTextContent()),
-                            //TODO: la partie "aire" semble être le problème, la remplacer par "hauteur"
                             Double.parseDouble(eElement.getElementsByTagName("Aire").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("CD").item(0).getTextContent()),
                             eElement.getElementsByTagName("Modele").item(0).getTextContent(),
