@@ -27,6 +27,7 @@ public class Selection {
     }
 
     public void reset(){
+
         //addElements();
         Programme.getStage().setScene(choix);
         Voiture.setChoice(null);
@@ -35,7 +36,6 @@ public class Selection {
 
     public void addElements() {
 
-        //TODO: présentement, les voitures ne load pas, je peux rien choisir dans l'écran de sélection
         list.getVoitures().clear();
         list.loadVoitures();
         grid.getChildren().clear();

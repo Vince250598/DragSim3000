@@ -92,6 +92,7 @@ public class EventHandler {
             if (opt.getTrempe().isSelected()) {
                 opt.getSec().setSelected(false);
                 Voiture.getChoice().setCf(0.45);
+                Voiture.getChoice().setDried(false);
             } else {
                 opt.getSec().setSelected(true);
                 Voiture.getChoice().setDried(true);
