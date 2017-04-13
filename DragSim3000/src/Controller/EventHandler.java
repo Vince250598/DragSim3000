@@ -103,7 +103,7 @@ public class EventHandler {
             if (opt.getAutom().isSelected()) {
                 opt.getManuel().setSelected(false);
                 Voiture.getChoice().setManual(false);
-            }else
+            } else
                 opt.getManuel().setSelected(true);
         });
 
@@ -111,6 +111,7 @@ public class EventHandler {
             if (opt.getManuel().isSelected()) {
                 opt.getAutom().setSelected(false);
                 Voiture.getChoice().setManual(true);
+                setShift();
             } else
                 opt.getAutom().setSelected(true);
         });
@@ -130,9 +131,23 @@ public class EventHandler {
         });
     }
 
-    public void Shift(Scene scene) {
-        scene.setOnKeyPressed(a -> {
-            Voiture.getChoice().gearShift();
+    public void setShift() {
+        ec.getEnCourse().setOnKeyPressed(a -> {
+            switch (a.getCode()) {
+                case UP:
+                    if (Voiture.getChoice().getcurrentGear() != Voiture.getChoice().getNombreVit()) {
+                        Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() + 1);
+                    }
+                    break;
+                case DOWN:
+                    if ((Voiture.getChoice().getVx() * 60 * Voiture.getChoice().getGearRatio(Voiture.getChoice().getcurrentGear() - 1) * Voiture.getChoice().getRatioDiff()
+                            / (2 * Math.PI * Voiture.getChoice().getRayonRoue())) <= Voiture.getChoice().getRpmMax() + 1) {
+                        if (Voiture.getChoice().getcurrentGear() - 1 != 0){
+                            Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
+                        }
+                    }
+
+            }
         });
     }
 
