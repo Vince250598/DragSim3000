@@ -4,17 +4,16 @@ package View;
 import Controller.Moteur;
 import Model.ListeVoitures;
 import Model.Voiture;
-import javafx.geometry.Bounds;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
+import javafx.animation.*;
+import javafx.application.*;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.effect.ColorInput;
 import javafx.scene.image.Image;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -43,6 +42,10 @@ public class EnCourse {
     static Label traction;
     static Image tractionImage = new Image("Ressources\\Traction.png");
     static ImageView tractionIV = new ImageView(tractionImage);
+    private Image turtleImage = new Image("Ressources\\turtle.png");
+    private ImageView turtle = new ImageView(turtleImage);
+    private Image rabbitImage = new Image("Ressources\\rabbit.png");
+    private ImageView rabbit = new ImageView(rabbitImage);
     static Slider throttle;
 
     public EnCourse() {
@@ -110,7 +113,17 @@ public class EnCourse {
 
         cadran = new HBox(50, pg, actualGear, traction, throttle);
         cadran.setTranslateY(900);
-        cadran.setTranslateX(5);
+        cadran.setTranslateX(20);
+
+        turtle.setScaleX(0.15);
+        turtle.setScaleY(0.15);
+        rabbit.setScaleX(0.15);
+        rabbit.setScaleY(0.15);
+
+        turtle.setTranslateX(-200);
+        turtle.setTranslateY(385);
+        rabbit.setTranslateX(575);
+        rabbit.setTranslateY(385);
 
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
@@ -124,7 +137,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(temps, vitesse, RPM, distance, stop, cadran);
+        group.getChildren().addAll(temps, vitesse, RPM, distance, stop, cadran, turtle, rabbit);
     }
 
     public void loaderVoiture() {
