@@ -227,6 +227,10 @@ public class Voiture {
             FMoteur = maxForce;
         if (getRpmMax() <= getRpm())
             FMoteur = 1e-8;
+        if (getThrottle() == 0)
+            FMoteur = -500;
+        if (getVx() > (2 * Math.PI * rayonRoue * rpmMax) / (60 * getGearRatio() * ratioDiff))
+            FMoteur = -5000;
         return FMoteur;
     }
 
@@ -244,9 +248,9 @@ public class Voiture {
             rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
             if (rpm > rpmMax)
                 rpm = rpmMax;
-            if (rpm < 1000)
-                rpm = 1000;
         }
+        if (rpm < 1000)
+            rpm = 1000;
     }
 
     private double CalculFTotal() {
