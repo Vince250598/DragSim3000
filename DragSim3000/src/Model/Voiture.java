@@ -60,6 +60,7 @@ public class Voiture {
     boolean isDried = true;
     boolean manual = false;
     double maxForce;
+    double throttle = 1;
 
     public Voiture(double masse, double area, double Cd, String modele,
                    double efficaciteTransmission,
@@ -152,7 +153,7 @@ public class Voiture {
     private double getPuissance() {
         double b;
         double d;
-        
+
         if (rpm <= 1000) {
             return puissance1000rpm;
         } else if (rpm < 1500) {
@@ -217,14 +218,15 @@ public class Voiture {
 
     private double CalculFMoteur() {
         //maxForce == force de traction maximale
-        maxForce = getCf() * 9.8 * getMasse();
+        setThrottle(EnCourse.getThrottle());
+        maxForce = (getCf() * 9.8 * getMasse()) / 2;
         if (getChoice() == ListeVoitures.getVoiture(9))
             maxForce = 3 * getCf() * 9.8 * getMasse();
-        FMoteur = (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
+        FMoteur = getThrottle() * (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
         if (maxForce < FMoteur)
             FMoteur = maxForce;
         if (getRpmMax() <= getRpm())
-            FMoteur = 0;
+            FMoteur = 1e-8;
         return FMoteur;
     }
 
@@ -238,9 +240,13 @@ public class Voiture {
             rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
             if (rpm > rpmMax)
                 rpm = rpmMax;
-        } else if (manual)
-            return;
-        //TODO fnjnjfdngdfg
+        } else if (manual) {
+            rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
+            if (rpm > rpmMax)
+                rpm = rpmMax;
+            if (rpm < 1000)
+                rpm = 1000;
+        }
     }
 
     private double CalculFTotal() {
@@ -297,7 +303,7 @@ public class Voiture {
         setTime(getTime() + 0.015);
         EnCourse.getActualGear().setText(getcurrentGear() + "");
         if (FMoteur >= maxForce)
-            EnCourse.getTractionIV().setEffect(new Glow(4));
+            EnCourse.getTractionIV().setEffect(new Glow(10));
         else EnCourse.getTractionIV().setEffect(new Glow(0));
     }
 
@@ -365,6 +371,9 @@ public class Voiture {
         return masse;
     }
 
+    public double getGearRatio(int index) {
+        return gearRatio[index];
+    }
 
     public double getEfficaciteTransmission() {
         return efficaciteTransmission;
@@ -376,6 +385,14 @@ public class Voiture {
 
     public double getRatioDiff() {
         return ratioDiff;
+    }
+
+    public double getThrottle() {
+        return throttle;
+    }
+
+    public void setThrottle(double throttle) {
+        this.throttle = throttle;
     }
 
     public int getNombreVit() {

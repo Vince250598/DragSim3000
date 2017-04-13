@@ -43,6 +43,7 @@ public class EnCourse {
     static Label traction;
     static Image tractionImage = new Image("Ressources\\Traction.png");
     static ImageView tractionIV = new ImageView(tractionImage);
+    static Slider throttle;
 
     public EnCourse() {
     }
@@ -100,8 +101,14 @@ public class EnCourse {
         tractionIV.setTranslateX(-40);
         tractionIV.setTranslateY(-39);
 
+        throttle = new Slider(0,1,1);
+        throttle.setMinWidth(50);
+        throttle.setMinHeight(50);
+        throttle.setScaleY(5);
+        throttle.setScaleX(5);
+        throttle.setTranslateX(250);
 
-        cadran = new HBox(50, pg, actualGear, traction);
+        cadran = new HBox(50, pg, actualGear, traction, throttle);
         cadran.setTranslateY(900);
         cadran.setTranslateX(5);
 
@@ -183,6 +190,10 @@ public class EnCourse {
 
     public static Label getActualGear() {
         return actualGear;
+    }
+
+    public static double getThrottle() {
+        return throttle.getValue();
     }
 
     public static ImageView getTractionIV() {
