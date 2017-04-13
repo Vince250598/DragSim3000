@@ -110,6 +110,7 @@ public class EnCourse {
         throttle.setScaleY(5);
         throttle.setScaleX(5);
         throttle.setTranslateX(250);
+        throttle.setTranslateY(20);
 
         cadran = new HBox(50, pg, actualGear, traction, throttle);
         cadran.setTranslateY(900);

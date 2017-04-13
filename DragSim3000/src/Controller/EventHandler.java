@@ -141,11 +141,8 @@ public class EventHandler {
                     }
                     break;
                 case DOWN:
-                    if ((Voiture.getChoice().getVx() * 60 * Voiture.getChoice().getGearRatio(Voiture.getChoice().getcurrentGear() - 1) * Voiture.getChoice().getRatioDiff()
-                            / (2 * Math.PI * Voiture.getChoice().getRayonRoue())) <= Voiture.getChoice().getRpmMax() + 1) {
-                        if (Voiture.getChoice().getcurrentGear() - 1 != 0){
-                            Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
-                        }
+                    if (Voiture.getChoice().getcurrentGear() - 1 != 0) {
+                        Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
                     }
 
             }
