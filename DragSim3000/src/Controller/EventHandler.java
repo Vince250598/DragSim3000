@@ -144,13 +144,12 @@ public class EventHandler {
                     if (Voiture.getChoice().getcurrentGear() - 1 != 0) {
                         Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
                     }
-
             }
         });
     }
 
     public void stop() {
-        ec.getStop().setOnAction(event -> {
+        ec.getStop().setOnMouseClicked(event -> {
             engine.getTl().pause();
             Optional<ButtonType> button = ec.getStopDialog().showAndWait();
             if (button.get() == ec.getMenu()) {
@@ -164,8 +163,10 @@ public class EventHandler {
             } else if (button.get() == ec.getCancel()) {
                 ec.getStopDialog().close();
                 engine.getTl().play();
-            } else Programme.getStage().close();
-            EnCourse.getRunningMusic().stop();
+            } else {
+                Programme.getStage().close();
+                EnCourse.getRunningMusic().stop();
+            }
         });
     }
 }

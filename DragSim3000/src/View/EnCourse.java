@@ -25,28 +25,27 @@ public class EnCourse {
     private Scene enCourse = new Scene(group, 1920, 1080);
     private Image driedBackground = new Image("Ressources\\road.png");
     private Image wetBackground = new Image("Ressources\\rainyRoad.png");
-    static Label temps;
-    static Label vitesse;
-    static Label RPM;
-    static Label distance;
-    private boolean dried = true;
+    private static Label temps;
+    private static Label vitesse;
+    private static Label RPM;
+    private static Label distance;
     private Button stop = new Button("Stop");
     private Alert stopDialog = new Alert(Alert.AlertType.CONFIRMATION);
     private ButtonType menu = new ButtonType("Menu");
     private ButtonType exit = new ButtonType("Exit");
     private ButtonType cancel = new ButtonType("Cancel");
     private static MediaPlayer runningMusic;
-    static ProgressBar pg;
-    static HBox cadran;
-    static Label actualGear;
-    static Label traction;
-    static Image tractionImage = new Image("Ressources\\Traction.png");
-    static ImageView tractionIV = new ImageView(tractionImage);
+    private static ProgressBar pg;
+    private static HBox cadran;
+    private static Label actualGear;
+    private static Label traction;
+    private static Image tractionImage = new Image("Ressources\\Traction.png");
+    private static ImageView tractionIV = new ImageView(tractionImage);
     private Image turtleImage = new Image("Ressources\\turtle.png");
     private ImageView turtle = new ImageView(turtleImage);
     private Image rabbitImage = new Image("Ressources\\rabbit.png");
     private ImageView rabbit = new ImageView(rabbitImage);
-    static Slider throttle;
+    private static Slider throttle;
 
     public EnCourse() {
     }
@@ -98,19 +97,19 @@ public class EnCourse {
         actualGear.setTranslateY(-12);
         actualGear.setTranslateX(-5);
 
-        traction = new Label("",tractionIV);
+        traction = new Label("", tractionIV);
         tractionIV.setScaleX(0.5);
         tractionIV.setScaleY(0.5);
         tractionIV.setTranslateX(-40);
         tractionIV.setTranslateY(-39);
 
-        throttle = new Slider(0,1,1);
+        throttle = new Slider(0, 1, 1);
         throttle.setMinWidth(50);
         throttle.setMinHeight(50);
         throttle.setScaleY(5);
         throttle.setScaleX(5);
         throttle.setTranslateX(250);
-        throttle.setTranslateY(20);
+        throttle.setTranslateY(0);
 
         cadran = new HBox(50, pg, actualGear, traction, throttle);
         cadran.setTranslateY(900);
@@ -138,7 +137,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(temps, vitesse, RPM, distance, stop, cadran, turtle, rabbit);
+        group.getChildren().addAll(stop, temps, vitesse, RPM, distance, cadran, turtle, rabbit);
     }
 
     public void loaderVoiture() {
@@ -170,10 +169,6 @@ public class EnCourse {
         return cancel;
     }
 
-    public StackPane getGroup() {
-        return group;
-    }
-
     public static MediaPlayer getRunningMusic() {
         return runningMusic;
     }
@@ -192,10 +187,6 @@ public class EnCourse {
 
     public static Label getDistance() {
         return distance;
-    }
-
-    public static HBox getCadran() {
-        return cadran;
     }
 
     public static ProgressBar getPg() {

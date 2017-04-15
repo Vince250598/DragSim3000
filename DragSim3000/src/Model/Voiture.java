@@ -343,10 +343,6 @@ public class Voiture {
         return Cd;
     }
 
-    public double getAccel() {
-        return accel;
-    }
-
     public double getDensite() {
         return densite;
     }
@@ -373,10 +369,6 @@ public class Voiture {
 
     public double getMasse() {
         return masse;
-    }
-
-    public double getGearRatio(int index) {
-        return gearRatio[index];
     }
 
     public double getEfficaciteTransmission() {
@@ -410,7 +402,6 @@ public class Voiture {
     public void setRpm(double rpm) {
         this.rpm = rpm;
     }
-
 
     public int getcurrentGear() {
         return currentGear;
@@ -450,10 +441,6 @@ public class Voiture {
 
     public void setCf(double cf) {
         Cf = cf;
-    }
-
-    public boolean isManual() {
-        return manual;
     }
 
     public void setManual(boolean manual) {

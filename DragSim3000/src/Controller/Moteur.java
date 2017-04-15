@@ -10,42 +10,11 @@ import javafx.util.Duration;
 import java.util.Vector;
 
 public class Moteur {
-    private static Voiture choixVoiture;
-    private double accel;
-    private int rpm = 1000;
-    private int actualGear = 1;
-    private double wheelSpeed;
-    private Vector gearRatio = new Vector();
-    private Vector puissance = new Vector();
-    private double actualTorque;
-    private boolean max = false;
-    private int increase;
-    private double currentSpeed = 1;
-    private double currentPosition;
-    private double wheelForce;
-    private double torque;
-    private double maxWheelForce;
-    private double totalForces;
-    private double frictionForce;
-    private double b;
-    private double d;
-    private double c1, c2, c3;
+
     private Timeline tl;
     private double timeIncrement = 0.015;
 
     public Moteur() {
-    }
-
-    public int getRpm() {
-        return rpm;
-    }
-
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    public double getCurrentPosition() {
-        return currentPosition;
     }
 
     public void test() {
