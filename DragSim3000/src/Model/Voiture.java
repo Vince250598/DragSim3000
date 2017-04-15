@@ -230,7 +230,7 @@ public class Voiture {
         if (getThrottle() == 0)
             FMoteur = -500;
         if (getVx() > (2 * Math.PI * rayonRoue * rpmMax) / (60 * getGearRatio() * ratioDiff))
-            FMoteur = -5000;
+            FMoteur = -5000 * (0.75 * nombreVit/currentGear);
         return FMoteur;
     }
 
