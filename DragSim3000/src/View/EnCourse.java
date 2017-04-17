@@ -63,6 +63,7 @@ public class EnCourse {
         else
             backgroundImage = new BackgroundImage(wetBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                     new BackgroundSize(300, 1080, false, false, false, false));
+        runningMusic.setCycleCount(MediaPlayer.INDEFINITE);
 
         temps = new Label("Temps: ");
         temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
@@ -111,7 +112,7 @@ public class EnCourse {
         throttle.setTranslateX(250);
         throttle.setTranslateY(0);
 
-        cadran = new HBox(50, pg, actualGear, traction, throttle);
+        cadran = new HBox(50, pg, actualGear, traction, throttle, stop);
         cadran.setTranslateY(900);
         cadran.setTranslateX(20);
 
@@ -128,8 +129,10 @@ public class EnCourse {
         Background bg = new Background(backgroundImage);
         group.setBackground(bg);
 
-        stop.setTranslateX(850);
-        stop.setTranslateY(410);
+        stop.setScaleX(2);
+        stop.setScaleY(2);
+        stop.setTranslateX(650);
+        stop.setTranslateY(15);
 
         stopDialog.setTitle("Stop");
         stopDialog.setHeaderText(null);
@@ -137,7 +140,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(stop, temps, vitesse, RPM, distance, cadran, turtle, rabbit);
+        group.getChildren().addAll(temps, vitesse, RPM, distance, cadran, turtle, rabbit);
     }
 
     public void loaderVoiture() {
