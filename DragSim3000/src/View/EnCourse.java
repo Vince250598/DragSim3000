@@ -41,6 +41,8 @@ public class EnCourse {
     private static Label actualGear;
     private static Label traction;
     private static Label quarterMile;
+    private static Label halfMile;
+    private static Label mile;
     private static Image tractionImage = new Image("Ressources\\Traction.png");
     private static ImageView tractionIV = new ImageView(tractionImage);
     private Image turtleImage = new Image("Ressources\\turtle.png");
@@ -97,6 +99,17 @@ public class EnCourse {
         quarterMile.setMinWidth(1000);
         quarterMile.setTranslateY(-200);
 
+        halfMile = new Label("");
+        halfMile.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        halfMile.setTextFill(Color.RED);
+        halfMile.setMinWidth(1000);
+        halfMile.setTranslateY(-100);
+
+        mile = new Label("");
+        mile.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        mile.setTextFill(Color.RED);
+        mile.setMinWidth(1000);
+
         pg = new ProgressBar(0);
         pg.setMinWidth(500);
         pg.setMinHeight(50);
@@ -148,7 +161,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(quarterMile, temps, vitesse, RPM, distance, cadran, turtle, rabbit);
+        group.getChildren().addAll(halfMile, mile, quarterMile, temps, vitesse, RPM, distance, cadran, turtle, rabbit);
     }
 
     public void loaderVoiture() {
@@ -218,5 +231,13 @@ public class EnCourse {
 
     public static Label getQuarterMile() {
         return quarterMile;
+    }
+
+    public static Label getHalfMile() {
+        return halfMile;
+    }
+
+    public static Label getMile() {
+        return mile;
     }
 }

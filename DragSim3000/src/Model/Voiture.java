@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 public class Voiture {
 
     boolean quarterDone;
+    boolean halfDone;
+    boolean mileDone;
     static Voiture choice;
     String modele;
     double masse;
@@ -313,6 +315,14 @@ public class Voiture {
         if (getxLabel() >= 402 && !quarterDone){
             EnCourse.getQuarterMile().setText("1/4 de mile: " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
             quarterDone = true;
+        }
+        if (getxLabel() >= 804 && !halfDone){
+            EnCourse.getHalfMile().setText("1/2 de mile: " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
+            halfDone = true;
+        }
+        if (getxLabel() >= 1609 && !mileDone){
+            EnCourse.getMile().setText("Mile:            " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
+            mileDone = true;
         }
     }
 
