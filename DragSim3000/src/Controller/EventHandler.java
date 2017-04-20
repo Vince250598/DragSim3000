@@ -62,17 +62,20 @@ public class EventHandler {
                 opt.addElements();
                 option();
                 Programme.getStage().show();
+                disabled();
                 event.consume();
             });
 
             iv.setOnMouseEntered(event -> {
                 selec.getList().getVoitures().get(i).getImage().setScaleX(1.2);
                 selec.getList().getVoitures().get(i).getImage().setScaleY(1.2);
+                event.consume();
             });
 
             iv.setOnMouseExited(event -> {
                 selec.getList().getVoitures().get(i).getImage().setScaleX(1);
                 selec.getList().getVoitures().get(i).getImage().setScaleY(1);
+                event.consume();
             });
         }
     }
@@ -169,6 +172,18 @@ public class EventHandler {
                 Programme.getStage().close();
                 EnCourse.getRunningMusic().stop();
             }
+        });
+    }
+
+    public void disabled(){
+
+        Voiture.getChoice().getImage().setOnMouseEntered(event -> {
+            Voiture.getChoice().getImage().setScaleX(0.6);
+            Voiture.getChoice().getImage().setScaleY(0.6);
+        });
+        Voiture.getChoice().getImage().setOnMouseExited(event -> {
+            Voiture.getChoice().getImage().setScaleX(0.6);
+            Voiture.getChoice().getImage().setScaleY(0.6);
         });
     }
 }
