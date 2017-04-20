@@ -17,6 +17,7 @@ public class Selection {
     private Scene choix = new Scene(grid, 1920, 1080);
     private Image background = new Image("\\Ressources\\noRoad.png");
     private Button back = new Button("Back");
+    private int x = 0;
 
     public Selection() {
         addElements();
@@ -26,9 +27,9 @@ public class Selection {
         return choix;
     }
 
-    public void reset(){
+    public void reset() {
 
-        //addElements();
+        addElements();
         Programme.getStage().setScene(choix);
         Voiture.setChoice(null);
         Demarrage.getStartingMusic().play();
@@ -42,14 +43,20 @@ public class Selection {
         grid.setAlignment(Pos.CENTER);
         int nbCol = 5;
         int nbRan = 3;
-        for (int i = 0; i < nbCol; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
+
+        ColumnConstraints colConst = new ColumnConstraints();
+        RowConstraints rowConst = new RowConstraints();
+
+        if (x == 0) {
             colConst.setPercentWidth(100.0 / nbCol);
+            rowConst.setPercentHeight(100.0 / nbRan);
+            x++;
+        }
+
+        for (int i = 0; i < nbCol; i++) {
             grid.getColumnConstraints().add(colConst);
         }
         for (int i = 0; i < nbRan; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / nbRan);
             grid.getRowConstraints().add(rowConst);
         }
 
