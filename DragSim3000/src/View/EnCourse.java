@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -39,6 +40,7 @@ public class EnCourse {
     private static HBox cadran;
     private static Label actualGear;
     private static Label traction;
+    private static Label quarterMile;
     private static Image tractionImage = new Image("Ressources\\Traction.png");
     private static ImageView tractionIV = new ImageView(tractionImage);
     private Image turtleImage = new Image("Ressources\\turtle.png");
@@ -88,6 +90,12 @@ public class EnCourse {
         RPM.setMinWidth(1000);
         RPM.setTranslateX(-450);
         RPM.setTranslateY(-320);
+
+        quarterMile = new Label("");
+        quarterMile.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
+        quarterMile.setTextFill(Color.RED);
+        quarterMile.setMinWidth(1000);
+        quarterMile.setTranslateY(-200);
 
         pg = new ProgressBar(0);
         pg.setMinWidth(500);
@@ -140,7 +148,7 @@ public class EnCourse {
         stopDialog.getButtonTypes().setAll(menu, exit, cancel);
 
         group.getChildren().clear();
-        group.getChildren().addAll(temps, vitesse, RPM, distance, cadran, turtle, rabbit);
+        group.getChildren().addAll(quarterMile, temps, vitesse, RPM, distance, cadran, turtle, rabbit);
     }
 
     public void loaderVoiture() {
@@ -206,5 +214,9 @@ public class EnCourse {
 
     public static ImageView getTractionIV() {
         return tractionIV;
+    }
+
+    public static Label getQuarterMile() {
+        return quarterMile;
     }
 }

@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class Voiture {
 
+    boolean quarterDone;
     static Voiture choice;
     String modele;
     double masse;
@@ -309,6 +310,10 @@ public class Voiture {
         if (FMoteur >= maxForce)
             EnCourse.getTractionIV().setEffect(new Glow(10));
         else EnCourse.getTractionIV().setEffect(new Glow(0));
+        if (getxLabel() >= 402 && !quarterDone){
+            EnCourse.getQuarterMile().setText("1/4 de mile: " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
+            quarterDone = true;
+        }
     }
 
     public double getArea() {
