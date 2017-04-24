@@ -32,7 +32,6 @@ public class Selection {
         addElements();
         Programme.getStage().setScene(choix);
         Voiture.setChoice(null);
-        Demarrage.getStartingMusic().play();
     }
 
     public void addElements() {

@@ -35,7 +35,6 @@ public class EnCourse {
     private ButtonType menu = new ButtonType("Menu");
     private ButtonType exit = new ButtonType("Exit");
     private ButtonType cancel = new ButtonType("Cancel");
-    private static MediaPlayer runningMusic;
     private static ProgressBar pg;
     private static HBox cadran;
     private static Label actualGear;
@@ -56,10 +55,6 @@ public class EnCourse {
 
     public void addElements() {
 
-        if (runningMusic == null) {
-            URL url = getClass().getResource("/Ressources/runningMusic.mp3");
-            runningMusic = new MediaPlayer(new Media(url.toString()));
-        }
         BackgroundImage backgroundImage;
         if (Voiture.getChoice().isDried())
             backgroundImage = new BackgroundImage(driedBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -67,7 +62,6 @@ public class EnCourse {
         else
             backgroundImage = new BackgroundImage(wetBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                     new BackgroundSize(300, 1080, false, false, false, false));
-        runningMusic.setCycleCount(MediaPlayer.INDEFINITE);
 
         temps = new Label("Temps: ");
         temps.setFont(Font.font(null, FontWeight.SEMI_BOLD, 100));
@@ -191,10 +185,6 @@ public class EnCourse {
 
     public ButtonType getCancel() {
         return cancel;
-    }
-
-    public static MediaPlayer getRunningMusic() {
-        return runningMusic;
     }
 
     public static Label getTemps() {

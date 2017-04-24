@@ -2,6 +2,7 @@ package View;
 
 import Controller.EventHandler;
 import Main.Programme;
+import Model.PlayList;
 import javafx.animation.Animation;
 import javafx.animation.ScaleTransition;
 import javafx.scene.Scene;
@@ -25,7 +26,7 @@ public class Demarrage {
     private Pane group = new Pane();
     private Scene start = new Scene(group, 1920, 1080);
     private Image background = new Image("\\Ressources\\background.png");
-    private static MediaPlayer startingMusic;
+    PlayList playList = new PlayList();
 
     public Demarrage(){}
 
@@ -40,6 +41,7 @@ public class Demarrage {
         Programme.getStage().show();
         if (group.getChildren().isEmpty())
             addElements();
+        playList.getSong();
     }
 
     public void addElements() {
@@ -48,11 +50,6 @@ public class Demarrage {
         Background bg = new Background(bgImg);
         group.setBackground(bg);
 
-        if (startingMusic == null) {
-            URL url = getClass().getResource("/Ressources/startingMusic.mp3");
-            startingMusic = new MediaPlayer(new Media(url.toString()));
-            startingMusic.setCycleCount(MediaPlayer.INDEFINITE);
-        }
         Text txt = new Text("Press any key\n to continue");
         txt.setFill(Color.RED);
         txt.setFont(Font.font(null, FontWeight.BOLD, 100));
@@ -74,11 +71,6 @@ public class Demarrage {
         st.setByY(1.1);
         st.play();
 
-        startingMusic.play();
-
     }
 
-    public static MediaPlayer getStartingMusic() {
-        return startingMusic;
-    }
 }

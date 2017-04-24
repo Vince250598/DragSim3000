@@ -129,8 +129,6 @@ public class EventHandler {
             ec.addElements();
             ec.loaderVoiture();
             engine.test();
-            Demarrage.getStartingMusic().pause();
-            EnCourse.getRunningMusic().play();
             stop();
         });
     }
@@ -158,7 +156,6 @@ public class EventHandler {
             Optional<ButtonType> button = ec.getStopDialog().showAndWait();
             if (button.get() == ec.getMenu()) {
                 engine.getTl().stop();
-                ec.getRunningMusic().stop();
                 selec.reset();
                 if (opt.getTrempe().isSelected())
                     opt.getTrempe().setSelected(false);
@@ -170,7 +167,6 @@ public class EventHandler {
                 engine.getTl().play();
             } else {
                 Programme.getStage().close();
-                EnCourse.getRunningMusic().stop();
             }
         });
     }
