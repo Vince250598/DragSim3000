@@ -26,9 +26,11 @@ public class Demarrage {
     private Pane group = new Pane();
     private Scene start = new Scene(group, 1920, 1080);
     private Image background = new Image("\\Ressources\\background.png");
-    PlayList playList = new PlayList();
+    private PlayList playList = new PlayList();
+    private boolean songsActivated = false;
 
-    public Demarrage(){}
+    public Demarrage() {
+    }
 
     public Demarrage(Stage s) {
         s.setMaximized(true);
@@ -41,7 +43,11 @@ public class Demarrage {
         Programme.getStage().show();
         if (group.getChildren().isEmpty())
             addElements();
-        playList.getSong();
+        if (!songsActivated) {
+            playList.getSong();
+            songsActivated = true;
+        }
+
     }
 
     public void addElements() {

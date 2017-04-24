@@ -282,19 +282,6 @@ public class Voiture {
 
     }
 
-    public void gearShift() {
-        if (1 + getcurrentGear() > getNombreVit())
-            return;
-        else if (getcurrentGear() - 1 < 1)
-            return;
-        else {
-            double oldGearRatio = getGearRatio();
-            setcurrentGear(getcurrentGear() + 1);
-            double newGearRatio = getGearRatio();
-            setRpm(getRpm() * newGearRatio / oldGearRatio);
-        }
-    }
-
     public void updateUI() {
         EnCourse.getTemps().setText("Temps: " + Math.round(getTime() * 100.00) / 100.00 + " s");
         EnCourse.getDistance().setText("Distance: " + Math.round(getxLabel()) + " m");
