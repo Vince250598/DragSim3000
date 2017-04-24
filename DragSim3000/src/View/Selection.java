@@ -31,6 +31,7 @@ public class Selection {
 
         addElements();
         Programme.getStage().setScene(choix);
+        Voiture.getChoice().setManual(false);
         Voiture.setChoice(null);
     }
 
