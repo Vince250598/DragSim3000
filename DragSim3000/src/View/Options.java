@@ -37,9 +37,9 @@ public class Options {
         hb1.setAlignment(Pos.CENTER);
         Text txt1 = new Text("État de la chaussée:");
         txt1.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
-        sec.setSelected(true);
         sec.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
         trempe.setFont(Font.font(null, FontWeight.SEMI_BOLD, 30));
+        sec.setSelected(true);
         hb1.getChildren().addAll(sec, trempe);
         vb1.getChildren().addAll(txt1, hb1);
 
@@ -50,9 +50,8 @@ public class Options {
         Text txt2 = new Text("Type de transmission:");
         txt2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
         autom.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
+        autom.setSelected(true);
         manuel.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
-        autom.setSelected(false);
-        manuel.setSelected(false);
         hb2.getChildren().addAll(autom, manuel);
         vb2.getChildren().addAll(txt2, hb2);
 
@@ -65,6 +64,8 @@ public class Options {
         group.getChildren().clear();
         group.getChildren().add(vb);
         vb.setTranslateY(-100);
+
+        EventHandler.setShiftManual(false);
     }
 
     public Scene getOption() {

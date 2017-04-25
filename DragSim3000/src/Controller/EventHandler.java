@@ -36,7 +36,7 @@ public class EventHandler {
     Options opt = new Options();
     EnCourse ec = new EnCourse();
     Selection selec = new Selection();
-    private boolean shiftManual = false;
+    private static boolean shiftManual = false;
 
     public EventHandler() {
     }
@@ -112,7 +112,7 @@ public class EventHandler {
             if (opt.getAutom().isSelected()) {
                 opt.getManuel().setSelected(false);
                 Voiture.getChoice().setManual(false);
-                stopShift();
+                shiftManual = false;
             } else
                 opt.getManuel().setSelected(true);
         });
@@ -172,10 +172,6 @@ public class EventHandler {
 
     }
 
-    void stopShift() {
-        shiftManual = false;
-    }
-
     public void stop() {
 
         ec.getStop().setOnMouseClicked(event -> {
@@ -208,5 +204,9 @@ public class EventHandler {
             Voiture.getChoice().getImage().setScaleX(0.6);
             Voiture.getChoice().getImage().setScaleY(0.6);
         });
+    }
+
+    public static void setShiftManual(boolean x){
+        shiftManual = x;
     }
 }
