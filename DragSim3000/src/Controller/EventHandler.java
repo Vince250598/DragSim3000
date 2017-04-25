@@ -36,6 +36,7 @@ public class EventHandler {
     Options opt = new Options();
     EnCourse ec = new EnCourse();
     Selection selec = new Selection();
+    private boolean shiftManual = false;
 
     public EventHandler() {
     }
@@ -111,6 +112,7 @@ public class EventHandler {
             if (opt.getAutom().isSelected()) {
                 opt.getManuel().setSelected(false);
                 Voiture.getChoice().setManual(false);
+                stopShift();
             } else
                 opt.getManuel().setSelected(true);
         });
@@ -138,15 +140,17 @@ public class EventHandler {
     }
 
     public void setShift() {
+        shiftManual = true;
+
         ec.getEnCourse().setOnKeyPressed(a -> {
             switch (a.getCode()) {
                 case UP:
-                    if (Voiture.getChoice().getcurrentGear() != Voiture.getChoice().getNombreVit()) {
+                    if (Voiture.getChoice().getcurrentGear() != Voiture.getChoice().getNombreVit() && shiftManual) {
                         Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() + 1);
                     }
                     break;
                 case DOWN:
-                    if (Voiture.getChoice().getcurrentGear() - 1 != 0) {
+                    if (Voiture.getChoice().getcurrentGear() - 1 != 0 && shiftManual) {
                         Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
                     }
             }
@@ -154,17 +158,22 @@ public class EventHandler {
 
         ec.getEnCourse().setOnMouseClicked(a -> {
             if (a.getButton() == MouseButton.PRIMARY) {
-                if (Voiture.getChoice().getcurrentGear() != Voiture.getChoice().getNombreVit()) {
+                if (Voiture.getChoice().getcurrentGear() != Voiture.getChoice().getNombreVit() && shiftManual) {
                     Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() + 1);
                 }
             }
             if (a.getButton() == MouseButton.SECONDARY) {
-                if (Voiture.getChoice().getcurrentGear() - 1 != 0) {
+                if (Voiture.getChoice().getcurrentGear() - 1 != 0 && shiftManual) {
                     Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
                 }
             }
 
         });
+
+    }
+
+    void stopShift() {
+        shiftManual = false;
     }
 
     public void stop() {

@@ -49,9 +49,10 @@ public class Options {
         hb2.setAlignment(Pos.CENTER);
         Text txt2 = new Text("Type de transmission:");
         txt2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 50));
-        autom.setSelected(true);
         autom.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
         manuel.setFont(Font.font(null,FontWeight.SEMI_BOLD, 30));
+        autom.setSelected(false);
+        manuel.setSelected(false);
         hb2.getChildren().addAll(autom, manuel);
         vb2.getChildren().addAll(txt2, hb2);
 
@@ -90,7 +91,4 @@ public class Options {
         return start;
     }
 
-    public StackPane getGroup() {
-        return group;
-    }
 }

@@ -44,7 +44,7 @@ public class Demarrage {
         if (group.getChildren().isEmpty())
             addElements();
         if (!songsActivated) {
-            playList.getSong();
+            //playList.getSong();
             songsActivated = true;
         }
 
