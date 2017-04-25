@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -147,6 +148,20 @@ public class EventHandler {
                     }
             }
         });
+
+        ec.getEnCourse().setOnMouseClicked(a -> {
+            if (a.getButton() == MouseButton.PRIMARY) {
+                if (Voiture.getChoice().getcurrentGear() != Voiture.getChoice().getNombreVit()) {
+                    Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() + 1);
+                }
+            }
+            if (a.getButton() == MouseButton.SECONDARY) {
+                if (Voiture.getChoice().getcurrentGear() - 1 != 0) {
+                    Voiture.getChoice().setcurrentGear(Voiture.getChoice().getcurrentGear() - 1);
+                }
+            }
+
+        });
     }
 
     public void stop() {
@@ -171,7 +186,7 @@ public class EventHandler {
         });
     }
 
-    public void disabled(){
+    public void disabled() {
 
         Voiture.getChoice().getImage().setOnMouseEntered(event -> {
             Voiture.getChoice().getImage().setScaleX(0.6);
