@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
@@ -41,10 +42,12 @@ public class EventHandler {
 
     public void anyKey(Scene scene) {
         scene.setOnKeyPressed(event -> {
-            Programme.getStage().setScene(selec.getChoix());
-            Programme.getStage().show();
-            choixVoiture();
-            event.consume();
+            if (event.getCode() == KeyCode.SPACE) {
+                Programme.getStage().setScene(selec.getChoix());
+                Programme.getStage().show();
+                choixVoiture();
+                event.consume();
+            }
         });
     }
 

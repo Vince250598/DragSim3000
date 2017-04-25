@@ -56,7 +56,7 @@ public class Demarrage {
         Background bg = new Background(bgImg);
         group.setBackground(bg);
 
-        Text txt = new Text("Press any key\n to continue");
+        Text txt = new Text(" Press space\n to continue");
         txt.setFill(Color.RED);
         txt.setFont(Font.font(null, FontWeight.BOLD, 100));
         txt.setTranslateX(950);
