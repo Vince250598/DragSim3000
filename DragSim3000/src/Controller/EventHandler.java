@@ -14,10 +14,10 @@ import java.util.Optional;
 
 public class EventHandler {
 
-    Demarrage dem = new Demarrage();
-    Options opt = new Options();
-    EnCourse ec = new EnCourse();
-    Selection selec = new Selection();
+    private Demarrage dem = new Demarrage();
+    private Options opt = new Options();
+    private EnCourse ec = new EnCourse();
+    private Selection selec = new Selection();
     private static boolean shiftManual = false;
 
     public EventHandler() {
@@ -34,7 +34,7 @@ public class EventHandler {
         });
     }
 
-    public void choixVoiture() {
+    private void choixVoiture() {
 
         selec.getBack().setOnMouseClicked(event -> dem.demarrer(this));
 
@@ -67,7 +67,7 @@ public class EventHandler {
         }
     }
 
-    public void option() {
+    private void option() {
         opt.getSec().setOnAction(event -> {
             if (opt.getSec().isSelected()) {
                 opt.getTrempe().setSelected(false);
@@ -121,7 +121,7 @@ public class EventHandler {
         });
     }
 
-    public void setShift() {
+    private void setShift() {
         shiftManual = true;
 
         ec.getEnCourse().setOnKeyPressed(a -> {
@@ -154,7 +154,7 @@ public class EventHandler {
 
     }
 
-    public void stop() {
+    private void stop() {
 
         ec.getStop().setOnMouseClicked(event -> {
             Programme.getMovement().pause();
@@ -176,7 +176,7 @@ public class EventHandler {
         });
     }
 
-    public void disabled() {
+    private void disabled() {
 
         Voiture.getChoice().getImage().setOnMouseEntered(event -> {
             Voiture.getChoice().getImage().setScaleX(0.6);
@@ -188,7 +188,7 @@ public class EventHandler {
         });
     }
 
-    public static void setShiftManual(boolean x){
+    public static void setShiftManual(boolean x) {
         shiftManual = x;
     }
 }

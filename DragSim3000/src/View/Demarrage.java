@@ -10,8 +10,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -19,15 +17,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.net.URL;
-
 public class Demarrage {
 
     private Pane group = new Pane();
     private Scene start = new Scene(group, 1920, 1080);
     private Image background = new Image("\\Ressources\\background.png");
     private PlayList playList = new PlayList();
-    private boolean songsActivated = false;
 
     public Demarrage() {
     }
@@ -38,16 +33,12 @@ public class Demarrage {
     }
 
     public void demarrer(EventHandler eh) {
+        playList.getSong();
         Programme.getStage().setScene(start);
         eh.anyKey(start);
         Programme.getStage().show();
         if (group.getChildren().isEmpty())
             addElements();
-        if (!songsActivated) {
-            //playList.getSong();
-            songsActivated = true;
-        }
-
     }
 
     public void addElements() {

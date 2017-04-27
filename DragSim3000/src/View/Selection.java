@@ -35,7 +35,7 @@ public class Selection {
         Voiture.setChoice(null);
     }
 
-    public void addElements() {
+    private void addElements() {
 
         list.getVoitures().clear();
         list.loadVoitures();

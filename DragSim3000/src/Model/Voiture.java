@@ -8,48 +8,48 @@ import javafx.scene.image.ImageView;
 
 public class Voiture {
 
-    boolean quarterDone;
-    boolean halfDone;
-    boolean mileDone;
-    static Voiture choice;
-    String modele;
-    double masse;
-    double efficaciteTransmission;
-    double rayonRoue;
-    double ratioDiff;
-    double rpmMax;
-    double ratioVit1;
-    double ratioVit2;
-    double ratioVit3;
-    double ratioVit4;
-    double ratioVit5;
-    double ratioVit6;
-    double ratioVit7;
-    double ratioVit8;
-    int nombreVit;
-    String URL;
-    ImageView image = new ImageView();
-    double area;
-    double x;
-    double xLabel;
-    double vx;
-    double time;
-    double Cd;
-    double accel;
-    double rpm = 1000;
-    int currentGear = 1;
-    double gearRatio[] = new double[8];
-    double densite;
-    double Fd;
-    double FMoteur;
-    double FTotal;
-    double Frr;
-    double Cf;
-    boolean isDried = true;
-    boolean manual = false;
-    double maxForce;
-    double throttle = 1;
-    double puissance[];
+    private boolean quarterDone;
+    private boolean halfDone;
+    private boolean mileDone;
+    private static Voiture choice;
+    private String modele;
+    private double masse;
+    private double efficaciteTransmission;
+    private double rayonRoue;
+    private double ratioDiff;
+    private double rpmMax;
+    private double ratioVit1;
+    private double ratioVit2;
+    private double ratioVit3;
+    private double ratioVit4;
+    private double ratioVit5;
+    private double ratioVit6;
+    private double ratioVit7;
+    private double ratioVit8;
+    private int nombreVit;
+    private String URL;
+    private ImageView image = new ImageView();
+    private double area;
+    private double x;
+    private double xLabel;
+    private double vx;
+    private double time;
+    private double Cd;
+    private double accel;
+    private double rpm = 1000;
+    private int currentGear = 1;
+    private double gearRatio[] = new double[8];
+    private double densite;
+    private double Fd;
+    private double FMoteur;
+    private double FTotal;
+    private double Frr;
+    private double Cf;
+    private boolean isDried = true;
+    private boolean manual = false;
+    private double maxForce;
+    private double throttle = 1;
+    private double puissance[];
 
     public Voiture(double masse, double area, double Cd, String modele,
                    double efficaciteTransmission,
@@ -188,9 +188,9 @@ public class Voiture {
         if (getRpmMax() <= getRpm())
             FMoteur = 1e-8;
         if (getThrottle() == 0)
-            FMoteur = -500 * (1/getcurrentGear());
+            FMoteur = -500 * (1 / getcurrentGear());
         if (getVx() > (2 * Math.PI * rayonRoue * rpmMax) / (60 * getGearRatio() * ratioDiff))
-            FMoteur = -5000 * (0.75 * nombreVit/currentGear);
+            FMoteur = -5000 * (0.75 * nombreVit / currentGear);
         return FMoteur;
     }
 
@@ -256,15 +256,15 @@ public class Voiture {
         if (FMoteur >= maxForce)
             EnCourse.getTractionIV().setEffect(new Glow(10));
         else EnCourse.getTractionIV().setEffect(new Glow(0));
-        if (getxLabel() >= 402 && !quarterDone){
+        if (getxLabel() >= 402 && !quarterDone) {
             EnCourse.getQuarterMile().setText("1/4 de mile: " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
             quarterDone = true;
         }
-        if (getxLabel() >= 804 && !halfDone){
+        if (getxLabel() >= 804 && !halfDone) {
             EnCourse.getHalfMile().setText("1/2 de mile: " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
             halfDone = true;
         }
-        if (getxLabel() >= 1609 && !mileDone){
+        if (getxLabel() >= 1609 && !mileDone) {
             EnCourse.getMile().setText("Mile:            " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
             mileDone = true;
         }
