@@ -1,24 +1,16 @@
 package View;
 
 
-import Controller.Moteur;
-import Model.ListeVoitures;
 import Model.Voiture;
 import javafx.geometry.*;
-import javafx.animation.*;
-import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.net.URL;
 
 public class EnCourse {
 

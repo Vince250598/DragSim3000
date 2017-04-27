@@ -1,37 +1,19 @@
 package Controller;
 
 import Main.Programme;
-import Model.ListeVoitures;
 import Model.Voiture;
-import View.Demarrage;
-import View.EnCourse;
-import View.Options;
-import View.Selection;
+import View.*;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
 
 import java.util.Optional;
 
 public class EventHandler {
 
-    /*
-    *
-    *
-    *
-    * TODO: quand je reset, la grille de sélection rapetisse à chaque fois ou bien il manque une voiture dans la grille, selon si on call addElements() dans reset
-    *
-    *
-    *
-    *
-    *
-    * */
-
-    Moteur engine = new Moteur();
     Demarrage dem = new Demarrage();
     Options opt = new Options();
     EnCourse ec = new EnCourse();
@@ -134,7 +116,7 @@ public class EventHandler {
             Programme.getStage().setScene(ec.getEnCourse());
             ec.addElements();
             ec.loaderVoiture();
-            engine.test();
+            Programme.move();
             stop();
         });
     }
@@ -175,10 +157,10 @@ public class EventHandler {
     public void stop() {
 
         ec.getStop().setOnMouseClicked(event -> {
-            engine.getTl().pause();
+            Programme.getMovement().pause();
             Optional<ButtonType> button = ec.getStopDialog().showAndWait();
             if (button.get() == ec.getMenu()) {
-                engine.getTl().stop();
+                Programme.getMovement().stop();
                 selec.reset();
                 if (opt.getTrempe().isSelected())
                     opt.getTrempe().setSelected(false);
@@ -187,7 +169,7 @@ public class EventHandler {
                 choixVoiture();
             } else if (button.get() == ec.getCancel()) {
                 ec.getStopDialog().close();
-                engine.getTl().play();
+                Programme.getMovement().play();
             } else {
                 Programme.getStage().close();
             }

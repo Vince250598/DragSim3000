@@ -17,7 +17,7 @@ public class Selection {
     private Scene choix = new Scene(grid, 1920, 1080);
     private Image background = new Image("\\Ressources\\noRoad.png");
     private Button back = new Button("Back");
-    private int x = 0;
+    private boolean loaded = false;
 
     public Selection() {
         addElements();
@@ -47,10 +47,10 @@ public class Selection {
         ColumnConstraints colConst = new ColumnConstraints();
         RowConstraints rowConst = new RowConstraints();
 
-        if (x == 0) {
+        if (!loaded) {
             colConst.setPercentWidth(100.0 / nbCol);
             rowConst.setPercentHeight(100.0 / nbRan);
-            x++;
+            loaded = true;
         }
 
         for (int i = 0; i < nbCol; i++) {
