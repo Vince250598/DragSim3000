@@ -7,7 +7,6 @@ import javafx.scene.media.MediaPlayer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Vector;
 
 public class PlayList {
 
@@ -58,12 +57,9 @@ public class PlayList {
             playing = true;
         }
 
-        songs.get(0).setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                songs.remove(0);
-                getSong();
-            }
+        songs.get(0).setOnEndOfMedia(() -> {
+            songs.remove(0);
+            getSong();
         });
 
     }

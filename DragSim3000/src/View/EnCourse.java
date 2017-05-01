@@ -34,9 +34,7 @@ public class EnCourse {
     private static Label RPM;
     private static Label distance;
     private static ProgressBar pg;
-    private static HBox cadran;
     private static Label actualGear;
-    private static Label traction;
     private static Label quarterMile;
     private static Label halfMile;
     private static Label mile;
@@ -105,7 +103,7 @@ public class EnCourse {
         actualGear.setTranslateY(-12);
         actualGear.setTranslateX(-5);
 
-        traction = new Label("", tractionIV);
+        Label traction = new Label("", tractionIV);
         tractionIV.setScaleX(0.5);
         tractionIV.setScaleY(0.5);
         tractionIV.setTranslateX(-40);
@@ -119,7 +117,7 @@ public class EnCourse {
         throttle.setTranslateX(250);
         throttle.setTranslateY(0);
 
-        cadran = new HBox(50, pg, actualGear, traction, throttle, stop);
+        HBox cadran = new HBox(50, pg, actualGear, traction, throttle, stop);
         cadran.setTranslateY(900);
         cadran.setTranslateX(20);
 

@@ -14,7 +14,7 @@ public class ListeVoitures {
     public ListeVoitures() {
     }
 
-    private static Vector<Voiture> voitures = new Vector<Voiture>();
+    private static Vector<Voiture> voitures = new Vector<>();
 
     public void loadVoitures() {
         try {
@@ -30,6 +30,7 @@ public class ListeVoitures {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     double[] puissance = new double[15];
+                    double[] ratioVit = new double[8];
                     puissance[0] = Double.parseDouble(eElement.getElementsByTagName("P1000").item(0).getTextContent());
                     puissance[1] = Double.parseDouble(eElement.getElementsByTagName("P1500").item(0).getTextContent());
                     puissance[2] = Double.parseDouble(eElement.getElementsByTagName("P2000").item(0).getTextContent());
@@ -45,24 +46,25 @@ public class ListeVoitures {
                     puissance[12] = Double.parseDouble(eElement.getElementsByTagName("P7000").item(0).getTextContent());
                     puissance[13] = Double.parseDouble(eElement.getElementsByTagName("P7500").item(0).getTextContent());
                     puissance[14] = Double.parseDouble(eElement.getElementsByTagName("P8000").item(0).getTextContent());
+                    ratioVit[0] = Double.parseDouble(eElement.getElementsByTagName("RV1").item(0).getTextContent());
+                    ratioVit[1] = Double.parseDouble(eElement.getElementsByTagName("RV2").item(0).getTextContent());
+                    ratioVit[2] = Double.parseDouble(eElement.getElementsByTagName("RV3").item(0).getTextContent());
+                    ratioVit[3] = Double.parseDouble(eElement.getElementsByTagName("RV4").item(0).getTextContent());
+                    ratioVit[4] = Double.parseDouble(eElement.getElementsByTagName("RV5").item(0).getTextContent());
+                    ratioVit[5] = Double.parseDouble(eElement.getElementsByTagName("RV6").item(0).getTextContent());
+                    ratioVit[6] = Double.parseDouble(eElement.getElementsByTagName("RV7").item(0).getTextContent());
+                    ratioVit[7] = Double.parseDouble(eElement.getElementsByTagName("RV8").item(0).getTextContent());
+
 
 
                     voitures.add(x, new Voiture(Double.parseDouble(eElement.getElementsByTagName("Masse").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("Aire").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("CD").item(0).getTextContent()),
-                            eElement.getElementsByTagName("Modele").item(0).getTextContent(),
                             Double.parseDouble(eElement.getElementsByTagName("EF").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("Rayon").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("RD").item(0).getTextContent()),
                             Double.parseDouble(eElement.getElementsByTagName("RPM").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV1").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV2").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV3").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV4").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV5").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV6").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV7").item(0).getTextContent()),
-                            Double.parseDouble(eElement.getElementsByTagName("RV8").item(0).getTextContent()),
+                            ratioVit,
                             Integer.parseInt(eElement.getElementsByTagName("NV").item(0).getTextContent()),
                             puissance,
                             eElement.getElementsByTagName("URL").item(0).getTextContent()));
@@ -77,7 +79,7 @@ public class ListeVoitures {
         return voitures;
     }
 
-    public static Voiture getVoiture(int index) {
-        return voitures.get(index);
+    static Voiture getVoiture() {
+        return voitures.get(9);
     }
 }

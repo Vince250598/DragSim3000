@@ -188,7 +188,7 @@ public class EventHandler {
         });
     }
 
-    public static void setShiftManual(boolean x) {
-        shiftManual = x;
+    public static void setShiftManual() {
+        shiftManual = false;
     }
 }

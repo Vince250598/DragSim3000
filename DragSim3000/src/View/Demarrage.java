@@ -41,7 +41,7 @@ public class Demarrage {
             addElements();
     }
 
-    public void addElements() {
+    private void addElements() {
         BackgroundImage bgImg = new BackgroundImage(background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true));
         Background bg = new Background(bgImg);

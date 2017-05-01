@@ -63,7 +63,7 @@ public class Options {
         group.getChildren().add(vb);
         vb.setTranslateY(-100);
 
-        EventHandler.setShiftManual(false);
+        EventHandler.setShiftManual();
     }
 
     public Scene getOption() {

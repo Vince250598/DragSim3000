@@ -12,22 +12,12 @@ public class Voiture {
     private boolean halfDone;
     private boolean mileDone;
     private static Voiture choice;
-    private String modele;
     private double masse;
     private double efficaciteTransmission;
     private double rayonRoue;
     private double ratioDiff;
     private double rpmMax;
-    private double ratioVit1;
-    private double ratioVit2;
-    private double ratioVit3;
-    private double ratioVit4;
-    private double ratioVit5;
-    private double ratioVit6;
-    private double ratioVit7;
-    private double ratioVit8;
     private int nombreVit;
-    private String URL;
     private ImageView image = new ImageView();
     private double area;
     private double x;
@@ -38,9 +28,7 @@ public class Voiture {
     private double accel;
     private double rpm = 1000;
     private int currentGear = 1;
-    private double gearRatio[] = new double[8];
     private double densite;
-    private double Fd;
     private double FMoteur;
     private double FTotal;
     private double Frr;
@@ -50,45 +38,30 @@ public class Voiture {
     private double maxForce;
     private double throttle = 1;
     private double puissance[];
+    private double ratioVit[];
 
-    public Voiture(double masse, double area, double Cd, String modele,
-                   double efficaciteTransmission,
-                   double rayonRoue,
-                   double ratioDiff,
-                   double rpmMax,
-                   double ratioVit1,
-                   double ratioVit2,
-                   double ratioVit3,
-                   double ratioVit4,
-                   double ratioVit5,
-                   double ratioVit6,
-                   double ratioVit7,
-                   double ratioVit8,
-                   int nombreVit,
-                   double[] puissance,
-                   String URL
+    Voiture(double masse, double area, double Cd,
+            double efficaciteTransmission,
+            double rayonRoue,
+            double ratioDiff,
+            double rpmMax,
+            double[] ratioVit,
+            int nombreVit,
+            double[] puissance,
+            String URL
     ) {
 
-        this.modele = modele;
         this.efficaciteTransmission = efficaciteTransmission;
         this.nombreVit = nombreVit;
         this.ratioDiff = ratioDiff;
-        this.ratioVit1 = ratioVit1;
-        this.ratioVit2 = ratioVit2;
-        this.ratioVit3 = ratioVit3;
-        this.ratioVit4 = ratioVit4;
-        this.ratioVit5 = ratioVit5;
-        this.ratioVit6 = ratioVit6;
-        this.ratioVit7 = ratioVit7;
-        this.ratioVit8 = ratioVit8;
         this.rayonRoue = rayonRoue;
         this.rpmMax = rpmMax;
-        this.URL = URL;
         this.masse = masse;
         this.Cd = Cd;
         this.area = area;
         image.setImage(new Image(URL));
         this.puissance = puissance;
+        this.ratioVit = ratioVit;
 
         time = 0;
         x = 0;
@@ -99,15 +72,6 @@ public class Voiture {
         accel = 0;
         Frr = 0.03 * getMasse() * 9.8;
         Cf = 0.85;
-
-        setGearRatio(ratioVit1, 0);
-        setGearRatio(ratioVit2, 1);
-        setGearRatio(ratioVit3, 2);
-        setGearRatio(ratioVit4, 3);
-        setGearRatio(ratioVit5, 4);
-        setGearRatio(ratioVit6, 5);
-        setGearRatio(ratioVit7, 6);
-        setGearRatio(ratioVit8, 7);
     }
 
 
@@ -163,8 +127,7 @@ public class Voiture {
             b = 0;
             d = 0;
         }
-        double puissance = (getRpm() * b + d);
-        return puissance;
+        return ((getRpm() * b) + d);
 
     }
 
@@ -173,14 +136,13 @@ public class Voiture {
     }
 
     private double CalculFd() {
-        Fd = 0.45 * getCd() * getArea() * getDensite() * getVx() * getVx();
-        return Fd;
+        return 0.45 * getCd() * getArea() * getDensite() * getVx() * getVx();
     }
 
     private double CalculFMoteur() {
         setThrottle(EnCourse.getThrottle());
         maxForce = (getCf() * 9.8 * getMasse()) / 2;
-        if (getChoice() == ListeVoitures.getVoiture(9))
+        if (getChoice() == ListeVoitures.getVoiture())
             maxForce = 3 * getCf() * 9.8 * getMasse();
         FMoteur = getThrottle() * (HPtoNM() * getGearRatio() * getRatioDiff() * getEfficaciteTransmission() / (getRayonRoue() * 2 * Math.PI));
         if (maxForce < FMoteur)
@@ -204,7 +166,7 @@ public class Voiture {
             rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
             if (rpm > rpmMax)
                 rpm = rpmMax;
-        } else if (manual) {
+        } else {
             rpm = (getVx() * 60 * getGearRatio() * getRatioDiff() / (2 * Math.PI * getRayonRoue()));
             if (rpm > rpmMax)
                 rpm = rpmMax;
@@ -315,7 +277,7 @@ public class Voiture {
     }
 
     private double getGearRatio() {
-        return gearRatio[currentGear - 1];
+        return ratioVit[currentGear - 1];
     }
 
     public ImageView getImage() {
@@ -364,10 +326,6 @@ public class Voiture {
 
     public void setcurrentGear(int currentGear) {
         this.currentGear = currentGear;
-    }
-
-    private void setGearRatio(double value, int index) {
-        this.gearRatio[index] = value;
     }
 
     public static Voiture getChoice() {

@@ -12,14 +12,13 @@ import javafx.util.Duration;
 
 public class Programme extends Application {
 
-    EventHandler events = new EventHandler();
-    Demarrage starter;
-    static Stage stage;
+    private EventHandler events = new EventHandler();
+    private static Stage stage;
     private static Timeline movement;
     private final static double timeIncrement = 0.015;
 
-    public void demarrer(Stage stage) {
-        starter = new Demarrage(stage);
+    private void demarrer(Stage stage) {
+        Demarrage starter = new Demarrage(stage);
         starter.demarrer(events);
     }
 
