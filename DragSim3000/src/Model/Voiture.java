@@ -39,8 +39,10 @@ public class Voiture {
     private double throttle = 1;
     private double puissance[];
     private double ratioVit[];
+    private String modele;
+    private double puissanceMax = 0;
 
-    Voiture(double masse, double area, double Cd,
+    Voiture(String modele, double masse, double area, double Cd,
             double efficaciteTransmission,
             double rayonRoue,
             double ratioDiff,
@@ -62,6 +64,7 @@ public class Voiture {
         image.setImage(new Image(URL));
         this.puissance = puissance;
         this.ratioVit = ratioVit;
+        this.modele = modele;
 
         time = 0;
         x = 0;
@@ -72,6 +75,10 @@ public class Voiture {
         accel = 0;
         Frr = 0.03 * getMasse() * 9.8;
         Cf = 0.85;
+        for (int x = 0; x < puissance.length; x++) {
+            if (puissanceMax < puissance[x])
+                puissanceMax = puissance[x];
+        }
     }
 
 
@@ -223,11 +230,11 @@ public class Voiture {
             quarterDone = true;
         }
         if (getxLabel() >= 804 && !halfDone) {
-            EnCourse.getHalfMile().setText("1/2 de mile: " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
+            EnCourse.getHalfMile().setText("1/2 mile     : " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
             halfDone = true;
         }
         if (getxLabel() >= 1609 && !mileDone) {
-            EnCourse.getMile().setText("Mile:            " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
+            EnCourse.getMile().setText("Mile           : " + Math.round(getTime() * 1000.000) / 1000.000 + " s");
             mileDone = true;
         }
     }
@@ -288,7 +295,7 @@ public class Voiture {
         return rpmMax;
     }
 
-    private double getMasse() {
+    public double getMasse() {
         return masse;
     }
 
@@ -359,4 +366,14 @@ public class Voiture {
     public void setManual(boolean manual) {
         this.manual = manual;
     }
+
+    public String getModele() {
+        return modele;
+    }
+
+    public double getPuissanceMax() {
+        return puissanceMax;
+    }
+
+
 }

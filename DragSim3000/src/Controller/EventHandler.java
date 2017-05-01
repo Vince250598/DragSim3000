@@ -56,12 +56,18 @@ public class EventHandler {
             iv.setOnMouseEntered(event -> {
                 selec.getList().getVoitures().get(i).getImage().setScaleX(1.2);
                 selec.getList().getVoitures().get(i).getImage().setScaleY(1.2);
+                selec.getModeleLabel().setText(selec.getList().getVoitures().get(i).getModele());
+                selec.getPuissance().setText("Puissance: " + Double.toString(selec.getList().getVoitures().get(i).getPuissanceMax()) + " HP");
+                selec.getPoids().setText("Poids: " + Double.toString(selec.getList().getVoitures().get(i).getMasse()) + " Kg");
                 event.consume();
             });
 
             iv.setOnMouseExited(event -> {
                 selec.getList().getVoitures().get(i).getImage().setScaleX(1);
                 selec.getList().getVoitures().get(i).getImage().setScaleY(1);
+                selec.getModeleLabel().setText("");
+                selec.getPuissance().setText("");
+                selec.getPoids().setText("");
                 event.consume();
             });
         }

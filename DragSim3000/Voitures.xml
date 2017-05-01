@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model>
 	<Voiture>
-		<Modele>VW Beetle</Modele>
+		<Modele>Volkswagen Beetle 1963</Modele>
 		<Masse>1231</Masse>
 		<EF>0.95</EF>
 		<Rayon>0.32</Rayon>
@@ -36,7 +36,7 @@
 		<Aire>2.3775</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>Corvette</Modele>
+		<Modele>Chevrolet Corvette 1963</Modele>
 		<Masse>1428</Masse>
 		<EF>0.95</EF>
 		<Rayon>0.33</Rayon>
@@ -71,7 +71,7 @@
 		<Aire>2</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>Ford Mustang gt350</Modele>
+		<Modele>Ford Mustang gt350 2010</Modele>
 		<Masse>1656</Masse>
 		<EF>1.5</EF>
 		<Rayon>0.3</Rayon>
@@ -173,7 +173,7 @@
 		<P8000>0</P8000>
 		<URL>/Ressources/HA2000.png</URL>
 		<CD>0.25</CD>
-		<Aire>1.75</Aire>
+		<Aire>1.5</Aire>
 	</Voiture>
 	<Voiture>
 		<Modele>AMC Pacer 1976</Modele>
@@ -211,7 +211,7 @@
 		<Aire>2.6264</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>1940 De Luxe Coupe</Modele>
+		<Modele>Chevrolet Deluxe Coupe 1940</Modele>
 		<Masse>1347</Masse>
 		<EF>0.95</EF>
 		<Rayon>0.31</Rayon>
@@ -281,7 +281,7 @@
 		<Aire>2</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>Subaru Forester</Modele>
+		<Modele>Subaru Forester 2013</Modele>
 		<Masse>1500</Masse>
 		<EF>1.5</EF>
 		<Rayon>0.34</Rayon>
@@ -316,7 +316,7 @@
 		<Aire>2.7</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>Dragster</Modele>
+		<Modele>Top Fuel Dragster</Modele>
 		<Masse>1009</Masse>
 		<EF>1.25</EF>
 		<Rayon>0.33</Rayon>
@@ -351,7 +351,7 @@
 		<Aire>1</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>F1</Modele>
+		<Modele>Formule 1</Modele>
 		<Masse>605</Masse>
 		<EF>1</EF>
 		<Rayon>0.31</Rayon>
@@ -421,7 +421,7 @@
 		<Aire>3</Aire>
 	</Voiture>
 	<Voiture>
-		<Modele>Porsche Panamera 2016</Modele>
+		<Modele>Porsche Panamera S 2016</Modele>
 		<Masse>1770</Masse>
 		<EF>1.5</EF>
 		<Rayon>0.32</Rayon>
