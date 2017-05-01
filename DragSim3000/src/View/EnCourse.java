@@ -1,24 +1,16 @@
 package View;
 
 
-import Controller.Moteur;
-import Model.ListeVoitures;
 import Model.Voiture;
 import javafx.geometry.*;
-import javafx.animation.*;
-import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.net.URL;
 
 public class EnCourse {
 
@@ -26,15 +18,21 @@ public class EnCourse {
     private Scene enCourse = new Scene(group, 1920, 1080);
     private Image driedBackground = new Image("Ressources\\road.png");
     private Image wetBackground = new Image("Ressources\\rainyRoad.png");
-    private static Label temps;
-    private static Label vitesse;
-    private static Label RPM;
-    private static Label distance;
+
     private Button stop = new Button("Stop");
     private Alert stopDialog = new Alert(Alert.AlertType.CONFIRMATION);
     private ButtonType menu = new ButtonType("Menu");
     private ButtonType exit = new ButtonType("Exit");
     private ButtonType cancel = new ButtonType("Cancel");
+
+    private ImageView turtle = new ImageView(new Image("Ressources\\turtle.png"));
+    private ImageView rabbit = new ImageView(new Image("Ressources\\rabbit.png"));
+
+    private static Slider throttle;
+    private static Label temps;
+    private static Label vitesse;
+    private static Label RPM;
+    private static Label distance;
     private static ProgressBar pg;
     private static HBox cadran;
     private static Label actualGear;
@@ -42,13 +40,7 @@ public class EnCourse {
     private static Label quarterMile;
     private static Label halfMile;
     private static Label mile;
-    private static Image tractionImage = new Image("Ressources\\Traction.png");
-    private static ImageView tractionIV = new ImageView(tractionImage);
-    private Image turtleImage = new Image("Ressources\\turtle.png");
-    private ImageView turtle = new ImageView(turtleImage);
-    private Image rabbitImage = new Image("Ressources\\rabbit.png");
-    private ImageView rabbit = new ImageView(rabbitImage);
-    private static Slider throttle;
+    private static ImageView tractionIV = new ImageView(new Image("Ressources\\Traction.png"));
 
     public EnCourse() {
     }
