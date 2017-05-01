@@ -22,7 +22,7 @@ public class ListeVoitures {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             org.w3c.dom.Document doc = builder.parse(xml);
-            //doc.getDocumentElement().normalize();
+            doc.getDocumentElement().normalize();
 
             NodeList list = doc.getElementsByTagName("Voiture");
             for (int x = 0; x < list.getLength(); x++) {
