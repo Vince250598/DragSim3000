@@ -1,6 +1,5 @@
 package Model;
 
-import Model.Voiture;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -19,11 +18,11 @@ public class ListeVoitures {
 
     public void loadVoitures() {
         try {
-            File xml = new File("C:/Users/Public/Documents/Voitures.xml");
+            File xml = new File("Voitures.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             org.w3c.dom.Document doc = builder.parse(xml);
-            doc.getDocumentElement().normalize();
+            //doc.getDocumentElement().normalize();
 
             NodeList list = doc.getElementsByTagName("Voiture");
             for (int x = 0; x < list.getLength(); x++) {
