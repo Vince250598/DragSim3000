@@ -11,7 +11,6 @@ import java.util.Collections;
 public class PlayList {
 
     private ArrayList<MediaPlayer> songs = new ArrayList<>();
-    private boolean playing = false;
     private URL url1 = getClass().getResource("/Ressources/ParadiseCity.mp3");
     private URL url2 = getClass().getResource("/Ressources/ThunderStruck.mp3");
     private URL url3 = getClass().getResource("/Ressources/Highway.mp3");
@@ -50,17 +49,17 @@ public class PlayList {
     }
 
     public void getSong() {
-        if (!playing || songs.isEmpty()) {
+
+        if (songs.isEmpty()){
             fill();
             Collections.shuffle(songs);
-            songs.get(0).play();
-            playing = true;
         }
+
+        songs.get(0).play();
 
         songs.get(0).setOnEndOfMedia(() -> {
             songs.remove(0);
             getSong();
         });
-
     }
 }

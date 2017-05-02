@@ -2,7 +2,6 @@ package View;
 
 import Controller.EventHandler;
 import Main.Programme;
-import Model.PlayList;
 import javafx.animation.Animation;
 import javafx.animation.ScaleTransition;
 import javafx.scene.Scene;
@@ -22,7 +21,6 @@ public class Demarrage {
     private Pane group = new Pane();
     private Scene start = new Scene(group, 1920, 1080);
     private Image background = new Image("\\Ressources\\background.png");
-    private PlayList playList = new PlayList();
 
     public Demarrage() {
     }
@@ -33,7 +31,6 @@ public class Demarrage {
     }
 
     public void demarrer(EventHandler eh) {
-        playList.getSong();
         Programme.getStage().setScene(start);
         eh.anyKey(start);
         Programme.getStage().show();
@@ -69,5 +66,4 @@ public class Demarrage {
         st.play();
 
     }
-
 }

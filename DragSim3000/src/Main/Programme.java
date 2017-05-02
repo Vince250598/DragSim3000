@@ -1,6 +1,7 @@
 package Main;
 
 import Controller.EventHandler;
+import Model.PlayList;
 import Model.Voiture;
 import View.Demarrage;
 import javafx.animation.Animation;
@@ -13,6 +14,7 @@ import javafx.util.Duration;
 public class Programme extends Application {
 
     private EventHandler events = new EventHandler();
+    private PlayList playlist = new PlayList();
     private static Stage stage;
     private static Timeline movement;
     private final static double timeIncrement = 0.015;
@@ -20,6 +22,7 @@ public class Programme extends Application {
     private void demarrer(Stage stage) {
         Demarrage starter = new Demarrage(stage);
         starter.demarrer(events);
+        playlist.getSong();
     }
 
     public static void move() {
